@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GAsp</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	<script type="text/javascript" src="./js/ganja.js"></script>
+</head>
+<body>
+	<section id="infosLeft">
+		
+	</section>
+	<section id="mainContainer">
+		<div id="pageSelection">
+			<div class="selectPage active">
+				<p>Main</p>
+			</div>
+			<div class="selectPage">
+				<p>My Work</p>
+			</div>
+			<div class="selectPage">
+				<p>All work</p>
+			</div>
+			<div id="changeMode">presentation_mode</div>
+		</div>
+		<div id="page">
+			<div id="leftBoxes" class="active">
+				<div id="console">
+				</div>
+				<div id="gaInfos">
+					<div id="movableVert"></div>
+					<div id="gaHeader">
+						<p>Algebra details</p>
+					</div>
+					<div id="currentGA">
+						<select id="selectGA">
+							<option value="0,0,0">real</option>
+							<option value="1,0,0">hyperbolic</option>
+							<option value="0,1,0">complex</option>
+							<option value="0,0,1">dual</option>
+							<option value="2,0,0">R2</option>
+							<option value="0,2,0">quaternion</option>
+							<option value="1,1,0">minkowski</option>
+							<option value="3,0,0">R3</option>
+							<option value="0,2,1">dualQuaternions</option>
+							<option selected="selected" value="2,0,1">PGA2D</option>
+							<option value="3,0,0">PGAh2D</option>
+							<option value="2,1,0">PGAe2D</option>
+							<option value="4,0,0">R4</option>
+						</select>
+					</div>
+					<div id="gaDetails">
+
+					</div>
+				</div>
+				<div id="movableLeft">
+					
+				</div>
+			</div>
+			<div id="viewer">
+				
+			</div>
+		</div>
+		<div id="run">Run</div>
+	</section>
+	
+	<script src="./js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" id="ganjaCode">
+// Create a Clifford Algebra with 2,0,1 metric.
+Algebra(2,0,1,()=>{
+
+  // From "Doing euclidean plane geometry using projective geometric algebra" 
+  // Charles Gunn - https://arxiv.org/abs/1501.06511, p21.
+  
+  //   Find and illustrate the unique direct isometry that takes (A,m) to (A2,m2)
+  //   Note that ganja.js allows implementing this letter for letter like in
+  //   the paper .. 
+
+  var point      = (x,y)=>1e12-x*1e02+y*1e01,
+      join       = (X,Y)=>(X&Y).Normalized,
+      lerp       = (x,y,a)=>(1-a)*x+a*y;
+      
+  // Start with two points A and A2 (and a helper)      
+  var A=point(-0.5,0.5), A2=point(0.5,0.2), B=point(0,-1), B2=point(0,-1),
+  
+  // Form the lines m and m2 using these points.
+      m=()=>join(B,A), m2=()=>join(A2,B2),
+  
+  // Find intersection of m and m2 and line through a and a2    
+      M=()=>m^m2, a=()=>join(A,A2),
+      
+  // Find the midpoint between A and A2 and the orthogonal line through it.      
+      Am=()=>A+A2, r=()=>(a<<Am).Normalized,
+      
+  // Find the line between m and m2 and cut that with r to find the center of our isometry      
+      c=()=>m-m2, C=()=>r^c,
+      
+  // Construct the transformation as a rotation around C. (or translation if C is ideal)       
+      s=()=>join(A,C), g=()=>r*s,
+  
+  // Interpolate the isometry to illustrate the solution. 
+      lines = [...Array(100)].map((x,xi)=>()=>lerp(1,g,xi*0.01)>>>m);
+
+  // Reproduce the graph from the paper
+  document.getElementById("viewer").appendChild(this.graph([0xCCCCCC].concat(lines).concat([
+    0xAAAA44,m,"m &rarr;",m2,"m' &rarr;", 
+    0x0000ff,[A,A2],
+    0x008800,c,"c",
+    0x008888,r,"r",
+    0xff0000,s,"s", 
+    0x444444,A,"A",A2,"A'",
+    0x999999,M,"M",C,"C",B,B2,
+  ])));
+});
+	</script>
+	<script>
+	document.getElementById("leftBoxes").style.height = window.innerHeight - 50 + "px";
+		var dragH = 0, dragV = 0;
+		var selectGA = document.getElementById("selectGA");
+		var currentGA = selectGA.options[selectGA.selectedIndex].value;
+		var stateMode = 0;
+		//ACE EDITOR (CONSOLE)
+		aceEditor = () => {
+			if (window.ace) {
+			    var editor = ace.edit("console");
+			    editor.setTheme("ace/theme/katzenmilch"); //theme setters 
+			    editor.session.setMode("ace/mode/javascript"); //mode = js, php etc...
+		     	editor.resize();
+		     	return editor;
+		    } else { // can't load ace editor
+		      	console.log("Can't load Ace editor");
+		    }
+		}
+		editor = aceEditor();
+	    //get ganja code
+	    var code = document.getElementById("ganjaCode").innerHTML;
+	    editor.setValue(code); //Fill the editor with current ganja code
+
+		sizeCanvas = () => {
+		  	//CANVAS SIZE
+			var viewer = document.getElementById("viewer");
+		    var present = viewer.querySelector("svg")||viewer.querySelector("canvas");
+		    if (present || present.value){ 
+		    	present.style.width= "100%";  	
+		    	present.style.height = document.getElementById("page").offsetHeight+"px";
+		    }
+		};
+		
+		sizeCanvas();
+		//DISPLAY ALGEBRA INFOS
+		dispMetrics = () =>{
+			var datas = Algebra(2,0,1).describe();
+
+			var table = document.createElement('table');
+			table.id="basisMetric";
+			var caption = document.createElement('caption');
+			caption.innerHTML = "Basis/Metrics";
+			table.appendChild(caption);
+			var tbdy = document.createElement('tbody');
+			for (var i = 0; i < 2; i++) {
+			    var tr = document.createElement('tr');
+			    for (var j = 0; j < datas.basis.length; j++) {
+			        var td = document.createElement('td');
+			        if(i==0)
+			       	 	td.appendChild(document.createTextNode(datas.basis[j]));
+			       	else
+			       		td.appendChild(document.createTextNode(datas.metric[j]));
+			        tr.appendChild(td)
+			    }
+			    tbdy.appendChild(tr);
+			  }
+			  table.appendChild(tbdy);
+			document.getElementById("gaDetails").appendChild(table);
+		}
+
+		dispMultTable = () =>{
+			var datas = Algebra(2,0,1).describe();
+
+			var table = document.createElement('table');
+			table.id="multTable";
+			var caption = document.createElement('caption');
+			caption.innerHTML = "multTable";
+			table.appendChild(caption);
+			var tbdy = document.createElement('tbody');
+			for (var i = 0; i < datas.mulTable[0].length; i++) {
+			    var tr = document.createElement('tr');
+			    for (var j = 0; j < datas.mulTable.length; j++) {
+			        var td = document.createElement('td');
+			       	td.appendChild(document.createTextNode(datas.mulTable[i][j]));
+			        tr.appendChild(td)
+			    }
+			    tbdy.appendChild(tr);
+			  }
+			  table.appendChild(tbdy);
+			document.getElementById("gaDetails").appendChild(table);
+		}
+		dispGaDetails = () =>{
+			dispMetrics();
+			dispMultTable();
+		}
+
+ 		dispGaDetails();
+ 		//Scalable sections
+		document.getElementById("movableLeft").onmousedown=(e) =>{dragH = 1;}
+		document.getElementById("movableLeft").onmouseup=(e) =>{dragH = 0;}
+
+		document.getElementById("movableVert").onmousedown=(e) =>{dragV = 1;}
+		document.getElementById("movableVert").onmouseup=(e) =>{dragV = 0;}
+
+
+		document.getElementsByTagName('body')[0].onmousemove = (e) =>{
+			if(dragH){
+				var zb = (document.getElementById("infosLeft").offsetWidth);
+				var width = window.innerWidth - zb;
+				var pourc = ((e.clientX-zb)*100)/width;
+				var gTP = (pourc)+"%"+(100-(pourc))+"%";
+				document.getElementById("page").style.gridTemplateColumns= gTP;
+			}
+			/*if(dragV){
+				var zb = (document.getElementById("pageSelection").offsetHeight);
+				var height = window.innerHeight - zb;
+				var pourc = ((e.clientY-zb)*100)/height;
+				var gTR = (pourc)+"%"+(100-(pourc))+"%";
+				document.getElementById("leftBoxes").style.gridTemplateRows= gTR;
+			}*/
+		};
+
+	    //EVENTS LISTENER ON CONSOLE 
+	    editor.session.on('change', function(delta) {
+			// delta.start, delta.end, delta.lines, delta.action
+			if(delta.action=="insert" || delta.action=="remove"){
+				document.getElementById("run").classList.add("active");
+			}
+		});
+
+		//EVENT CLICK RUN 
+		document.getElementById("run").onclick=() =>{
+			var currentCode = editor.getValue();
+			document.getElementById("viewer").innerHTML = "";
+			var scriptGJ = document.getElementById("ganjaCode");
+			scriptGJ.parentNode.removeChild(scriptGJ);
+			var script= document.createElement('script');
+     		script.id= 'ganjaCode';
+     		script.innerHTML = currentCode;
+     		document.body.appendChild(script);
+			document.getElementById("run").classList.remove("active");
+			sizeCanvas();
+		}
+
+		document.getElementById("changeMode").onclick = () =>{
+			var leftBoxes = document.getElementById("leftBoxes");
+			switch(stateMode){
+				case 0:
+					stateMode = 1;
+					leftBoxes.classList.remove("active");
+					leftBoxes.style.width = "0px";
+					document.getElementById("page").style.gridTemplateColumns= "0% 100%";
+					break;
+				case 1:
+					stateMode = 0;
+					leftBoxes.classList.add("active");
+					leftBoxes.style.width = "auto";
+					document.getElementById("page").style.gridTemplateColumns= "40% 60%";
+ 					dispGaDetails();
+					break;
+			}
+		}
+		document.body.onkeydown = (e)=>{
+		    if(e.keyCode==27){ //Escape
+		    	dragV = dragH = 0;
+		    }
+		};
+	</script>
+</body>
+</html>

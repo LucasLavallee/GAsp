@@ -1,0 +1,167 @@
+/* Font */
+@font-face{
+	font-family: 'OpenSans-Regular'; 
+	src: url("font/OpenSans-Regular.ttf");
+}
+html{
+	width: 100%;
+}
+p,h1,h2,h3,h4{
+	margin: 0;
+}
+h3{
+	font-weight: bold;
+}
+body{
+	min-height: 100%;
+	background-color: #fff;
+	color: rgb(60, 64, 67);
+	font-family: 'OpenSans-Regular';
+	margin: 0;
+}
+#infosLeft{
+	background-color:#2d2c31;
+	width: 50px;
+	height: 100%;
+	position: 	fixed;	
+
+}
+#mainContainer{
+	position: fixed;
+	display: grid;
+	grid-template-rows: 50px;
+	width: calc(100% - 50px);
+	height: 100%;
+	padding-left: 50px;
+}
+#pageSelection{
+	background-color: #2e2c37;
+	top: 0px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+.selectPage{
+	color: #fff;
+	background-color: #2e2c37;
+	vertical-align: middle;
+	padding: 0 15px;
+	margin-right: 5px;
+}
+.selectPage p{
+	font-size: 18px;
+	line-height: 50px;
+}
+.selectPage.active{
+	background-color: #f8f8f8;
+	color: inherit; 
+}
+#page{
+	position: relative;
+	z-index: 1;
+	grid-template-columns: 40% 60%;
+	display: grid;
+	transition: all ease .5s;
+}
+#leftBoxes{
+	position: relative;
+	display: grid;
+	grid-template-rows: 55% 45%;
+	height: 100%;
+	border-right: 2px solid gray;
+	transition: all ease .5s;
+}
+#leftBoxes div{
+	display: none;
+} 
+#leftBoxes.active div {
+	display: block;
+}
+#console{
+	background-color: #f8f8f8;
+	position: relative;
+	border-bottom: 2px solid gray;
+	color: black;
+}
+#gaInfos::before{
+    background: url(../media/img/info.png) no-repeat center ;
+}
+#console::before{
+    background: url(../media/img/terminal.png) no-repeat center;
+}
+#console::before,#gaInfos::before{
+    width: 20px;
+    content: " ";
+    background-size: cover;
+    position: absolute;
+    left: -35px;
+    height:20px;
+}
+
+#gaInfos{
+	background-color: #f1f2f6;
+}
+#viewer{
+}
+#run{
+	position: fixed;
+	cursor: pointer;
+	bottom: 15px;
+	right: 15px;
+	background-color: rgb(60, 64, 67);
+	color: #fff;
+	padding: 5px 10px;
+	z-index: 2;
+	display: none;
+}
+#run.active{
+	display: block;
+}
+#gaDetails{
+	padding: 10px 15px;
+}
+#gaDetails table{
+	font-size: 14px;
+	text-align: center;
+	border: 1px solid gray;
+	border-collapse: collapse;
+	margin-bottom: 	15px;
+}
+#basisMetric td{
+	padding: 0px 5px;
+	width: 40px;
+}
+#gaDetails table caption{
+	font-weight: bold;
+}
+#gaDetails table tr:nth-child(2n+1){
+	background-color: #FFFFE0;
+}
+#gaHeader{
+	padding: 5px 10px;
+	background: #1abc9c; 
+	color: #fff;
+}
+#multTable td {
+	padding: 0px 5px;
+		width: 60px
+}
+#movableLeft{
+	position: absolute;
+	width: 4px;
+	right: -5px;
+	height: 100%;
+	background-color: rgb(60, 64, 67);
+	cursor: ew-resize;
+}
+#movableVert{
+	position: 	absolute;	
+	height: 6px;
+	background-color: rgb(60, 64, 67);
+	cursor: ns-resize;
+	width: 	100%;
+}
+#changeMode{
+	color: #ddd;
+	cursor: pointer;
+}
