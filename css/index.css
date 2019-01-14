@@ -73,7 +73,7 @@ nav h1 span{
 #leftContent{
 	height: calc(100% - 60px);
 }
-#visualizer{
+#viewer{
 	position: absolute;
 	width: 70%;
 	height: 100%;
@@ -139,4 +139,16 @@ form input, form label,form textarea{
 	position: absolute;
 	right: 20px;
 	cursor: pointer;
+}
+#run{
+	position: fixed;
+	right: 50px;
+	bottom: 50px;
+	display: none;
+	background-color: #1d3557;
+	color: #fff;
+	padding: 15px;
+}
+#run.active{
+	display: block;
 }
