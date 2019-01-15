@@ -5,7 +5,8 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
 	<script type="text/javascript" src="./js/lib/ganja.js"></script>
-	<script type="text/javascript" src="./js/classes.js"></script>
+	<script type="text/javascript" src="./js/classes.js"></script>	
+	<script type="text/javascript" src="./js/codeInstance.js"></script>
 </head>
 <body>
 	<nav>
@@ -55,18 +56,13 @@
 		//CANVAS SIZE
 			var viewer = document.getElementById("viewer");
 		    var present = viewer.querySelector("svg")||viewer.querySelector("canvas");
+		   	if(present == null)
+		   		return;
 		    if (present || present.value){ 
 		    	present.style.width= "100%";  	
 		    	present.style.height = document.getElementById("leftPanel").offsetHeight+"px";
 		    }
 		};
-
-	    //Modals Creation
-
-	    const modalCreate = new Modal("Create a project");
-	    modalCreate.content = "<form method='post' action=''><label for='name'>Project Name (20 characters MAX): </label><input type='text' name='name'><label for='ga'>Project description: </label><textarea></textarea><label for='ga'>Select your GA: </label><select name='ga'><option>GA 1</option></select></form>";
-	    modalCreate.footer = "<input type='submit' value='Create'>";
-
 	    //Event Listener
 
 		/*document.getElementById("newProject").onclick = () =>{
@@ -98,141 +94,51 @@
 			sizeCanvas();
 		}
 
+	    //Modals Creation
 
-	// 	sizeCanvas = () => {
-	// 	  	//CANVAS SIZE
-	// 		var viewer = document.getElementById("viewer");
-	// 	    var present = viewer.querySelector("svg")||viewer.querySelector("canvas");
-	// 	    if (present || present.value){ 
-	// 	    	present.style.width= "100%";  	
-	// 	    	present.style.height = document.getElementById("page").offsetHeight+"px";
-	// 	    }
-	// 	};
-		
-	// 	sizeCanvas();
-	// 	//DISPLAY ALGEBRA INFOS
-	// 	dispMetrics = () =>{
-	// 		var datas = Algebra(2,0,1).describe();
-
-	// 		var table = document.createElement('table');
-	// 		table.id="basisMetric";
-	// 		var caption = document.createElement('caption');
-	// 		caption.innerHTML = "Basis/Metrics";
-	// 		table.appendChild(caption);
-	// 		var tbdy = document.createElement('tbody');
-	// 		for (var i = 0; i < 2; i++) {
-	// 		    var tr = document.createElement('tr');
-	// 		    for (var j = 0; j < datas.basis.length; j++) {
-	// 		        var td = document.createElement('td');
-	// 		        if(i==0)
-	// 		       	 	td.appendChild(document.createTextNode(datas.basis[j]));
-	// 		       	else
-	// 		       		td.appendChild(document.createTextNode(datas.metric[j]));
-	// 		        tr.appendChild(td)
-	// 		    }
-	// 		    tbdy.appendChild(tr);
-	// 		  }
-	// 		  table.appendChild(tbdy);
-	// 		document.getElementById("gaDetails").appendChild(table);
-	// 	}
-
-	// 	dispMultTable = () =>{
-	// 		var datas = Algebra(2,0,1).describe();
-
-	// 		var table = document.createElement('table');
-	// 		table.id="multTable";
-	// 		var caption = document.createElement('caption');
-	// 		caption.innerHTML = "multTable";
-	// 		table.appendChild(caption);
-	// 		var tbdy = document.createElement('tbody');
-	// 		for (var i = 0; i < datas.mulTable[0].length; i++) {
-	// 		    var tr = document.createElement('tr');
-	// 		    for (var j = 0; j < datas.mulTable.length; j++) {
-	// 		        var td = document.createElement('td');
-	// 		       	td.appendChild(document.createTextNode(datas.mulTable[i][j]));
-	// 		        tr.appendChild(td)
-	// 		    }
-	// 		    tbdy.appendChild(tr);
-	// 		  }
-	// 		  table.appendChild(tbdy);
-	// 		document.getElementById("gaDetails").appendChild(table);
-	// 	}
-	// 	dispGaDetails = () =>{
-	// 		dispMetrics();
-	// 		dispMultTable();
-	// 	}
-
- // 		dispGaDetails();
- // 		//Scalable sections
-	// 	document.getElementById("movableLeft").onmousedown=(e) =>{dragH = 1;}
-	// 	document.getElementById("movableLeft").onmouseup=(e) =>{dragH = 0;}
-
-	// 	document.getElementById("movableVert").onmousedown=(e) =>{dragV = 1;}
-	// 	document.getElementById("movableVert").onmouseup=(e) =>{dragV = 0;}
+	    const modalCreate = new Modal("Create a project");
+	    modalCreate.content = "<form method='post' action=''><label for='name'>Project Name (20 characters MAX): </label><input type='text' name='name'><label for='ga'>Project description: </label><textarea></textarea><label for='ga'>Select your GA: </label><select name='ga'><option>GA 1</option></select></form>";
+	    modalCreate.footer = "<input type='submit' value='Create'>";
 
 
-	// 	document.getElementsByTagName('body')[0].onmousemove = (e) =>{
-	// 		if(dragH){
-	// 			var zb = (document.getElementById("infosLeft").offsetWidth);
-	// 			var width = window.innerWidth - zb;
-	// 			var pourc = ((e.clientX-zb)*100)/width;
-	// 			var gTP = (pourc)+"%"+(100-(pourc))+"%";
-	// 			document.getElementById("page").style.gridTemplateColumns= gTP;
-	// 		}
-	// 		/*if(dragV){
-	// 			var zb = (document.getElementById("pageSelection").offsetHeight);
-	// 			var height = window.innerHeight - zb;
-	// 			var pourc = ((e.clientY-zb)*100)/height;
-	// 			var gTR = (pourc)+"%"+(100-(pourc))+"%";
-	// 			document.getElementById("leftBoxes").style.gridTemplateRows= gTR;
-	// 		}*/
-	// 	};
+	    var inst = new CodeInstance([3,0,1]);
+	    //Object.freeze(inst);
 
-	//     //EVENTS LISTENER ON CONSOLE 
-	//     editor.session.on('change', function(delta) {
-	// 		// delta.start, delta.end, delta.lines, delta.action
-	// 		if(delta.action=="insert" || delta.action=="remove"){
-	// 			document.getElementById("run").classList.add("active");
-	// 		}
-	// 	});
+	    inst.addDefinition("//DEFINITION PART");
+	    inst.addDefinition("var point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;");
+	    inst.addDefinition("var line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;");
+	    inst.addDefinition("var plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;");
 
-	// 	//EVENT CLICK RUN 
-	// 	document.getElementById("run").onclick=() =>{
-	// 		var currentCode = editor.getValue();
-	// 		document.getElementById("viewer").innerHTML = "";
-	// 		var scriptGJ = document.getElementById("ganjaCode");
-	// 		scriptGJ.parentNode.removeChild(scriptGJ);
-	// 		var script= document.createElement('script');
- //     		script.id= 'ganjaCode';
- //     		script.innerHTML = currentCode;
- //     		document.body.appendChild(script);
-	// 		document.getElementById("run").classList.remove("active");
-	// 		sizeCanvas();
-	// 	}
+	    inst.addObject("//CREATION PART");
+	    inst.addObject("var dist_pp = (P1,P2)=>(P1.Normalized&P2.Normalized).Length,");
+	    inst.addObject("dist_pP = (P,p)=>(P.Normalized&p.Normalized).Length,");
+	    inst.addObject("dist_ll = (l1,l2)=>(!(l1.Normalized*l2.Normalized)).Length;");
+	    inst.addObject("var angle_pp = (p1,p2)=>Math.acos(p1.Normalized<<p2.Normalized)*180/Math.PI,");
+	    inst.addObject("angle_ll = (l1,l2)=>Math.acos(l1.Normalized<<l2.Normalized)*180/Math.PI;");
+		inst.addObject("var A=point(0,-1,0), B=point(1,1,-1), C=point(-1,1,-1), D=point(1,1,1), E=point(-1,1,1),");
+		inst.addObject("a=B&C&D,");
+		inst.addObject("camera=0e0;");
 
-	// 	document.getElementById("changeMode").onclick = () =>{
-	// 		var leftBoxes = document.getElementById("leftBoxes");
-	// 		switch(stateMode){
-	// 			case 0:
-	// 				stateMode = 1;
-	// 				leftBoxes.classList.remove("active");
-	// 				leftBoxes.style.width = "0px";
-	// 				document.getElementById("page").style.gridTemplateColumns= "0% 100%";
-	// 				break;
-	// 			case 1:
-	// 				stateMode = 0;
-	// 				leftBoxes.classList.add("active");
-	// 				leftBoxes.style.width = "auto";
-	// 				document.getElementById("page").style.gridTemplateColumns= "40% 60%";
- // 					dispGaDetails();
-	// 				break;
-	// 		}
-	// 	}
-	// 	document.body.onkeydown = (e)=>{
-	// 	    if(e.keyCode==27){ //Escape
-	// 	    	dragV = dragH = 0;
-	// 	    }
-	// 	};
+		inst.addDisplay("//DISPLAY PART");
+		inst.addDisplay("var time=performance.now()/4000;");
+		inst.addDisplay("A=point(0,Math.sin(time*4),0);");
+		inst.addDisplay("camera.set(Math.cos(time)+Math.sin(time)*1e13);");
+		inst.addDisplay("return [0xddaaff,[A,B,C],");
+		inst.addDisplay("0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],");
+		inst.addDisplay("0x444444,A,'A',B,'B',C,'C',D,'D',E,'E',");
+		inst.addDisplay("0xFF8888,[A,E],dist_pp(A,E).toFixed(2),");
+		inst.addDisplay("0x8888FF,[A,B+E],dist_pP(A,a).toFixed(2),");
+		inst.addDisplay("0x44aa44,C+E,dist_ll(C&E,D&B).toFixed(2),");
+		inst.addDisplay("0x44aaff,[A+D+E,B+C+5*D+5*E,D+E],(angle_pp(A&E&D,a).toFixed(2))+'°',");
+		inst.addDisplay("0xff44ff,[A,2*A+D,2*A+B],(angle_ll(A&D,B&A).toFixed(2))+'°'];"); 
+
+		inst.addOption("animate", "true");
+		inst.addOption("camera", false);
+
+	    var code = inst.displayAll();
+	    console.log(code);
+	    editor.setValue(code);
+
 	</script>
 </body>
 </html>
