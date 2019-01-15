@@ -1,0 +1,3 @@
+[submodule "js/lib/ganja.js"]
+	path = js/lib/ganja.js
+	url = https://github.com/enkimute/ganja.js
