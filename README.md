@@ -1,1 +1,4 @@
 # GAsp
+---
+permalink: /index.html
+---
