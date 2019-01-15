@@ -15,11 +15,20 @@
 	<section id="mainPart">
 		<div id="leftPanel">
 			<div id="selectLeftPan">
-				<p class="active">JS</p>
-				<p>OBJECT MODE</p>
+				<p class="selectMode active">Console Mode</p>
+				<p class="selectMode">Object Mode</p>
 			</div>
 			<div id="leftContent">
-				
+				<div id="consoleMode" class="active">
+					<div id="headerCMode">
+						<p>JS</p>
+						<p>Pseudo-code</p>
+					</div>
+					<div id="console"></div>
+				</div>
+				<div id="objectMode">
+					<p>Welcome to the object mode</p>
+				</div>
 			</div>
 		</div>
 		<div id="viewer">
@@ -37,10 +46,18 @@
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
 
+		// Elements.
+   		var els={};
+    	["#viewer","#run","#ganjaCode","#consoleMode","#objectMode","#console"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+
+   		var elsClass={};
+    	[".selectMode"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
+
+    	console.log(els.selectMode);
 		//ACE EDITOR (CONSOLE)
 		aceEditor = () => {
 			if (window.ace) {
-			    var editor = ace.edit("leftContent");
+			    var editor = ace.edit("console");
 			    editor.setTheme("ace/theme/tomorrow"); //theme setters 
 			    editor.session.setMode("ace/mode/javascript"); //mode = js, php etc...
 		     	editor.resize();
@@ -54,8 +71,8 @@
 
 	    sizeCanvas = () => {
 		//CANVAS SIZE
-			var viewer = document.getElementById("viewer");
-		    var present = viewer.querySelector("svg")||viewer.querySelector("canvas");
+			
+		    var present = els.viewer.querySelector("svg")||els.viewer.querySelector("canvas");
 		   	if(present == null)
 		   		return;
 		    if (present || present.value){ 
@@ -63,19 +80,31 @@
 		    	present.style.height = document.getElementById("leftPanel").offsetHeight+"px";
 		    }
 		};
+
 	    //Event Listener
 
 		/*document.getElementById("newProject").onclick = () =>{
 			modalCreate.display();
 		}*/
 
+		for (var i = 0; i < elsClass.selectMode.length; i++) {
+		    elsClass.selectMode[i].onclick = () =>{
+		    	changeActive(elsClass.selectMode[0]);
+		    	changeActive(elsClass.selectMode[1]);
+		    	changeActive(els.consoleMode);
+		    	changeActive(els.objectMode);
+		    }
+		}
 
+		changeActive = (element) =>{
+			element.classList.toggle("active");
+		}
 
 		//EVENTS LISTENER ON CONSOLE 
 	    editor.session.on('change', function(delta) {
 			// delta.start, delta.end, delta.lines, delta.action
 			if(delta.action=="insert" || delta.action=="remove"){
-				document.getElementById("run").classList.add("active");
+				els.run.classList.add("active");
 			}
 		});
 
@@ -83,7 +112,7 @@
 		//EVENT CLICK RUN 
 		document.getElementById("run").onclick=() =>{
 			var currentCode = editor.getValue();
-			document.getElementById("viewer").innerHTML = "";
+			els.viewer.innerHTML = "";
 			var scriptGJ = document.getElementById("ganjaCode");
 			scriptGJ.parentNode.removeChild(scriptGJ);
 			var script= document.createElement('script');
@@ -108,13 +137,13 @@
 	    inst.addDefinition("var point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;");
 	    inst.addDefinition("var line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;");
 	    inst.addDefinition("var plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;");
+	    inst.addDefinition("var dist_pp = (P1,P2)=>(P1.Normalized&P2.Normalized).Length,");
+	    inst.addDefinition("dist_pP = (P,p)=>(P.Normalized&p.Normalized).Length,");
+	    inst.addDefinition("dist_ll = (l1,l2)=>(!(l1.Normalized*l2.Normalized)).Length;");
+	    inst.addDefinition("var angle_pp = (p1,p2)=>Math.acos(p1.Normalized<<p2.Normalized)*180/Math.PI,");
+	    inst.addDefinition("angle_ll = (l1,l2)=>Math.acos(l1.Normalized<<l2.Normalized)*180/Math.PI;");
 
 	    inst.addObject("//CREATION PART");
-	    inst.addObject("var dist_pp = (P1,P2)=>(P1.Normalized&P2.Normalized).Length,");
-	    inst.addObject("dist_pP = (P,p)=>(P.Normalized&p.Normalized).Length,");
-	    inst.addObject("dist_ll = (l1,l2)=>(!(l1.Normalized*l2.Normalized)).Length;");
-	    inst.addObject("var angle_pp = (p1,p2)=>Math.acos(p1.Normalized<<p2.Normalized)*180/Math.PI,");
-	    inst.addObject("angle_ll = (l1,l2)=>Math.acos(l1.Normalized<<l2.Normalized)*180/Math.PI;");
 		inst.addObject("var A=point(0,-1,0), B=point(1,1,-1), C=point(-1,1,-1), D=point(1,1,1), E=point(-1,1,1),");
 		inst.addObject("a=B&C&D,");
 		inst.addObject("camera=0e0;");

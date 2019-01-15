@@ -6,7 +6,7 @@ class CodeInstance{
 			this._definition = [];
 			this._object = [];
 			this._display = [];
-			this._options= []; //tab[0]["name"] et tab[0]["value"]
+			this._options= []; //tab[0]["name"] et tab[0]["value"]  { width, height, animate, camera, scale, grid, canvas }
 		/*if(! CodeInstance.instance){
 			this._algebra = algebra;
 			this._definition = [];
@@ -58,6 +58,7 @@ class CodeInstance{
 		for(var i = 0; i<this._algebra.length;i++) 
 			all += this._algebra[i] + ",";
 		all += "()=>{\n";
+
 		//Writting the definition part (point,line,plane...)
 		for(var i =0; i<this._definition.length;i++){
 			if(this._definition[i].slice(0,2)== "//") all+= "\n";
