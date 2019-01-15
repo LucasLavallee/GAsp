@@ -57,6 +57,7 @@ nav h1 span{
 	height: 100%;
 	width: 40%;
 	border-right: 4px solid #1d3557;
+	z-index: 2;
 }
 #selectLeftPan{
 	width: 100%;
