@@ -10,29 +10,33 @@
 	<script type="text/javascript" src="./js/codeInstance.js"></script>
 </head>
 <body>
-	<nav>
+	<nav id="nav">
 		<h1>GAsp <span>a web GA manipulator</span></h1>
+		<div id="controlButtons">
+			<div class="buttons">Save</div>
+			<div class="buttons">Clear</div>
+		</div>
 	</nav>
 	<section id="mainPart">
 		<div id="leftPanel">
-			<div id="selectLeftPan">
-				<p class="selectMode active">Console Mode</p>
-				<p class="selectMode">Current GA Macro</p>
-			</div>
 			<div id="leftContent">
 				<div id="consoleMode" class="active">
-					<div id="headerCMode">
-						<p>GAViewer</p>
-						<p>JS</p>
+					<div class="selectLeftPan">
+						<p class="selectMode active">Console Mode</p>
 					</div>
 					<div id="console"></div>
 				</div>
-				<div id="objectMode">
-					<p>Point :</p>
-					<p>Circle :</p>
-					<p>...</p>
+				<div id="macros">
+						<div id="movableUp" class="resize"></div>
+					<div class="selectLeftPan" id="headerMacro">
+						<p>GA infos</p>
+					</div>
+					<div id="macrosContent">
+					</div>
 				</div>
 			</div>
+			<div id="movableLeft" class="resize"></div>
+			<div id="run">Run</div>
 		</div>
 		<div id="viewer">
 			<!--<div id="newProject">
@@ -42,18 +46,18 @@
 				</div>
 			</div>-->	
 		</div>
-		<div id="run">Run</div>
 	</section>
 	<script src="./js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
+		var macroDeploy = false;
+
 		// Elements.
    		var els={};
-    	["#viewer","#run","#ganjaCode","#consoleMode","#objectMode","#console"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
-    	console.log(els.selectMode);
 		//ACE EDITOR (CONSOLE)
 		aceEditor = () => {
 			if (window.ace) {
@@ -81,26 +85,56 @@
 		    	present.style.height = document.getElementById("leftPanel").offsetHeight+"px";
 		    }
 		};
-
-	    //Event Listener
-
-		/*document.getElementById("newProject").onclick = () =>{
-			modalCreate.display();
-		}*/
-
-		for (var i = 0; i < elsClass.selectMode.length; i++) {
-		    elsClass.selectMode[i].onclick = () =>{
-		    	changeActive(elsClass.selectMode[0]);
-		    	changeActive(elsClass.selectMode[1]);
-		    	changeActive(els.consoleMode);
-		    	changeActive(els.objectMode);
-		    }
-		}
-
 		changeActive = (element) =>{
 			element.classList.toggle("active");
 		}
 
+
+    /********************
+    	Event Listener
+   	********************/
+
+ 		//Scalable sections
+		els.movableLeft.onmousedown=(e) =>{
+			window.onmousemove = function(e) {
+				var width = window.innerWidth;
+				var pourc = ((e.clientX)*100)/width;
+				els.leftPanel.style.width = pourc+"%";
+				els.viewer.style.width = (100-pourc)+"%";
+				els.viewer.style.marginLeft = pourc+"%";
+			}
+			window.onmouseleave = window.onmouseup = function(e) { window.onmouseleave = window.onmouseup = window.onmousemove = undefined; };
+		}
+		els.movableUp.onmousedown=(e) =>{
+			window.onmousemove = function(e) {
+				els.consoleMode.classList.remove("transi");
+				els.macros.classList.remove("transi");
+				var height = els.leftPanel.offsetHeight;
+				var mouseY = e.clientY;
+				if(mouseY-els.nav.offsetHeight > els.leftPanel.offsetHeight-50 ){
+					mouseY = els.leftPanel.offsetHeight+20; //Definitly not a magic number, will come back to it later
+					macroDeploy = false;
+				}
+				if(mouseY-els.nav.offsetHeight < 50)
+					mouseY = 50;
+				
+				var pourc = ((mouseY-els.nav.offsetHeight)*100)/height;
+
+				els.consoleMode.style.height = pourc+"%";
+				els.macros.style.height = (100-pourc)+"%";
+			}
+			window.onmouseleave = window.onmouseup = function(e) { window.onmouseleave = window.onmouseup = window.onmousemove = undefined; };
+		}
+
+		els.headerMacro.onclick = (e) => {
+			if(!macroDeploy){
+				els.consoleMode.classList.add("transi");
+				els.macros.classList.add("transi");
+				els.consoleMode.style.height = "60%";
+				els.macros.style.height = "40%";
+				macroDeploy = true;
+			}
+		}
 		//EVENTS LISTENER ON CONSOLE 
 	    editor.session.on('change', function(delta) {
 			// delta.start, delta.end, delta.lines, delta.action
@@ -108,7 +142,6 @@
 				els.run.classList.add("active");
 			}
 		});
-
 
 		//EVENT CLICK RUN 
 		document.getElementById("run").onclick=() =>{
@@ -166,7 +199,6 @@
 		inst.addOption("camera", false);
 
 	    var code = inst.displayAll();
-	    console.log(code);
 	    editor.setValue(code);
 	</script>
 </body>

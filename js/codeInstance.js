@@ -108,3 +108,46 @@ class CodeInstance{
 
 	}
 }	
+
+
+
+//GA Viewer
+
+/*radius = 3;
+
+center1 = c3ga_point( 2*e1);
+
+center2 = c3ga_point(-2*e1);
+
+sphere  = yellow(dual((center1 - radius*radius*0.5*einf))),
+
+plane   = red(dual(center1-center2)),
+
+circle  = dual( dual(sphere) ^ dual(plane) ),*/
+
+//GAsp
+
+/*Algebra(4,1,()=>{ 
+
+// We start by defining a null basis, and upcasting for points
+  var ni = 1e4+1e5, no = .5e5-.5e4;
+  var point = (x,y,z)=> no + x*1e1 + y*1e2 + z*1e3 + .5*(x*x+y*y+z*z)*ni;
+  
+  var radius = 3;
+  var center1 = point(2,0,0);
+  var center2 = point(-2,0,0);
+  var S  = ()=>!(center1- radius*radius*.5*ni);
+  
+  var P  = !(center1-center2); 
+  var C1 = ()=>S&P;
+  
+  
+// Graph the items.  
+  document.getElementById("viewer").appendChild(this.graph([
+      0x00FF0000, center1, "c1",
+      0x00FF0000, center2, "c2", // points
+      0xE00000FF, S, "S&P",       // sphere
+      0xE0FF0000, P, "plane",
+      0xE0000FF00, C1, "Inter"
+  ],{conformal:true,gl:true,grid:true})); 
+});*/
