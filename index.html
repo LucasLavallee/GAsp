@@ -4,10 +4,10 @@
 	<title>GAsp_v3</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
-
 	<script type="text/javascript" src="./js/lib/ganja.js/ganja.js"></script>
 	<script type="text/javascript" src="./js/classes.js"></script>	
 	<script type="text/javascript" src="./js/codeInstance.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
 	<nav id="nav">
@@ -38,30 +38,47 @@
 			<div id="movableLeft" class="resize"></div>
 			<div id="run">Run</div>
 		</div>
-		<div id="viewer">
-			<!--<div id="newProject">
-				<div id="npSub">	
-					<img src="./media/img/new-document.png">
-					<p>Create a new project</p>
+		<div id="viewerPanel">
+				<div id="viewerSettings">
+					<i class="fas fa-th fa-lg optionSetting" data-val="grid"></i>
+					<i class="fas fa-film fa-lg optionSetting" data-val="animate"></i>
 				</div>
-			</div>-->	
+			<div id="viewer">
+				<!--<div id="newProject">
+					<div id="npSub">	
+						<img src="./media/img/new-document.png">
+						<p>Create a new project</p>
+					</div>
+				</div>-->	
+			</div>
 		</div>
 	</section>
 	<script src="./js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
 		var macroDeploy = false;
+		var currentInfos = {
+			"algebra": [],
+			"options":{
+				"grid": "false",
+				"animate": "true",
+				"camera": false
+			}
+		}
 
 		// Elements.
    		var els={};
-    	["#viewer","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
-    	[".selectMode"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
+    	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
 		//ACE EDITOR (CONSOLE)
 		aceEditor = () => {
 			if (window.ace) {
 			    var editor = ace.edit("console");
+			    editor.setOptions({
+			    	autoScrollEditorIntoView : true,
+			    });
 			    editor.setTheme("ace/theme/tomorrow"); //theme setters 
 			    editor.session.setMode("ace/mode/javascript"); //mode = js, php etc...
 		     	editor.resize();
@@ -76,7 +93,6 @@
 
 	    sizeCanvas = () => {
 		//CANVAS SIZE
-			
 		    var present = els.viewer.querySelector("svg")||els.viewer.querySelector("canvas");
 		   	if(present == null)
 		   		return;
@@ -88,7 +104,33 @@
 		changeActive = (element) =>{
 			element.classList.toggle("active");
 		}
-
+		updateViewer = () =>{
+			var currentCode = editor.getValue();
+			els.viewer.innerHTML = "";
+			var scriptGJ = document.getElementById("ganjaCode");
+			scriptGJ.parentNode.removeChild(scriptGJ);
+			var script= document.createElement('script');
+     		script.id= 'ganjaCode';
+     		script.innerHTML = currentCode;
+     		document.body.appendChild(script);
+			document.getElementById("run").classList.remove("active");
+			sizeCanvas();
+		}
+		refreshConsole = () => {
+			var code = inst.displayAll();
+			editor.setValue(code);
+		}
+		refreshOption = () => {
+			for(var i = 0; i<elsClass.optionSetting.length; i++){
+				var div = elsClass.optionSetting[i];
+				var data = div.dataset.val;
+				if(data in currentInfos["options"]){
+					if(currentInfos["options"][data] === "true" || currentInfos["options"][data] === true){
+						div.classList.add("active");
+					}
+				}
+			}
+		}
 
     /********************
     	Event Listener
@@ -100,15 +142,18 @@
 				var width = window.innerWidth;
 				var pourc = ((e.clientX)*100)/width;
 				els.leftPanel.style.width = pourc+"%";
-				els.viewer.style.width = (100-pourc)+"%";
-				els.viewer.style.marginLeft = pourc+"%";
+				els.viewerPanel.style.width = (100-pourc)+"%";
+				els.viewerPanel.style.marginLeft = pourc+"%";
 			}
 			window.onmouseleave = window.onmouseup = function(e) { window.onmouseleave = window.onmouseup = window.onmousemove = undefined; };
 		}
 		els.movableUp.onmousedown=(e) =>{
 			window.onmousemove = function(e) {
-				els.consoleMode.classList.remove("transi");
-				els.macros.classList.remove("transi");
+				macroDeploy = true;
+				if(els.consoleMode.classList.contains("transi")){
+					els.consoleMode.classList.remove("transi");
+					els.macros.classList.remove("transi");
+				}
 				var height = els.leftPanel.offsetHeight;
 				var mouseY = e.clientY;
 				if(mouseY-els.nav.offsetHeight > els.leftPanel.offsetHeight-50 ){
@@ -134,7 +179,36 @@
 				els.macros.style.height = "40%";
 				macroDeploy = true;
 			}
+			else{
+				els.consoleMode.classList.add("transi");
+				els.macros.classList.add("transi");
+				els.consoleMode.style.height = "calc(100% - 50px)";
+				els.macros.style.height = "50px";
+				macroDeploy = false;
+			}
 		}
+
+		for(var i = 0; i<elsClass.optionSetting.length; i++){
+			elsClass.optionSetting[i].onclick = (function (i){
+				return function (){
+					changeActive(elsClass.optionSetting[i]);
+					//Changing currentInfos param
+					var data = elsClass.optionSetting[i].dataset.val;
+					if(elsClass.optionSetting[i].classList.contains("active")){
+						currentInfos["options"][data] === "false" ? currentInfos["options"][data] = "true" : currentInfos["options"][data] = true;
+					}
+					else{
+						currentInfos["options"][data] === "true" ? currentInfos["options"][data] = "false" : currentInfos["options"][data] = false;
+					}
+					console.log(data + "   " + currentInfos["options"][data] + "   " + typeof currentInfos["options"][data]);
+					//changing the options of the current instance
+					inst.setOption(data, currentInfos["options"][data]);
+					refreshConsole();
+					updateViewer();
+				}
+			})(i);
+		}
+
 		//EVENTS LISTENER ON CONSOLE 
 	    editor.session.on('change', function(delta) {
 			// delta.start, delta.end, delta.lines, delta.action
@@ -145,16 +219,7 @@
 
 		//EVENT CLICK RUN 
 		document.getElementById("run").onclick=() =>{
-			var currentCode = editor.getValue();
-			els.viewer.innerHTML = "";
-			var scriptGJ = document.getElementById("ganjaCode");
-			scriptGJ.parentNode.removeChild(scriptGJ);
-			var script= document.createElement('script');
-     		script.id= 'ganjaCode';
-     		script.innerHTML = currentCode;
-     		document.body.appendChild(script);
-			document.getElementById("run").classList.remove("active");
-			sizeCanvas();
+			updateViewer();
 		}
 
 	    //Modals Creation
@@ -195,11 +260,12 @@
 		inst.addDisplay("0x44aaff,[A+D+E,B+C+5*D+5*E,D+E],(angle_pp(A&E&D,a).toFixed(2))+'°',");
 		inst.addDisplay("0xff44ff,[A,2*A+D,2*A+B],(angle_ll(A&D,B&A).toFixed(2))+'°'];"); 
 
-		inst.addOption("animate", "true");
-		inst.addOption("camera", false);
+		inst.addOption("animate", currentInfos["options"]["animate"]);
+		inst.addOption("camera", currentInfos["options"]["camera"]);
+		inst.addOption("grid", currentInfos["options"]["grid"]);
 
-	    var code = inst.displayAll();
-	    editor.setValue(code);
+	    refreshConsole();
+	    refreshOption();
 	</script>
 </body>
 </html>

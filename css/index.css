@@ -196,11 +196,12 @@ nav h1 span{
 #macrosHeader{
 	height: 40px;
 }
-#viewer{
+#viewerPanel{
 	position: absolute;
 	width: 60%;
 	height: 100%;
 	margin-left: 40%;
+	overflow: hidden;
 }
 form input, form label,form textarea{
 	display: block;
@@ -220,4 +221,18 @@ form input, form label,form textarea{
 #run.active{
 	display: block;
 	animation: buttonColor 1s infinite;
+}
+#viewerSettings {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	cursor: pointer;
+}
+#viewerSettings i{
+	display: block;
+	margin: 15px;
+	color: gray;
+}
+#viewerSettings i.active{
+	color: #011c27;
 }

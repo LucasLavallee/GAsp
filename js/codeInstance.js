@@ -6,7 +6,7 @@ class CodeInstance{
 			this._definition = [];
 			this._object = [];
 			this._display = [];
-			this._options= []; //tab[0]["name"] et tab[0]["value"]  { width, height, animate, camera, scale, grid, canvas }
+			this._options= new Map(); //tab[0]["name"] et tab[0]["value"]  { width, height, animate, camera, scale, grid, canvas }
 		/*if(! CodeInstance.instance){
 			this._algebra = algebra;
 			this._definition = [];
@@ -20,6 +20,10 @@ class CodeInstance{
 
 	//SETTERS
 
+	setOption(name, val){
+		this._options.has(name) ? this._options.set(name,val) : console.log("data not found");
+	}
+
 	//METHODS
 	addDefinition(def) {
 		this._definition.push(def);
@@ -28,8 +32,7 @@ class CodeInstance{
 		this._object.push(object);
 	}
 	addOption(name, value){
-		var arr = {"name":name, "value":value};
-		this._options.push(arr);
+		this._options.set(name,value);
 	}
 	addDisplay(disp){
 		this._display.push(disp);
@@ -84,16 +87,18 @@ class CodeInstance{
 		all += globalOffset+"}";
 
 		//display the options
-		if(this._options.length > 0){
+		if(this._options.size > 0){
+			var i = 0;
 			all += ",{";
-			for(var i = 0; i<this._options.length;i++){
-				if(this._options[i]["value"] != false)
-					all+=this._options[i]["name"] + ":" + this._options[i]["value"];
+			this._options.forEach((val,key) => {
+				if(val != false)
+					all+=key + ":" + val;
 				else 
-					all+=this._options[i]["name"];
-				if(i!=this._options.length-1)
+					all+=key;
+				if(i!=this._options.size - 1)
 					all+=",";
-			}
+				i++;
+			});
 			all += "}";
 		}
 		all += "));\n});";
