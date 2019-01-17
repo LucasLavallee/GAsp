@@ -45,6 +45,7 @@
 					<i class="fas fa-film fa-lg optionSetting" data-val="animate"></i>
 				</div>
 			<div id="viewer">
+				<iframe id="exampleView"></iframe>
 				<!--<div id="newProject">
 					<div id="npSub">	
 						<img src="./media/img/new-document.png">
@@ -58,6 +59,19 @@
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
 		var macroDeploy = false;
+		var exampleList = ["complex_mandelbrot","complex_least_squares",
+                    "dual_differentiation","dual_backpropagation",
+                    "quaternion_hue","quaternion_mandelbrot",
+                    "timespace_lorentz",
+                    "pga2d_points_and_lines","pga2d_distances_and_angles","pga2d_project_and_reject","pga2d_rotors_and_translators","pga2d_isometries", "pga2d_inverse_kinematics","pga2d_separating_axis","pga2d_pose_estimation","pga2d_euler_line","pga2d_desargues_theorem","pga2d_differentiation","pga2d_physics_moon","pga2d_origami", "pga2d_poncelet",
+                    "pga3d_points_and_lines","pga3d_distances_and_angles","pga3d_rotors_and_translators","pga3d_icosahedron","pga3d_sampling","pga3d_slicing","pga3d_differentiation","pga3d_skinning","pga3d_physics_planets","pga3d_origami","pga3d_physics_symmetric_top","pga3d_physics_free_top","pga3d_objects","pga3d_levenberg_marquardt",
+                    "cga2d_points_and_circles","cga2d_project_and_reject","cga2d_rotors_and_translators","cga2d_euler_line",
+                    "cga3d_points_circles_lines","cga3d_points_spheres_planes","cga3d_dual_spheres_planes","cga3d_intersections","cga3d_project_reject","cga3d_opns_visualizer","cga3d_opns_line_circle","cga3d_json",
+                    "mga3d_points_and_lines",
+                    "ccga3d_points_quadrics",
+                    "qcga3d_points_and_more",
+                    "game_wedge"]; 
+
 		var currentInfos = {
 			"algebra": [],
 			"options":{
@@ -66,10 +80,11 @@
 				"camera": false
 			}
 		}
+		var currentScript;
 
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -105,18 +120,15 @@
 		}
 		updateViewer = () =>{
 			var currentCode = editor.getValue();
-			els.viewer.innerHTML = "";
-			var scriptGJ = document.getElementById("ganjaCode");
-			scriptGJ.parentNode.removeChild(scriptGJ);
+			var parent = currentScript.parentNode;
+			parent.innerHTML = '';
 			var script= document.createElement('script');
-     		script.id= 'ganjaCode';
      		script.innerHTML = currentCode;
-     		document.body.appendChild(script);
-			document.getElementById("run").classList.remove("active");
+     		parent.appendChild(script);
+     		currentScript = script;
 			sizeCanvas();
 		}
-		refreshConsole = () => {
-			var code = inst.displayAll();
+		refreshConsole = (code) => {
 			editor.setValue(code);
 		}
 		refreshOption = () => {
@@ -130,6 +142,17 @@
 				}
 			}
 		}
+		loadExample = (link) =>{
+        	els.exampleView.setAttribute("src", link);
+		}
+		displayExample = () => {
+			for(var i = 0; i<exampleList.length; i++){
+				els.macrosContent.innerHTML += "<p onclick='loadExample(\"./js/lib/ganja.js/examples/example_"+exampleList[i]+".html\")'>"+exampleList[i]+"</p>";
+			}
+		}
+
+		loadExample("./js/lib/ganja.js/examples/example_pga3d_distances_and_angles.html");
+
 
     /********************
     	Event Listener
@@ -146,6 +169,8 @@
 				}
 				var width = document.body.clientWidth ;
 				var mouseX = e.clientX;
+				
+				console.log(mouseX);
 					 //In case of double screen
 				if(mouseX<0) mouseX = 0;
 				else if(mouseX>width-4) mouseX = width-4;	 
@@ -182,7 +207,6 @@
 			}
 			window.onmouseleave = window.onmouseup = function(e) { window.onmouseleave = window.onmouseup = window.onmousemove = undefined; };
 		}
-
 		els.headerMacro.onclick = (e) => {
 			if(!macroDeploy){
 				els.consoleMode.classList.add("transi");
@@ -237,6 +261,19 @@
 			})(i);
 		}
 
+		//Iframe laoding
+		els.exampleView.onload = (e)=>{
+	      	els.exampleView.contentDocument.body.style = "margin:0; padding:0;width:100%; height:100%; margin:0;";
+	      	//Taking the script of the example
+	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
+	      	refreshConsole(currentScript.innerText);
+
+	      	var myscript = document.createElement('style');
+	      	myscript.type = 'text/css';
+	      	myscript.innerHTML = 'svg,canvas{width:100% !important;height:100% !important;}';
+	      	els.exampleView.contentDocument.getElementsByTagName("head")[0].appendChild(myscript);
+	    }
+
 		//EVENTS LISTENER ON CONSOLE 
 	    editor.session.on('change', function(delta) {
 			// delta.start, delta.end, delta.lines, delta.action
@@ -252,12 +289,12 @@
 
 	    //Modals Creation
 
-	    const modalCreate = new Modal("Create a project");
+	    /*const modalCreate = new Modal("Create a project");
 	    modalCreate.content = "<form method='post' action=''><label for='name'>Project Name (20 characters MAX): </label><input type='text' name='name'><label for='ga'>Project description: </label><textarea></textarea><label for='ga'>Select your GA: </label><select name='ga'><option>GA 1</option></select></form>";
-	    modalCreate.footer = "<input type='submit' value='Create'>";
+	    modalCreate.footer = "<input type='submit' value='Create'>";*/
 
 
-	    var inst = new CodeInstance([3,0,1]);
+	    /*var inst = new CodeInstance([3,0,1]);
 	    //Object.freeze(inst);
 
 	    inst.addDefinition("//DEFINITION PART");
@@ -290,10 +327,44 @@
 
 		inst.addOption("animate", currentInfos["options"]["animate"]);
 		inst.addOption("camera", currentInfos["options"]["camera"]);
-		inst.addOption("grid", currentInfos["options"]["grid"]);
+		inst.addOption("grid", currentInfos["options"]["grid"]);*/
 
-	    refreshConsole();
 	    refreshOption();
 	</script>
 </body>
 </html>
+
+<!-- 
+Algebra(3,0,1,()=>{
+
+	//DEFINITION PART
+	var point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
+	var line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;
+	var plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
+	var dist_pp = (P1,P2)=>(P1.Normalized&P2.Normalized).Length,
+	dist_pP = (P,p)=>(P.Normalized&p.Normalized).Length,
+	dist_ll = (l1,l2)=>(!(l1.Normalized*l2.Normalized)).Length;
+	var angle_pp = (p1,p2)=>Math.acos(p1.Normalized<<p2.Normalized)*180/Math.PI,
+	angle_ll = (l1,l2)=>Math.acos(l1.Normalized<<l2.Normalized)*180/Math.PI;
+
+	//CREATION PART
+	var A=point(0,-1,0), B=point(1,1,-1), C=point(-1,1,-1), D=point(1,1,1), E=point(-1,1,1),
+		a=B&C&D,
+		camera=0e0;
+	document.getElementById('viewer').appendChild(this.graph(()=>{
+
+		//DISPLAY PART
+		var time=performance.now()/4000;
+		A=point(0,Math.sin(time*4),0);
+		camera.set(Math.cos(time)+Math.sin(time)*1e13);
+		return [0xddaaff,[A,B,C],
+			0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],
+			0x444444,A,'A',B,'B',C,'C',D,'D',E,'E',
+			0xFF8888,[A,E],dist_pp(A,E).toFixed(2),
+			0x8888FF,[A,B+E],dist_pP(A,a).toFixed(2),
+			0x44aa44,C+E,dist_ll(C&E,D&B).toFixed(2),
+			0x44aaff,[A+D+E,B+C+5*D+5*E,D+E],(angle_pp(A&E&D,a).toFixed(2))+'°',
+			0xff44ff,[A,2*A+D,2*A+B],(angle_ll(A&D,B&A).toFixed(2))+'°'];
+	},{animate:true,camera,grid:true}));
+});
+-->
