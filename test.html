@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test Hover</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="test.css">
+</head>
+<body>
+
+<!-- Je veux que au survol de l'image qui suit, la div contenant le marqueur (class="invisible") apparaisse -->
+<img src="media/img/sphere.PNG" alt="image" style="width:140px; height:140px;" class="survol"/>
+ 
+ 
+<!--Je veux faire apparaitre cette div-->
+<div id = "divHover" class="invisible">
+Hoo, une belle image !
+</div>
+
+<div class="blur pic" id="image";" > 
+		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+</div>
+<div id="titre">
+		<a href="<?php the_permalink(); ?>"><span><?php the_title(); ?></span></a>
+</div>
+
+</body>
+</html>
