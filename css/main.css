@@ -1,0 +1,105 @@
+/* Font */
+@font-face{
+	font-family: 'Lato_Regular'; 
+	src: url("font/Lato-Regular.ttf");
+}
+@font-face{
+	font-family: 'Lato_Bold'; 
+	src: url("font/Lato-Bold.ttf");
+}
+@font-face{
+	font-family: 'Lato_Italic'; 
+	src: url("font/Lato-Italic.ttf");
+}
+html,body{
+	width: 100%;
+	height: 100%;
+}
+p,h1,h2,h3,h4{
+	margin: 0;
+    text-align: center;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 25px;
+    color: #011c27;
+}
+body{
+	background-color: #35605a;
+	color: rgb(0, 0, 0);
+	font-family: 'Lato_Regular';
+	margin: 0;
+}
+
+#title{
+    font-size: 61px;
+    font-style: bold;
+    font-family: 'PT Sans Narrow', sans-serif;
+    color: aliceblue;
+    
+}
+
+#icon{
+    font-size: 100px;
+    font-style: bold;
+    font-family: wingdings;
+    color: #35605a ;
+    
+}
+
+#icon>span{
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 70px;
+    width: auto; 
+    float: left; 
+    padding: 0 15px; 
+    position: relative; 
+    left: 15%; 
+}
+
+#iconP>span{
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 70px;
+    width: auto; 
+    float: left; 
+    padding: 0 15px; 
+    position: relative; 
+    left: 15%; 
+}
+
+#iconP{
+    font-size: 100px;
+    font-style: bold;
+    font-family: wingdings;
+    color: #35605a ;
+    width: auto; 
+    float: left; 
+    position: relative; 
+    left: -5%; 
+}
+.circleBase {
+    border-radius: 70%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+}
+.circleBase h4{
+    line-height: 150px;
+    vertical-align: middle;
+}
+
+.circleBase h3{
+    vertical-align: middle;
+    color: aliceblue;
+    font-size: 18px;
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.type1 {
+    width: 150px;
+    height: 150px;
+    background: white;
+}
+
+#icons{
+    margin: auto;
+    padding-top: 150px;
+    display: flex;
+    justify-content: space-evenly;
+}
