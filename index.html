@@ -13,6 +13,7 @@
 	<nav id="nav">
 		<h1>GAsp <span>a web GA manipulator</span></h1>
 		<div id="controlButtons">
+			<i class="fas fa-expand fa-lg" id="presentationMode" title="Presentation mode"></i>
 			<div class="buttons">Save</div>
 			<div class="buttons">Clear</div>
 		</div>
@@ -68,7 +69,7 @@
 
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -76,9 +77,7 @@
 		aceEditor = () => {
 			if (window.ace) {
 			    var editor = ace.edit("console");
-			    editor.setOptions({
-			    	autoScrollEditorIntoView : true,
-			    });
+			    editor.setAutoScrollEditorIntoView(true);
 			    editor.setTheme("ace/theme/tomorrow"); //theme setters 
 			    editor.session.setMode("ace/mode/javascript"); //mode = js, php etc...
 		     	editor.resize();
@@ -139,17 +138,29 @@
  		//Scalable sections
 		els.movableLeft.onmousedown=(e) =>{
 			window.onmousemove = function(e) {
-				var width = window.innerWidth;
-				var pourc = ((e.clientX)*100)/width;
+				els.presentationMode.classList.remove("active");
+				//Remove the smoothing transition
+				if(els.leftPanel.classList.contains("transi")){
+					els.leftPanel.classList.remove("transi");
+					els.viewerPanel.classList.remove("transi");
+				}
+				var width = document.body.clientWidth ;
+				var mouseX = e.clientX;
+					 //In case of double screen
+				if(mouseX<0) mouseX = 0;
+				else if(mouseX>width-4) mouseX = width-4;	 
+				var pourc = ((mouseX)*100)/width;
 				els.leftPanel.style.width = pourc+"%";
 				els.viewerPanel.style.width = (100-pourc)+"%";
 				els.viewerPanel.style.marginLeft = pourc+"%";
+				editor.resize();
 			}
 			window.onmouseleave = window.onmouseup = function(e) { window.onmouseleave = window.onmouseup = window.onmousemove = undefined; };
 		}
 		els.movableUp.onmousedown=(e) =>{
 			window.onmousemove = function(e) {
 				macroDeploy = true;
+				//Remove the smoothing transition
 				if(els.consoleMode.classList.contains("transi")){
 					els.consoleMode.classList.remove("transi");
 					els.macros.classList.remove("transi");
@@ -167,6 +178,7 @@
 
 				els.consoleMode.style.height = pourc+"%";
 				els.macros.style.height = (100-pourc)+"%";
+				editor.resize();
 			}
 			window.onmouseleave = window.onmouseup = function(e) { window.onmouseleave = window.onmouseup = window.onmousemove = undefined; };
 		}
@@ -185,6 +197,22 @@
 				els.consoleMode.style.height = "calc(100% - 50px)";
 				els.macros.style.height = "50px";
 				macroDeploy = false;
+			}
+		}
+		//Presentation Mode
+		els.presentationMode.onclick = (e) =>{
+			changeActive(els.presentationMode);
+			if(els.presentationMode.classList.contains("active")){
+				els.leftPanel.classList.add("transi");
+				els.viewerPanel.classList.add("transi");
+				els.leftPanel.style.width = els.viewerPanel.style.marginLeft = "0%";
+				els.viewerPanel.style.width = "100%";
+			}
+			else{
+				els.leftPanel.classList.add("transi");
+				els.viewerPanel.classList.add("transi");
+				els.leftPanel.style.width = els.viewerPanel.style.marginLeft = "40%";
+				els.viewerPanel.style.width = "60%";
 			}
 		}
 

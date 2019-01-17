@@ -29,7 +29,7 @@ p,h1,h2,h3,h4{
 }
 
 body{
-	background-color: #f1faee;
+	background-color: #fff;
 	color: rgb(60, 64, 67);
 	font-family: 'Lato_Regular';
 	margin: 0;
@@ -103,7 +103,7 @@ nav h1 span{
 }
 .selectLeftPan{
 	width: 100%;
-	background-color: #35605a;;
+	background-color: #35605a;
 	height: 50px; 
 	font-family: 'Lato_Bold';
 	letter-spacing: 0px;
@@ -226,7 +226,6 @@ form input, form label,form textarea{
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	cursor: pointer;
 }
 #viewerSettings i{
 	display: block;
@@ -235,4 +234,16 @@ form input, form label,form textarea{
 }
 #viewerSettings i.active{
 	color: #011c27;
+}
+i{
+	cursor: pointer;
+}
+
+#presentationMode{
+	margin: 0 5px;
+	padding: 10px;
+}
+#presentationMode.active{
+	background-color: #35605a;
+	border-radius: 25px;
 }
