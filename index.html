@@ -45,13 +45,19 @@
 					<i class="fas fa-film fa-lg optionSetting" data-val="animate"></i>
 				</div>
 			<div id="viewer">
-				<iframe id="exampleView"></iframe>
+				<iframe id="exampleView" class="active transi"></iframe>
 				<!--<div id="newProject">
 					<div id="npSub">	
 						<img src="./media/img/new-document.png">
 						<p>Create a new project</p>
 					</div>
 				</div>-->	
+				<div id="examples" class="transi">
+					<div id="headerExample" class="selectLeftPan">
+						<p>Choose an example</p>
+					</div>
+					<div id="allEx"></div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -84,7 +90,7 @@
 
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -127,6 +133,7 @@
      		parent.appendChild(script);
      		currentScript = script;
 			sizeCanvas();
+			changeActive(els.run);
 		}
 		refreshConsole = (code) => {
 			editor.setValue(code);
@@ -147,7 +154,7 @@
 		}
 		displayExample = () => {
 			for(var i = 0; i<exampleList.length; i++){
-				els.macrosContent.innerHTML += "<p onclick='loadExample(\"./js/lib/ganja.js/examples/example_"+exampleList[i]+".html\")'>"+exampleList[i]+"</p>";
+				els.allEx.innerHTML += "<p onclick='loadExample(\"./js/lib/ganja.js/examples/example_"+exampleList[i]+".html\")'>"+exampleList[i]+"</p>";
 			}
 		}
 
@@ -239,7 +246,11 @@
 				els.viewerPanel.style.width = "60%";
 			}
 		}
-
+		els.headerExample.onclick = (e) =>{
+			changeActive(els.examples);
+			changeActive(els.exampleView);
+			displayExample();
+		}
 		for(var i = 0; i<elsClass.optionSetting.length; i++){
 			elsClass.optionSetting[i].onclick = (function (i){
 				return function (){
