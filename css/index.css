@@ -282,6 +282,13 @@ iframe.active{
 	padding: 15px;
 	overflow: scroll;
 	height: calc(100% - 50px);
+	display: flex;
+	flex-wrap: wrap;
+}
+#allEx img{
+	width: 100px;
+	height: auto;
+	margin: 10px;
 }
 #projInfos{
 	position: absolute;
