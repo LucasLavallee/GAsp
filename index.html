@@ -40,10 +40,10 @@
 			<div id="run">Run</div>
 		</div>
 		<div id="viewerPanel">
-				<div id="viewerSettings">
+				<!--<div id="viewerSettings">
 					<i class="fas fa-th fa-lg optionSetting" data-val="grid"></i>
 					<i class="fas fa-film fa-lg optionSetting" data-val="animate"></i>
-				</div>
+				</div>-->
 			<div id="viewer">
 				<div id="projInfos">
 					<h3 id="projName" class="bold">---</h3>
@@ -68,6 +68,7 @@
 	<script src="./js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
+		var transitionTime = 800;
 		var macroDeploy = false;
 		var exampleList = ["complex_mandelbrot","complex_least_squares",
                     "dual_differentiation","dual_backpropagation",
@@ -92,7 +93,7 @@
 		}
 		var currentScript;
 		var currentMode = 1; // 0 = project Mode | 1 = Example Mode 
-
+		var test;
 		// Elements.
    		var els={};
     	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
@@ -118,12 +119,13 @@
 
 	    sizeCanvas = () => {
 		//CANVAS SIZE
-		    var present = els.viewer.querySelector("svg")||els.viewer.querySelector("canvas");
+		    var present = els.exampleView.contentDocument.querySelector("svg")||els.exampleView.contentDocument.querySelector("canvas");
 		   	if(present == null)
 		   		return;
 		    if (present || present.value){ 
-		    	present.style.width= "100%";  	
-		    	present.style.height = document.getElementById("leftPanel").offsetHeight+"px";
+		    	present.width= els.exampleView.offsetWidth; 
+		    	present.height = els.exampleView.offsetHeight;
+
 		    }
 		};
 		changeActive = (element) =>{
@@ -174,8 +176,6 @@
 		displayInterface = () => {
 			switch(currentMode){
 				case 0:
-
-					
 					break;
 				case 1: 
 					els.examples.style.display = 'block';
@@ -201,22 +201,53 @@
      			els.exampleView.contentDocument.body.appendChild(script);
      			currentScript = script;
 	      	}
-	      	//Taking the script of the example
-	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
-	      	refreshConsole(currentScript.innerText);
-
+	      	sizeCanvas();
+/*
 	      	var mystyle = document.createElement('style');
 	      	mystyle.type = 'text/css';
-	      	mystyle.innerHTML = 'svg,canvas{width:100% !important;height:100% !important;}';
-	      	els.exampleView.contentDocument.getElementsByTagName("head")[0].appendChild(mystyle);
+	      	mystyle.innerHTML = 'svg,canvas{width:100%;height:100%;}';
+	      	els.exampleView.contentDocument.getElementsByTagName("head")[0].appendChild(mystyle);*/
+		}
+		takeScreenShot = () =>{
+			var canvas = els.exampleView.contentDocument.querySelector("canvas")/* || els.exampleView.contentDocument.querySelector("svg")*/;
+			var width = canvas.width;
+			var height = canvas.height;
+			canvas.width = 1920;
+			canvas.height = 1080;
+
+			canvas.update(canvas.value);
+			//Open the screenshot in a new window
+			var dataUrl = canvas.toDataURL(1);
+			window.open(dataUrl, "toDataURL() image", "width=600, height=200"); //2
+			canvas.width = width;
+			canvas.height = height;
+
+			canvas.update(canvas.value);
+		}
+		function convertCanvasToImage(canvas) {
+			var image = new Image();
+			image.src = canvas.toDataURL("image/png");
+			return image;
 		}
 
+		cloneCanvas = (canvas) => {
+		    //create a new canvas
+		    var newCanvas = document.createElement('canvas');
+		    var context = newCanvas.getContext('2d');
 
+		    //set dimensions
+		    newCanvas.width = canvas.width;
+		    newCanvas.height = canvas.height;
+
+		    //apply the old canvas to the new one
+		    context.drawImage(canvas, 0, 0);
+		    //return the new canvas
+		    return newCanvas;
+		}
 
     /********************
     	Event Listener
    	********************/
-
  		//Scalable sections
 		els.movableLeft.onmousedown=(e) =>{
 			window.onmousemove = function(e) {
@@ -228,8 +259,7 @@
 				}
 				var width = document.body.clientWidth ;
 				var mouseX = e.clientX;
-				
-				console.log(mouseX);
+			
 					 //In case of double screen
 				if(mouseX<0) mouseX = 0;
 				else if(mouseX>width-4) mouseX = width-4;	 
@@ -238,6 +268,7 @@
 				els.viewerPanel.style.width = (100-pourc)+"%";
 				els.viewerPanel.style.marginLeft = pourc+"%";
 				editor.resize();
+				sizeCanvas();
 			}
 			window.onmouseleave = window.onmouseup = function(e) { window.onmouseleave = window.onmouseup = window.onmousemove = undefined; };
 		}
@@ -301,7 +332,9 @@
 		els.headerExample.onclick = (e) =>{
 			changeActive(els.examples);
 			changeActive(els.exampleView);
-			displayExample();
+			if(els.allEx.innerHTML == '')
+				displayExample();
+			setTimeout(function(){ sizeCanvas(); }, transitionTime);
 		}
 		for(var i = 0; i<elsClass.optionSetting.length; i++){
 			elsClass.optionSetting[i].onclick = (function (i){
@@ -327,6 +360,10 @@
 		//Iframe laoding
 		els.exampleView.onload = (e)=>{
 			preloadIframe();
+	      	
+	      	//Taking the script of the example
+	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
+	      	refreshConsole(currentScript.innerText);
 	    }
 
 		//EVENTS LISTENER ON CONSOLE 
@@ -341,6 +378,7 @@
 		document.getElementById("run").onclick=() =>{
 			updateViewer();
 		}
+
 	    refreshOption();
 	    displayInterface();
 	    preloadIframe();

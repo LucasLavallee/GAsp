@@ -279,7 +279,7 @@ iframe.active{
 	top:50%;
 }
 #allEx{
-	padding: 15px;
+	padding: 25px;
 	overflow: scroll;
 	height: calc(100% - 50px);
 	display: flex;
