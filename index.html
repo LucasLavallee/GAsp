@@ -45,6 +45,10 @@
 					<i class="fas fa-film fa-lg optionSetting" data-val="animate"></i>
 				</div>
 			<div id="viewer">
+				<div id="projInfos">
+					<h3 id="projName" class="bold">---</h3>
+					<p>by <span id="projAuthor" class="bold">_____</span></p>
+				</div>
 				<iframe id="exampleView" class="active transi"></iframe>
 				<!--<div id="newProject">
 					<div id="npSub">	
@@ -87,10 +91,11 @@
 			}
 		}
 		var currentScript;
+		var currentMode = 1; // 0 = project Mode | 1 = Example Mode 
 
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -149,16 +154,62 @@
 				}
 			}
 		}
-		loadExample = (link) =>{
-        	els.exampleView.setAttribute("src", link);
+
+		loadProjInfos = (author, name) =>{
+			els.projName.innerHTML = name;
+			els.projAuthor.innerHTML = author;
+		}
+		loadExample = (name) =>{
+			loadProjInfos("ganja.js master",name);
+        	els.exampleView.setAttribute("src", "./js/lib/ganja.js/examples/example_"+name+".html");
 		}
 		displayExample = () => {
 			for(var i = 0; i<exampleList.length; i++){
-				els.allEx.innerHTML += "<p onclick='loadExample(\"./js/lib/ganja.js/examples/example_"+exampleList[i]+".html\")'>"+exampleList[i]+"</p>";
+				els.allEx.innerHTML += "<p onclick='loadExample(\""+exampleList[i]+"\")'>"+exampleList[i]+"</p>";
 			}
 		}
 
-		loadExample("./js/lib/ganja.js/examples/example_pga3d_distances_and_angles.html");
+		//Function that loads the different necessary parts/div of the current Mode
+		displayInterface = () => {
+			switch(currentMode){
+				case 0:
+
+					
+					break;
+				case 1: 
+					els.examples.style.display = 'block';
+					loadExample("pga3d_icosahedron");
+					break;
+			}
+		}
+		preloadIframe = () =>{
+	      	els.exampleView.contentDocument.body.style = "margin:0; padding:0;width:100%; height:100%; margin:0;";
+	      	if(currentMode==0){
+
+				//script that contains the ganja.js
+	      		var currentCode = editor.getValue();
+	      		var scriptGJ= document.createElement('script');
+     			scriptGJ.type = "text/javascript";
+     			scriptGJ.src = "./js/lib/ganja.js/ganja.js";
+     			els.exampleView.contentDocument.getElementsByTagName("head")[0].appendChild(scriptGJ);
+
+	      		//script that contains the ganja.js
+	      		var currentCode = editor.getValue();
+	      		var script= document.createElement('script');
+     			script.innerHTML = currentCode;
+     			els.exampleView.contentDocument.body.appendChild(script);
+     			currentScript = script;
+	      	}
+	      	//Taking the script of the example
+	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
+	      	refreshConsole(currentScript.innerText);
+
+	      	var mystyle = document.createElement('style');
+	      	mystyle.type = 'text/css';
+	      	mystyle.innerHTML = 'svg,canvas{width:100% !important;height:100% !important;}';
+	      	els.exampleView.contentDocument.getElementsByTagName("head")[0].appendChild(mystyle);
+		}
+
 
 
     /********************
@@ -274,15 +325,7 @@
 
 		//Iframe laoding
 		els.exampleView.onload = (e)=>{
-	      	els.exampleView.contentDocument.body.style = "margin:0; padding:0;width:100%; height:100%; margin:0;";
-	      	//Taking the script of the example
-	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
-	      	refreshConsole(currentScript.innerText);
-
-	      	var myscript = document.createElement('style');
-	      	myscript.type = 'text/css';
-	      	myscript.innerHTML = 'svg,canvas{width:100% !important;height:100% !important;}';
-	      	els.exampleView.contentDocument.getElementsByTagName("head")[0].appendChild(myscript);
+			preloadIframe();
 	    }
 
 		//EVENTS LISTENER ON CONSOLE 
@@ -297,85 +340,9 @@
 		document.getElementById("run").onclick=() =>{
 			updateViewer();
 		}
-
-	    //Modals Creation
-
-	    /*const modalCreate = new Modal("Create a project");
-	    modalCreate.content = "<form method='post' action=''><label for='name'>Project Name (20 characters MAX): </label><input type='text' name='name'><label for='ga'>Project description: </label><textarea></textarea><label for='ga'>Select your GA: </label><select name='ga'><option>GA 1</option></select></form>";
-	    modalCreate.footer = "<input type='submit' value='Create'>";*/
-
-
-	    /*var inst = new CodeInstance([3,0,1]);
-	    //Object.freeze(inst);
-
-	    inst.addDefinition("//DEFINITION PART");
-	    inst.addDefinition("var point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;");
-	    inst.addDefinition("var line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;");
-	    inst.addDefinition("var plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;");
-	    inst.addDefinition("var dist_pp = (P1,P2)=>(P1.Normalized&P2.Normalized).Length,");
-	    inst.addDefinition("dist_pP = (P,p)=>(P.Normalized&p.Normalized).Length,");
-	    inst.addDefinition("dist_ll = (l1,l2)=>(!(l1.Normalized*l2.Normalized)).Length;");
-	    inst.addDefinition("var angle_pp = (p1,p2)=>Math.acos(p1.Normalized<<p2.Normalized)*180/Math.PI,");
-	    inst.addDefinition("angle_ll = (l1,l2)=>Math.acos(l1.Normalized<<l2.Normalized)*180/Math.PI;");
-
-	    inst.addObject("//CREATION PART");
-		inst.addObject("var A=point(0,-1,0), B=point(1,1,-1), C=point(-1,1,-1), D=point(1,1,1), E=point(-1,1,1),");
-		inst.addObject("a=B&C&D,");
-		inst.addObject("camera=0e0;");
-
-		inst.addDisplay("//DISPLAY PART");
-		inst.addDisplay("var time=performance.now()/4000;");
-		inst.addDisplay("A=point(0,Math.sin(time*4),0);");
-		inst.addDisplay("camera.set(Math.cos(time)+Math.sin(time)*1e13);");
-		inst.addDisplay("return [0xddaaff,[A,B,C],");
-		inst.addDisplay("0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],");
-		inst.addDisplay("0x444444,A,'A',B,'B',C,'C',D,'D',E,'E',");
-		inst.addDisplay("0xFF8888,[A,E],dist_pp(A,E).toFixed(2),");
-		inst.addDisplay("0x8888FF,[A,B+E],dist_pP(A,a).toFixed(2),");
-		inst.addDisplay("0x44aa44,C+E,dist_ll(C&E,D&B).toFixed(2),");
-		inst.addDisplay("0x44aaff,[A+D+E,B+C+5*D+5*E,D+E],(angle_pp(A&E&D,a).toFixed(2))+'°',");
-		inst.addDisplay("0xff44ff,[A,2*A+D,2*A+B],(angle_ll(A&D,B&A).toFixed(2))+'°'];"); 
-
-		inst.addOption("animate", currentInfos["options"]["animate"]);
-		inst.addOption("camera", currentInfos["options"]["camera"]);
-		inst.addOption("grid", currentInfos["options"]["grid"]);*/
-
 	    refreshOption();
+	    displayInterface();
+	    preloadIframe();
 	</script>
 </body>
 </html>
-
-<!-- 
-Algebra(3,0,1,()=>{
-
-	//DEFINITION PART
-	var point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
-	var line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;
-	var plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
-	var dist_pp = (P1,P2)=>(P1.Normalized&P2.Normalized).Length,
-	dist_pP = (P,p)=>(P.Normalized&p.Normalized).Length,
-	dist_ll = (l1,l2)=>(!(l1.Normalized*l2.Normalized)).Length;
-	var angle_pp = (p1,p2)=>Math.acos(p1.Normalized<<p2.Normalized)*180/Math.PI,
-	angle_ll = (l1,l2)=>Math.acos(l1.Normalized<<l2.Normalized)*180/Math.PI;
-
-	//CREATION PART
-	var A=point(0,-1,0), B=point(1,1,-1), C=point(-1,1,-1), D=point(1,1,1), E=point(-1,1,1),
-		a=B&C&D,
-		camera=0e0;
-	document.getElementById('viewer').appendChild(this.graph(()=>{
-
-		//DISPLAY PART
-		var time=performance.now()/4000;
-		A=point(0,Math.sin(time*4),0);
-		camera.set(Math.cos(time)+Math.sin(time)*1e13);
-		return [0xddaaff,[A,B,C],
-			0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],
-			0x444444,A,'A',B,'B',C,'C',D,'D',E,'E',
-			0xFF8888,[A,E],dist_pp(A,E).toFixed(2),
-			0x8888FF,[A,B+E],dist_pP(A,a).toFixed(2),
-			0x44aa44,C+E,dist_ll(C&E,D&B).toFixed(2),
-			0x44aaff,[A+D+E,B+C+5*D+5*E,D+E],(angle_pp(A&E&D,a).toFixed(2))+'°',
-			0xff44ff,[A,2*A+D,2*A+B],(angle_ll(A&D,B&A).toFixed(2))+'°'];
-	},{animate:true,camera,grid:true}));
-});
--->
