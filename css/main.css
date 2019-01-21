@@ -92,7 +92,8 @@ body{
     transform: translate3d(0,0,0) scale(0.75)!important; 
 }
 .active h3{
-    display: none;
+    color: #011c27 !important;
+    font-size: 40px !important;
 }
 .unactive{
     display: none;
