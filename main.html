@@ -12,23 +12,41 @@
 </head>
 
 <body>
-    <h4 id="title"> GAsp</h4>
-    <h1> a web GA manipulator</h1>
+    <div id = "header">
+     <h4 id="title"> GAsp</h4>
+     <h1> a web GA manipulator</h1>
+    </div>
+
     <div id="icons">
         <div class="circleBase type1">
-            <h4 id="icon"></h4>
+            <h4 id="iconExample"></h4>
             <h3>Discover with examples</h3>
         </div>
         <div  class="circleBase">
-            <h4 id="icon"> <span>+</span></h4>
+            <h4 id="iconCreate"> <span>+</span></h4>
             <h3>Create a new project</h3>
         </div>
         <div class="circleBase type1">
-            <h4 id="icon"></h4>
+            <h4 id="iconOpen"></h4>
             <h3>Open a project</h3>
         </div>
     </div>
     </div>
+    <div id = "signIn" class = "sign unactive">
+        <h4> Sign in </h4>
+        <form id = "form" method = "post" action = "traitemebt.php">
+            <p>
+                <label> Username </label> : <input type="text" name = "username"/>
+            </p>
+            <p>
+                <label> Password </label> : <input type="text" name = "password"/>
+            </p>
+        </form>
+        <div id = "validate">
+        
+            </div>
+    </div>
+
     <script>
         changeActive = (element) =>{
 			element.classList.toggle("active");
@@ -51,6 +69,14 @@
             }
         }
         myFunction();
+        document.getElementById("iconOpen").addEventListener("click", DisplaySignIn)
+        function DisplaySignIn(){
+            console.log("sign in should show up !! ");
+            if (document.getElementById("signIn").classList.contains("unactive"))
+            document.getElementById("signIn").classList.replace("unactive", "active");
+            else if (document.getElementById("signIn").classList.contains("active"))
+            document.getElementById("signIn").classList.replace("active", "unactive");
+        }
     </script>
 </body>
 
