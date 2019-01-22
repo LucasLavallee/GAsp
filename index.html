@@ -115,8 +115,6 @@
 		}
 		editor = aceEditor();
 	    editor.setValue(""); //Fill the editor with current ganja code
-
-
 	    sizeCanvas = () => {
 		//CANVAS SIZE
 		    var present = els.exampleView.contentDocument.querySelector("svg")||els.exampleView.contentDocument.querySelector("canvas");
@@ -125,7 +123,8 @@
 		    if (present || present.value){ 
 		    	present.width= els.exampleView.offsetWidth; 
 		    	present.height = els.exampleView.offsetHeight;
-
+		    	present.style.width= "100%";
+		    	present.style.height = "100%";	
 		    }
 		};
 		changeActive = (element) =>{
