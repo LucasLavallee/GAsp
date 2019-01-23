@@ -18,6 +18,10 @@
   100% {background-color: rgb(29, 53, 87);}
 }
 
+#headerExample, #headerMacro, .buttons, #run{
+	cursor: pointer;
+}
+
 .transi{
 	transition: all ease .8s;
 }
@@ -133,7 +137,6 @@ nav h1 span{
 	letter-spacing: 0px;
 	display: flex;
 	align-items: center;
-	cursor: pointer;
 }
 .selectLeftPan p{
 	margin-left: 35px;
