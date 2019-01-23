@@ -51,10 +51,22 @@ nav{
 	color: 	#eeeeee;
 	display: grid;
 	align-items: stretch;
-	grid-template-columns: 50% 50%;
+	grid-template-columns: 45px 1fr 1fr;
 }
+
+#home{
+	font-size : 20px;
+	display :flex;
+	align-items : center;
+	justify-content: center;
+	background-color : #50514f;
+	border-radius : 50%;
+	margin : 12.5px 0;
+}
+
 nav h1{
-	display: inline-block;	
+	display: inline-block;
+	margin-left : 15px;
 }
 nav h1 span{
 	font-size: 18px;
