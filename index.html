@@ -81,8 +81,34 @@
                     "mga3d_points_and_lines",
                     "ccga3d_points_quadrics",
                     "qcga3d_points_and_more",
-                    "game_wedge"]; 
-
+                    "game_wedge"];
+					
+		//var exampleCategories = ["Complex", 2, "Differentiation", 2, "Quaternion", 2, "Timespace", 1, "2D PGA", 14, "3D PGA", 14, "2D CGA", 4, "3D CGA", 8, "3D Mother Algebra", 1, "3D CCGA", 1, "3D QCGA", 1, "Game", 1];
+		// build an array (exampleCategories) with the names of the categories, and their occurrences
+		var exampleCategories=[];
+		var cut=exampleList[0].indexOf("_");
+		var lastCat=exampleList[0].slice(0, cut);
+		var occ=1;
+		for(var i=1; i< exampleList.length; i ++){
+			var cut=exampleList[i].indexOf("_");
+			var currentCat=exampleList[i].slice(0, cut);
+			if(currentCat==lastCat)
+				occ ++;
+			else{
+				exampleCategories.push(lastCat);
+				exampleCategories.push(occ);
+				lastCat=currentCat;
+				occ=1;
+			}
+		}
+		exampleCategories.push(lastCat);
+		exampleCategories.push(occ);
+		
+		console.log(exampleCategories);
+		
+		console.log(exampleList);
+		
+		
 		var currentInfos = {
 			"algebra": [],
 			"options":{
@@ -165,9 +191,28 @@
         	els.exampleView.setAttribute("src", "./js/lib/ganja.js/examples/example_"+name+".html");
 		}
 		displayExample = () => {
-			for(var i = 0; i<exampleList.length; i++){
-//				els.allEx.innerHTML += "<p onclick='loadExample(\""+exampleList[i]+"\")'>"+exampleList[i]+"</p>";
-				els.allEx.innerHTML += "<img title = '"+exampleList[i]+"' src='./js/lib/ganja.js/images/"+exampleList[i]+".jpg' onclick='loadExample(\""+exampleList[i]+"\")'>";
+			var k=0;
+			for(var j=0; j<exampleCategories.length; j+=2){
+				var exampleCat = document.createElement("div");
+				exampleCat.classList.add("exampleCat");
+				var titleCat = document.createElement("p");
+				titleCat.innerHTML=exampleCategories[j];
+				exampleCat.appendChild(titleCat);
+				for(var i = 0; i<Number(exampleCategories[j+1]); i++){
+	//				els.allEx.innerHTML += "<p onclick='loadExample(\""+exampleList[i]+"\")'>"+exampleList[i]+"</p>";
+					var example = document.createElement("div");
+					var imageEx = document.createElement("img");
+					imageEx.setAttribute("title", exampleList[k]);
+					imageEx.setAttribute("src", "./js/lib/ganja.js/images/"+exampleList[k]+".jpg");
+					imageEx.setAttribute("onclick", "loadExample('"+exampleList[k]+"')");
+					example.appendChild(imageEx);
+					var titleEx = document.createElement("p");
+					titleEx.innerHTML=exampleList[k].split('_').slice(1).join(' ');
+					example.appendChild(titleEx);
+					exampleCat.appendChild(example);
+					k++;
+				}
+				els.allEx.appendChild(exampleCat);
 			}
 		}
 
