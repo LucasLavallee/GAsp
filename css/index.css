@@ -17,6 +17,7 @@
   50% {background-color: #35605a;}
   100% {background-color: rgb(29, 53, 87);}
 }
+
 .transi{
 	transition: all ease .8s;
 }
@@ -32,7 +33,7 @@ p,h1,h2,h3,h4{
 }
 
 body{
-	background-color: #fff;
+	background-color: #eeeeee;
 	color: rgb(60, 64, 67);
 	font-family: 'Lato_Regular';
 	margin: 0;
@@ -47,7 +48,7 @@ nav{
 	padding: 0 35px;
 	background-color:#011c27;
 	box-shadow: 0 4px 2px -2px #dcdcdc;
-	color: 	#f0f7ee;
+	color: 	#eeeeee;
 	display: grid;
 	align-items: stretch;
 	grid-template-columns: 50% 50%;
@@ -126,7 +127,7 @@ nav h1 span{
 	margin-left: 35px;
 	font-family: 'Lato_Bold';
 	font-size: 20px;
-	color: #fff;
+	color: #eeeeee;
 }
 #leftContent{
 	height: 100%;
@@ -134,7 +135,7 @@ nav h1 span{
 	position: relative;
 }
 #newProject{
-	background-color: #fff;
+	background-color: #eeeeee;
 	position: absolute;
 	top: 50%; left: 50%;
 	transform: translate3d(-50%,-50%,0);
@@ -168,13 +169,13 @@ nav h1 span{
 	top: 50%;
 	left: 50%;
 	transform: translate3d(-50%,-50%,0);
-	background-color: #e9edf0;
+	background-color: #eeeeee;
 	min-width: 50%; 
 }
 .modalHeader{
 	padding: 20px;
 	background-color: #e63946;
-	color: #fff;
+	color: #eeeeee;
 }
 .modalContent{
 	padding: 20px;
@@ -190,7 +191,7 @@ nav h1 span{
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	color: 	#f0f7ee;
+	color: 	#eeeeee;
 }
 #consoleMode{
 	height: calc(100% - 50px);
@@ -225,7 +226,7 @@ form input, form label,form textarea{
 	bottom: 30px;
 	display: none;
 	background-color: #1d3557;
-	color: #fff;
+	color: #eeeeee;
 	padding: 15px;
 	border-radius: 4px;
 }
@@ -279,23 +280,44 @@ iframe.active{
 	top:50%;
 }
 #allEx{
+	color : #35605a;
 	padding: 25px;
 	overflow: scroll;
 	height: calc(100% - 100px);
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction : column;
 }
 #allEx img{
 	width: 100px;
 	height: auto;
+	border : solid 2px #35605a;
+	border-radius : 5px;
+}
+
+.exTitles{
+	font-size : 20px;
+	margin-bottom : 10px;
+	margin-left : 10px;
+}
+
+.exampleCat{
+	display : flex;
+	flex-direction : row;
+	flex-wrap : wrap;
+	font-size : 14px;
+	margin-bottom : 25px;
+}
+
+.exampleCat > div{
 	margin: 10px;
 }
+
 #projInfos{
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	padding: 10px 15px;
 	font-size: 0.9em;
-	background-color: #fff;
+	background-color: #eeeeee;
 	box-shadow: 2px 2px 2px #dcdcdc;
 }

@@ -197,7 +197,8 @@
 				exampleCat.classList.add("exampleCat");
 				var titleCat = document.createElement("p");
 				titleCat.innerHTML=exampleCategories[j];
-				exampleCat.appendChild(titleCat);
+				titleCat.setAttribute("class", "exTitles");
+				els.allEx.appendChild(titleCat);
 				for(var i = 0; i<Number(exampleCategories[j+1]); i++){
 	//				els.allEx.innerHTML += "<p onclick='loadExample(\""+exampleList[i]+"\")'>"+exampleList[i]+"</p>";
 					var example = document.createElement("div");
