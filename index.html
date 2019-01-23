@@ -15,7 +15,7 @@
 		<div id="controlButtons">
 			<i class="fas fa-expand fa-lg" id="presentationMode" title="Presentation mode"></i>
 			<div class="buttons">Save</div>
-			<div class="buttons">Clear</div>
+			<div id="clear" class="buttons">Clear</div>
 		</div>
 	</nav>
 	<section id="mainPart">
@@ -82,9 +82,9 @@
                     "ccga3d_points_quadrics",
                     "qcga3d_points_and_more",
                     "game_wedge"];
-					
-		//var exampleCategories = ["Complex", 2, "Differentiation", 2, "Quaternion", 2, "Timespace", 1, "2D PGA", 14, "3D PGA", 14, "2D CGA", 4, "3D CGA", 8, "3D Mother Algebra", 1, "3D CCGA", 1, "3D QCGA", 1, "Game", 1];
+				
 		// build an array (exampleCategories) with the names of the categories, and their occurrences
+		// example : ["Complex", 2, "Differentiation", 2,... ]
 		var exampleCategories=[];
 		var cut=exampleList[0].indexOf("_");
 		var lastCat=exampleList[0].slice(0, cut);
@@ -104,10 +104,6 @@
 		exampleCategories.push(lastCat);
 		exampleCategories.push(occ);
 		
-		console.log(exampleCategories);
-		
-		console.log(exampleList);
-		
 		
 		var currentInfos = {
 			"algebra": [],
@@ -122,7 +118,7 @@
 		var test;
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -224,6 +220,7 @@
 					els.run.style.top = '-10px';
 					break;
 				case 1: 
+					els.clear.style.display = 'none';
 					els.headerExample.style.display = 'flex';
 					els.allEx.style.display = 'block';
 					loadExample("pga3d_icosahedron");
@@ -425,10 +422,19 @@
 		document.getElementById("run").onclick=() =>{
 			updateViewer();
 		}
+		
+		//EVENT CLICK CLEAR
+		els.clear.onclick=() =>{
+			editor.setValue("");
+			updateViewer();
+		}
+		
 
 	    refreshOption();
 	    displayInterface();
 	    preloadIframe();
+		
+		console.log(currentInfos);
 	</script>
 </body>
 </html>
