@@ -47,6 +47,41 @@
             </div>
     </div>
 
+    <div id = "chooseGA" class = "chooseGA unactive">
+    <div class = "chooseInfo">
+        <div class = "choose">
+            <h4> Choose the geometric algebra </h4>
+            <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <div class = "validateGA">
+        
+                </div>
+            </div>
+        
+    <div class = "infoGA">
+                <h4> GA informations </h4>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+                <p> lorem ipsum </p>
+        </div>
+    </div>
+    <div class = "createGA">
+        <div id ="or">
+                <h3> or </h3>
+            </div>
+        <div class = "create">
+           
+            <h4> Create a geometric algebra</h4>
+        </div>
+    </div>
+    </div>
     <script>
         changeActive = (element) =>{
 			element.classList.toggle("active");
@@ -71,11 +106,17 @@
         myFunction();
         document.getElementById("iconOpen").addEventListener("click", DisplaySignIn)
         function DisplaySignIn(){
-            console.log("sign in should show up !! ");
             if (document.getElementById("signIn").classList.contains("unactive"))
             document.getElementById("signIn").classList.replace("unactive", "active");
             else if (document.getElementById("signIn").classList.contains("active"))
             document.getElementById("signIn").classList.replace("active", "unactive");
+        }
+        document.getElementById("iconCreate").addEventListener("click", DisplayChooseGA)
+        function DisplayChooseGA(){
+            if (document.getElementById("chooseGA").classList.contains("unactive"))
+            document.getElementById("chooseGA").classList.replace("unactive", "active");
+            else if (document.getElementById("chooseGA").classList.contains("active"))
+            document.getElementById("chooseGA").classList.replace("active", "unactive");
         }
     </script>
 </body>
