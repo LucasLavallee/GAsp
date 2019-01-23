@@ -274,8 +274,13 @@ iframe.active{
 	top: calc(100% - 50px);
 	width: 100%;
 	height: 50%;
-	display: none;
+	display: block;
 }
+
+#headerExample, #allEx{
+	display : none;
+}
+
 #examples.active{
 	top:50%;
 }
@@ -284,8 +289,6 @@ iframe.active{
 	padding: 25px;
 	overflow: scroll;
 	height: calc(100% - 100px);
-	display: flex;
-	flex-direction : column;
 }
 #allEx img{
 	width: 100px;

@@ -118,7 +118,7 @@
 			}
 		}
 		var currentScript;
-		var currentMode = 1; // 0 = project Mode | 1 = Example Mode 
+		var currentMode = 0; // 0 = project Mode | 1 = Example Mode 
 		var test;
 		// Elements.
    		var els={};
@@ -221,9 +221,11 @@
 		displayInterface = () => {
 			switch(currentMode){
 				case 0:
+					els.run.style.top = '-10px';
 					break;
 				case 1: 
-					els.examples.style.display = 'block';
+					els.headerExample.style.display = 'flex';
+					els.allEx.style.display = 'block';
 					loadExample("pga3d_icosahedron");
 					break;
 			}
