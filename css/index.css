@@ -222,8 +222,8 @@ form input, form label,form textarea{
 }
 #run{
 	position: absolute;
-	right: -100px;
-	bottom: 30px;
+	left: 15px;
+	top: -60px;
 	display: none;
 	background-color: #1d3557;
 	color: #eeeeee;
