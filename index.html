@@ -69,6 +69,52 @@
 			</div>
 		</div>
 	</section>
+	<section id="pop-up_black">
+		<div id="pop-up">
+			<div id="save_header">
+			</div>
+			<div id="sign_in">
+				<p>Sign in</p>
+				<form>
+					<p>
+						<label>username : </label>
+						<input type="text" name="username" />
+					</p>
+					<p>
+						<label>password : </label>
+						<input type="password" name="password" />
+					</p>
+				</form>
+			</div>
+			<div id="sign_up">
+				<p>Sign out</p>
+				<form>
+					<p>
+						<label>email : </label>
+						<input type="email" name="email" />
+					</p>
+					<p>
+						<label>username : </label>
+						<input type="text" name="username" />
+					</p>
+					<p>
+						<label>password : </label>
+						<input type="password" name="password" />
+					</p>
+					<p>
+						<label>confirm password : </label>
+						<input type="password" name="confirm_password" />
+				</form>
+			</div>
+			</form>
+			<div class="buttons" id="sign-in_send">
+				<p>OK</p>
+			</div>
+			<div class="buttons" id="sign-up_send">
+				<p>OK</p>
+			</div>
+		</div>
+	</section>
 	<script src="./js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
@@ -405,7 +451,7 @@
 			})(i);
 		}
 
-		//Iframe laoding
+		//Iframe loading
 		els.exampleView.onload = (e)=>{
 			preloadIframe();
 	      	
