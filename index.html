@@ -78,11 +78,11 @@
 				<form>
 					<p>
 						<label>username : </label>
-						<input type="text" name="username" />
+						<input type="email" name="email" id="userIn"/>
 					</p>
 					<p>
 						<label>password : </label>
-						<input type="password" name="password" />
+						<input type="password" name="password"  id="passwordIn"/>
 					</p>
 				</form>
 			</div>
@@ -91,28 +91,30 @@
 				<form>
 					<p>
 						<label>email : </label>
-						<input type="email" name="email" />
+						<input type="email" name="email" id="emailUp"/>
 					</p>
 					<p>
 						<label>username : </label>
-						<input type="text" name="username" />
+						<input type="text" name="username"  id="userUp"/>
 					</p>
 					<p>
 						<label>password : </label>
-						<input type="password" name="password" />
+						<input type="password" name="password"  id="passUp"/>
 					</p>
 					<p>
 						<label>confirm password : </label>
-						<input type="password" name="confirm_password" />
+						<input type="password" name="confirm_password"  id="confPassUp"/>
+					</p>
 				</form>
 			</div>
 			</form>
-			<div class="buttons" id="sign-in_send">
+			<div class="buttons" id="sign_in_send">
 				<p>OK</p>
 			</div>
-			<div class="buttons" id="sign-up_send">
+			<div class="buttons" id="sign_up_send">
 				<p>OK</p>
 			</div>
+			<div id="errorForm"></div>
 		</div>
 	</section>
 	<script src="./js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -168,7 +170,7 @@
 		var test;
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -339,6 +341,59 @@
 		    return newCanvas;
 		}
 
+		function signUp(){
+			var mail = document.getElementById('emailUp');
+			var user= document.getElementById('userUp');
+			var pwd = document.getElementById('passUp');
+			var confPwd = document.getElementById('confPassUp');
+
+			if(mail.value!="" && user.value!="" && pwd.value!="" && confPwd.value!=""){
+				if (/^([a-z0-9._-]+)@([a-z0-9._-]+)\.([a-z]{2,6})$/.test(mail.value)){ //Checking mail
+					if(user.value.length>=5){
+						if(pwd.value==confPwd.value){
+							var payload = {
+								email: mail.value,
+								username: user.value,
+								password: pwd.value
+							};
+							var data = new FormData();
+							data.append( "json", JSON.stringify( payload ) );
+
+							var myHeaders = new Headers({
+							 	'Accept': 'application/json',
+      							'Content-Type': 'application/json',
+      							'Access-Control-Allow-Origin': '*'
+							});
+
+
+							fetch('https://serene-forest-42732.herokuapp.com/signup',{
+								method: "POST",
+								body: data,
+								mode: 'cors',
+								header: myHeaders
+							})
+							.then(function(res){return res.json();})
+							.then(function(data){alert(JSON.stringify(data) ) })
+
+
+						}
+						else{
+							els.errorForm.innerHTML = "Different password";
+						}
+					}
+					else{
+						els.errorForm.innerHTML = "Username is too short (5 characters min)";
+					}
+				}
+				else{
+					els.errorForm.innerHTML = "Invalid email";
+				}
+			}
+			else{
+				els.errorForm.innerHTML = "Missing values";
+			}
+		}
+
     /********************
     	Event Listener
    	********************/
@@ -451,6 +506,10 @@
 			})(i);
 		}
 
+		els.sign_up_send.onclick = (e) =>{
+			signUp();
+		}
+
 		//Iframe loading
 		els.exampleView.onload = (e)=>{
 			preloadIframe();
@@ -484,7 +543,6 @@
 	    displayInterface();
 	    preloadIframe();
 		
-		console.log(currentInfos);
 	</script>
 </body>
 </html>
