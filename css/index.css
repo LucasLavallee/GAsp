@@ -54,18 +54,19 @@ nav{
 	box-shadow: 0 4px 2px -2px #dcdcdc;
 	color: 	#eeeeee;
 	display: grid;
-	align-items: stretch;
-	grid-template-columns: 45px 1fr 1fr;
+	align-items: center;
+	grid-template-columns: 45px auto auto;
 }
 
 #home{
 	font-size : 20px;
 	display :flex;
-	align-items : center;
-	justify-content: center;
 	background-color : #50514f;
 	border-radius : 50%;
-	margin : 12.5px 0;
+	width : 45px;
+	height : 45px;
+	align-items : center;
+	justify-content: center;
 }
 
 nav h1{
@@ -83,7 +84,8 @@ nav h1 span{
 	float: 	right;
 	display: 	flex;
     align-items: center;
-    justify-content: flex-end;	
+    justify-content: flex-end;
+	grid-column : 3;
 }
 .buttons{
 	align-items: 	center;	
@@ -338,4 +340,10 @@ iframe.active{
 	font-size: 0.9em;
 	background-color: #eeeeee;
 	box-shadow: 2px 2px 2px #dcdcdc;
+}
+
+@media(max-width: 565px){
+	#nav > h1 > span{
+		display : none;
+	}
 }
