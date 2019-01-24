@@ -18,7 +18,7 @@
   100% {background-color: rgb(29, 53, 87);}
 }
 
-#headerExample, #headerMacro, .buttons, #run{
+#headerExample, #headerMacro, .buttons, #run, .exampleCat div{
 	cursor: pointer;
 }
 
