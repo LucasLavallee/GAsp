@@ -356,7 +356,8 @@
 								username: user.value,
 								password: pwd.value
 							};
-							var data = JSON.stringify(payload);
+							var data = new FormData();
+							data.append( "json", JSON.stringify( payload ) );
 
 							var myHeaders = new Headers({
 							 	'Accept': 'application/json',
