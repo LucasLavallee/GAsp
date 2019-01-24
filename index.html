@@ -393,6 +393,15 @@
 			}
 		}
 
+	//retrieve GA Infos
+	function updateGAInfos(){
+		var currentCode = editor.getValue();
+		if(currentCode.length==0){
+			console.log("No code in console");
+		}
+		console.log(currentCode);
+	}
+	
     /********************
     	Event Listener
    	********************/
@@ -516,6 +525,7 @@
 	      	//Taking the script of the example
 	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
 	      	refreshConsole(currentScript.innerText);
+			updateGAInfos();
 	    }
 
 		//EVENTS LISTENER ON CONSOLE 
@@ -529,12 +539,14 @@
 		//EVENT CLICK RUN 
 		document.getElementById("run").onclick=() =>{
 			updateViewer();
+			updateGAInfos();
 		}
 		
 		//EVENT CLICK CLEAR
 		els.clear.onclick=() =>{
 			editor.setValue("");
 			updateViewer();
+			updateGAInfos();
 		}
 		
 
