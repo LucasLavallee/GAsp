@@ -12,57 +12,60 @@
 </head>
 
 <body>
-    <div id = "header">
-     <h4 id="title"> GAsp</h4>
-     <h1> a web GA manipulator</h1>
+    <div id="header">
+        <h4 id="title"> GAsp</h4>
+        <h1> a web GA manipulator</h1>
     </div>
 
     <div id="icons">
-        <div class="circleBase type1">
-            <h4 id="iconExample"></h4>
+        <div id="iconExample" class="circleBase type1">
+            <img  src="media/img/examples_icon.png" alt="new file">
             <h3>Discover with examples</h3>
         </div>
-        <div  class="circleBase">
-            <h4 id="iconCreate"> <span>+</span></h4>
+
+
+        <div id="iconCreate" class="circleBase">
+            <img  src="media/img/new_file_icon.png" alt="new file">
             <h3>Create a new project</h3>
         </div>
-        <div class="circleBase type1">
-            <h4 id="iconOpen"></h4>
+
+        <div id="iconOpen" class="circleBase type1">
+            <img  src="media/img/open_file_icon.png" alt="new file">
             <h3>Open a project</h3>
         </div>
+
     </div>
-    </div>
-    <div id = "signIn" class = "sign unactive">
+    <div id="signIn" class="sign ">
         <h4> Sign in </h4>
-        <form id = "form" method = "post" action = "traitemebt.php">
+        <form id="form" method="post" action="traitemebt.php">
             <p>
-                <label> Username </label> : <input type="text" name = "username"/>
+                <label> Username </label> : <input type="text" name="username" />
             </p>
             <p>
-                <label> Password </label> : <input type="text" name = "password"/>
+                <label> Password </label> : <input type="text" name="password" />
             </p>
         </form>
-        <div id = "validate">
-        
-            </div>
+        <div id="validate">
+            <i class="fas fa-check-square"></i>
+        </div>
     </div>
 
-    <div id = "chooseGA" class = "chooseGA unactive">
-    <div class = "chooseInfo">
-        <div class = "choose">
-            <h4> Choose the geometric algebra </h4>
-            <p> lorem ipsum </p>
+    <div id="chooseGA" class="chooseGA">
+        <div class="chooseInfo">
+            <div class="choose">
+                <h4> Choose the geometric algebra </h4>
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
-                <div class = "validateGA">
-        
+                <p> lorem ipsum </p>
+                <div class="validateGA">
+                    <i class="fas fa-check-square"></i>
                 </div>
             </div>
-        
-    <div class = "infoGA">
+
+            <div class="infoGA">
                 <h4> GA informations </h4>
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
@@ -70,53 +73,79 @@
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
+            </div>
         </div>
-    </div>
-    <div class = "createGA">
-        <div id ="or">
+        <div class="createGA">
+            <div id="or">
                 <h3> or </h3>
             </div>
-        <div class = "create">
-           
-            <h4> Create a geometric algebra</h4>
+            <div id="createGA" class="create">
+
+                <h4> Create a geometric algebra</h4>
+            </div>
         </div>
     </div>
+
+    <div id="createAlgebra" class="createAlgebra">
+        <h3>Create a geometric algebra</h3>
+        <form id="form2" method="post" action="traitemebt.php">
+            <p>
+                <label> Name </label> : <input type="text" name="nameGA" />
+            </p>
+            <p>
+                <label> Dimension </label> : <input type="text" name="dimensionGA" />
+            </p>
+            <p>
+                <label> Basis </label> : <input type="text" name="dimensionGA" />
+
+            </p>
+            <p>
+                <label> Metric </label> : <input type="text" name="dimensionGA" />
+            </p>
+            <p>
+                <label> Definition of a new vector </label> : <input type="text" name="dimensionGA" />
+            </p>
+            <p>
+                <label> definition from an 3D Euclidean point </label> : <input type="text" name="dimensionGA" />
+            </p>
+        </form>
     </div>
     <script>
-        changeActive = (element) =>{
-			element.classList.toggle("active");
+        changeActive = (element) => {
+            element.classList.toggle("active");
         }
-        changeUnactive = (element) =>{
-			element.classList.toggle("unactive");
+        changeUnactive = (element) => {
+            element.classList.toggle("unactive");
         }
         function myFunction() {
-            var elsClass={};
-            [".circleBase",".type1"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
-            for (var i=0; i<elsClass.circleBase.length; i++){
-                elsClass.circleBase[i].onclick = (function (i){
-				return function (){
-                    // indice i pour la div cliquée et (i+1)%3 et (i+2)%3 pour les deux classes restantes 
-                    changeActive(elsClass.circleBase[i]);
-                    changeUnactive(elsClass.circleBase[(i+1)%3]);
-                    changeUnactive(elsClass.circleBase[(i+2)%3]);
-				}
-			})(i);
+            var elsClass = {};
+            [".circleBase", ".type1"].forEach(x => elsClass[x.replace(/[.]/g, '')] = document.querySelectorAll(x));
+            for (var i = 0; i < elsClass.circleBase.length; i++) {
+                elsClass.circleBase[i].onclick = (function (i) {
+                    return function () {
+                        // indice i pour la div cliquée et (i+1)%3 et (i+2)%3 pour les deux classes restantes 
+                        changeActive(elsClass.circleBase[i]);
+                        changeUnactive(elsClass.circleBase[(i + 1) % 3]);
+                        changeUnactive(elsClass.circleBase[(i + 2) % 3]);
+                    }
+                })(i);
             }
         }
         myFunction();
         document.getElementById("iconOpen").addEventListener("click", DisplaySignIn)
-        function DisplaySignIn(){
-            if (document.getElementById("signIn").classList.contains("unactive"))
-            document.getElementById("signIn").classList.replace("unactive", "active");
-            else if (document.getElementById("signIn").classList.contains("active"))
-            document.getElementById("signIn").classList.replace("active", "unactive");
+        function DisplaySignIn() {
+            document.getElementById("signIn").classList.toggle("activeClass");
         }
+
         document.getElementById("iconCreate").addEventListener("click", DisplayChooseGA)
-        function DisplayChooseGA(){
-            if (document.getElementById("chooseGA").classList.contains("unactive"))
-            document.getElementById("chooseGA").classList.replace("unactive", "active");
-            else if (document.getElementById("chooseGA").classList.contains("active"))
-            document.getElementById("chooseGA").classList.replace("active", "unactive");
+        function DisplayChooseGA() {
+            document.getElementById("chooseGA").classList.toggle("activeClass2");
+        }
+
+        document.getElementById("createGA").addEventListener("click", DisplayCreateGA)
+        function DisplayCreateGA() {
+            document.getElementById("chooseGA").classList.toggle("activeClass2");
+            document.getElementById("createAlgebra").classList.toggle("activeClass");
         }
     </script>
 </body>

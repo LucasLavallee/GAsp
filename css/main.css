@@ -58,6 +58,7 @@ body{
 }
 
 #signIn {
+    display: none;
     width: 700px;
     height: 400px;
     border: 2px solid #011c27;
@@ -65,15 +66,23 @@ body{
     border-radius: 15px;
     margin: auto;
 }
-
+#signIn.active{
+    display: block;
+}
 #chooseGA{
+    display: none;
     position: relative;
     top: 20%;
 }
+
+#chooseGA.active{
+    display: block;
+}
+
 .chooseGA{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 .choose{
@@ -120,11 +129,16 @@ body{
    margin-right: auto;
     padding: 50px;
 }
+#form2>input{
+    width: 20px;
+    height: 20px;
+}
 #form>p{
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 35px;
 }
-input{
+
+#signIn>input{
     width: 450px;
     height: 35px;
     border: 2px solid #011c27; 
@@ -132,15 +146,18 @@ input{
 #validate{
     width: 50px;
     height: 50px;
-    background :  #011c27;
-    position: absolute;
-    left: 630px;
+    position: relative;
+    left: 90%;
+    top: 5%;
+}
+.fas{
+    font-weight: 900;
+    font-size: 60px;
 }
 
 .validateGA{
     width: 50px;
     height: 50px;
-    background :  #011c27;
     position: relative;
     left: 90%;
     top: 5%;
@@ -171,16 +188,48 @@ input{
         width: 150px;
         height: 150px;
         background: white;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: space-around;
 
+}
+#createAlgebra.active{
+    display: block;
+}
+
+#createAlgebra{
+    display: none;
+    width: 80%;
+    height: 50%;
+    border: 2px solid #011c27;
+    background: #eeeeee;
+    border-radius: 15px;
+    padding: 40px;
+    margin: auto;
+}
+#createAlgebra>h3{
+    padding: 30px;
+    color: #011c27;
+    font-size: 40px;
+    font-family: 'PT Sans Narrow', sans-serif;
 }
 .active{
     top:0px;
     left:25px !important;   
     transform: translate3d(0,0,0) scale(0.75)!important; 
 }
+.activeClass{
+    display: block !important;
+}
 .active h3{
     color: #011c27 !important;
     font-size: 40px !important;
+    position: absolute !important;
+    bottom: -150px !important;
+}
+.activeClass2{
+    display: flex !important;
 }
 .unactive{
     display: none;
@@ -195,6 +244,8 @@ input{
     color: aliceblue;
     font-size: 18px;
     font-family: 'PT Sans Narrow', sans-serif;
+    position: absolute;
+    bottom: -30px;
 }
 .type1 {
     width: 150px;
@@ -223,3 +274,15 @@ input{
     left: 75%;
     transform: translate3d(-50%,0,0);
 }
+
+/*<div id = "title2">
+<h3>Create a new project</h3>
+</div>
+
+<div id = "title1">
+<h3>Discover with examples</h3>
+</div>
+
+<div id ="title3"
+<h3>Open a project</h3>
+</div>*/
