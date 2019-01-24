@@ -356,12 +356,11 @@
 								username: user.value,
 								password: pwd.value
 							};
-							var data = new FormData();
-							data.append( "json", JSON.stringify( payload ) );
+							var data = JSON.stringify( payload );
 
 							var myHeaders = new Headers({
 							 	'Accept': 'application/json',
-      							'Content-Type': undefined,
+      							'Content-Type': 'application/json',
       							'Access-Control-Allow-Origin': '*'
 							});
 
