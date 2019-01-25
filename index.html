@@ -363,7 +363,7 @@
 
 							var myHeaders = new Headers({
 							 	'Accept': 'application/json',
-      							'Content-Type': 'application/json',
+      							'Content-Type': 'application/json; charset=utf-8',
       							'Access-Control-Allow-Origin': '*'
 							});
 
@@ -372,7 +372,9 @@
 								method: "POST",
 								body: data,
 								mode: 'cors',
-								header: myHeaders
+								headers: {
+									"Content-Type": "application/json"
+								}
 							})
 							.then(function(res){return res.json();})
 							.then(function(data){alert(JSON.stringify(data) ) })
