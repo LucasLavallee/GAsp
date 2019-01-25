@@ -421,11 +421,14 @@
 								username: user.value,
 								password: pwd.value
 							};
-							var data = JSON.stringify( payload );
+							/*var data = new FormData();
+							data.append( "json", JSON.stringify( payload ) );*/
+
+							var data = JSON.stringify( payload )
 
 							var myHeaders = new Headers({
 							 	'Accept': 'application/json',
-      							'Content-Type': 'application/json',
+      							'Content-Type': 'application/json; charset=utf-8',
       							'Access-Control-Allow-Origin': '*'
 							});
 
@@ -434,7 +437,11 @@
 								method: "POST",
 								body: data,
 								mode: 'cors',
-								header: myHeaders
+								headers: {
+									"Accept": "application/json",
+									"Content-Type": "application/json",
+									"Access-Control-Allow-Origin": "*"
+								}
 							})
 							.then(function(res){return res.json();})
 							.then(function(data){alert(JSON.stringify(data) ) })
