@@ -78,7 +78,7 @@
 				<form>
 					<p>
 						<label>username : </label>
-						<input type="email" name="email" id="userIn"/>
+						<input type="email" name="email" id="mailIn"/>
 					</p>
 					<p>
 						<label>password : </label>
@@ -359,14 +359,7 @@
 							/*var data = new FormData();
 							data.append( "json", JSON.stringify( payload ) );*/
 
-							var data = JSON.stringify( payload )
-
-							var myHeaders = new Headers({
-							 	'Accept': 'application/json',
-      							'Content-Type': 'application/json; charset=utf-8',
-      							'Access-Control-Allow-Origin': '*'
-							});
-
+							var data = JSON.stringify( payload );
 
 							fetch('https://serene-forest-42732.herokuapp.com/signup',{
 								method: "POST",
@@ -394,6 +387,34 @@
 				else{
 					els.errorForm.innerHTML = "Invalid email";
 				}
+			}
+			else{
+				els.errorForm.innerHTML = "Missing values";
+			}
+		}
+
+		function signIn(){
+			var mail = document.getElementById('mailIn');
+			var pwd = document.getElementById('passwordIn');
+			if(mail.value!="" && pwd.value!=""){
+				var payload = {
+					email: mail.value,
+					password: pwd.value
+				};
+				var data = JSON.stringify( payload );
+
+				fetch('https://serene-forest-42732.herokuapp.com/signin',{
+					method: "POST",
+					body: data,
+					mode: 'cors',
+					headers: {
+						"Accept": "application/json",
+						"Content-Type": "application/json",
+						"Access-Control-Allow-Origin": "*"
+					}
+				})
+				.then(function(res){return res.json();})
+				.then(function(data){alert(JSON.stringify(data) ) })
 			}
 			else{
 				els.errorForm.innerHTML = "Missing values";
