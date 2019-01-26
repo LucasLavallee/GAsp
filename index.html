@@ -170,7 +170,7 @@
 		var test;
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -600,6 +600,9 @@
 
 		els.sign_up_send.onclick = (e) =>{
 			signUp();
+		}
+		els.sign_in_send.onclick = (e) =>{
+			signIn();
 		}
 
 		//Iframe loading
