@@ -221,6 +221,7 @@ nav h1 span{
 #macros{
 	height: 50px;
 	position: relative;
+	overflow : hidden;
 }
 #macrosHeader{
 	height: 40px;

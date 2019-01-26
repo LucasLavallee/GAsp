@@ -340,6 +340,71 @@
 		    //return the new canvas
 		    return newCanvas;
 		}
+		
+		// take the code from the console, and retrieve the GA info
+		function retrieveGAInfo(){
+			var currentCode = editor.getValue();
+			if(currentCode.length!=0){
+				/* delete comments */
+				var args=currentCode.replace(/\/\*[\s\S]*?\*\//g, " ");
+				// delete comments //
+				args=args.replace(/\/\/.*/g, " ");
+				// search Algebra
+				var index = args.indexOf("Algebra");
+				//substring since Algebra
+				args = args.substring(index+8);
+				// slice between ( and (
+				var argsArray = args.split("(", 1);
+				// slice between ( and )
+				argsArray = argsArray[0].split(")", 1);
+				// if ends with , delete it
+				if(argsArray[0].endsWith(","))
+					args=argsArray[0].substring(0, argsArray[0].length-1);
+				else args=argsArray[0];
+				// retrieve the description object
+				var description = new Function('return Algebra(' + args + ').describe();');
+				return description();
+			}
+		}
+		
+		function updateGAInfo(){
+			els.macrosContent.innerHTML='';
+			var description = retrieveGAInfo();
+			//test
+			console.log(description);
+			
+			var metricTitle = document.createElement("p");
+			if (description!=null){
+				metricTitle.innerHTML = "Metric";
+				els.macrosContent.appendChild(metricTitle);
+				
+				var metricTable = document.createElement("table");
+				
+				var basis = document.createElement("tr");
+				for(var i=0; i<description.basis.length; i++){
+					var basisElt = document.createElement("td");
+					basisElt.innerHTML = description.basis[i];
+					basis.appendChild(basisElt);
+				}
+				metricTable.appendChild(basis);
+				
+				var metric = document.createElement("tr");
+				for(var i=0; i<description.metric.length; i++){
+					var metricElt = document.createElement("td");
+					metricElt.innerHTML = description.metric[i];
+					metric.appendChild(metricElt);
+				}
+				metricTable.appendChild(metric);
+				
+				els.macrosContent.appendChild(metricTable);
+			}
+			else{
+				var noGA = document.createElement("p");
+				noGA.innerHTML = "No Geometric Algebra in the console.";
+				metricTitle.appendChild(noGA);
+				els.macrosContent.appendChild(metricTitle);
+			}
+		}
 
 		function signUp(){
 			var mail = document.getElementById('emailUp');
@@ -387,34 +452,6 @@
 				else{
 					els.errorForm.innerHTML = "Invalid email";
 				}
-			}
-			else{
-				els.errorForm.innerHTML = "Missing values";
-			}
-		}
-
-		function signIn(){
-			var mail = document.getElementById('mailIn');
-			var pwd = document.getElementById('passwordIn');
-			if(mail.value!="" && pwd.value!=""){
-				var payload = {
-					email: mail.value,
-					password: pwd.value
-				};
-				var data = JSON.stringify( payload );
-
-				fetch('https://serene-forest-42732.herokuapp.com/signin',{
-					method: "POST",
-					body: data,
-					mode: 'cors',
-					headers: {
-						"Accept": "application/json",
-						"Content-Type": "application/json",
-						"Access-Control-Allow-Origin": "*"
-					}
-				})
-				.then(function(res){return res.json();})
-				.then(function(data){alert(JSON.stringify(data) ) })
 			}
 			else{
 				els.errorForm.innerHTML = "Missing values";
@@ -544,6 +581,7 @@
 	      	//Taking the script of the example
 	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
 	      	refreshConsole(currentScript.innerText);
+			updateGAInfo();
 	    }
 
 		//EVENTS LISTENER ON CONSOLE 
@@ -557,12 +595,14 @@
 		//EVENT CLICK RUN 
 		document.getElementById("run").onclick=() =>{
 			updateViewer();
+			updateGAInfo();
 		}
 		
 		//EVENT CLICK CLEAR
 		els.clear.onclick=() =>{
 			editor.setValue("");
 			updateViewer();
+			updateGAInfo();
 		}
 		
 
