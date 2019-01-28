@@ -131,6 +131,7 @@ class Account{
          }
       }
       changeData(mail,username,state){
+      	console.log(mail + " " + username + " " + state);
         	this._mail = mail;
 	      	this._username = username;
 	      	this._state = state; 
