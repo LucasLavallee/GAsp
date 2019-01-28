@@ -228,7 +228,24 @@ nav h1 span{
 }
 
 #macrosContent{
+	color : #35605a;
+	padding: 25px;
 	overflow : scroll;
+}
+
+#macrosContent > p{
+	font-size : 20px;
+}
+
+#macrosContent td{
+	border : 1px solid #35605a;
+	text-align : center;
+	padding : 0 5px;
+}
+
+#macrosContent table{
+	border-collapse : collapse;
+	margin : 10px 0;
 }
 
 #viewerPanel{
