@@ -128,7 +128,7 @@ class Account{
               this.changeData(data.user.email,data.user.username,true);
 
            }else{
-              var msg = new Message(json.msg,false,errorForm).display();
+              var msg = new Message(data.msg,false,errorForm).display();
            }
          }
          else{
