@@ -119,7 +119,7 @@ class Account{
                   msg.display();
                   popUp.classList.toggle("active");
                   console.log("data.user.email = "+data.user.email+"data.user.username =" +data.user.username);
-                  changeData(data.user.email,data.user.username,true);
+                  this.changeData(data.user.email,data.user.username,true);
 
                }else{
                   var msg = new Message(json.msg,false,errorForm).display();
