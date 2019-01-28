@@ -56,11 +56,13 @@ body{
     position: relative; 
     left: 15%; 
 }
-
+.activeThis{
+    display: block;
+}
 #signIn {
     display: none;
-    width: 700px;
-    height: 400px;
+    width: 40%;
+    height: 40%;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
@@ -200,8 +202,8 @@ body{
 
 #createAlgebra{
     display: none;
-    width: 80%;
-    height: 50%;
+    width: 60%;
+    height: 35%;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
