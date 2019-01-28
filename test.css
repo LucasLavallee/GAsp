@@ -1,0 +1,9 @@
+
+.invisible{
+display:none;
+}
+  
+.survol:hover ~ .invisible
+{
+display:block;
+}

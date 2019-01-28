@@ -367,7 +367,7 @@ iframe.active{
 
 #pop_up_black{
 	color : white;
-	/* display: none; */
+	display: none;
 	background-color: rgba(0,0,0,0.75);
 	position: fixed;
 	width: 100%;
