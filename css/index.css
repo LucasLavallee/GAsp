@@ -368,13 +368,17 @@ iframe.active{
 
 #pop_up_black{
 	color : white;
-	display: none;
+	/* display: none; */
 	background-color: rgba(0,0,0,0.75);
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	z-index: 3;
+	
+	/* active */
+	display : flex;
+	justify-content : center;
 }
 
 #pop_up_black.active{
@@ -400,6 +404,7 @@ iframe.active{
 	display : flex;
 	align-items : center;
 	justify-content : center;
+	cursor : default;
 }
 
 #pop-up{
@@ -426,10 +431,6 @@ iframe.active{
 	justify-content : center;
 }
 
-#account > *{
-	padding : 0 7%;
-}
-
 #sign_in{
 	border-right : solid #eeeeee 2px;
 }
@@ -437,18 +438,21 @@ iframe.active{
 #account > div > p{
 	font-weight : bold;
 	margin-bottom : 15px;
+	font-size : 18px;
 }
 
 #account > div{
 	display : flex;
 	flex-direction : column;
 	align-items : center;
+	padding : 0 7%;
 }
 
 #account > div > form > p{
 	display : flex;
+	flex-wrap : wrap;
 	font-family : inherit;
-	color : inherit; /* don't work :( */
+	color : inherit;
 }
 
 #account input{
@@ -456,6 +460,7 @@ iframe.active{
 	color : inherit;
 	background-color : #47827a;
 	border : solid #eeeeee 2px;
+	width : 100%;
 }
 
 #account i{
