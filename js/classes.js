@@ -111,7 +111,7 @@ class Account{
                headers: {
                   "Accept": "application/json",
                   "Content-Type": "application/json",
-                  "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com:14861"
+                  "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
                },
 				credentials: 'include'
 
