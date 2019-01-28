@@ -73,47 +73,47 @@
 	<section id="pop_up_black">
 		<div id="pop-up">
 			<div id="save_header">
+				<i class="fas fa-save"></i>
+				<p>Save your work</p>
 			</div>
-			<div id="sign_in">
-				<p>Sign in</p>
-				<form>
-					<p>
-						<label>username : </label>
-						<input type="email" name="email" id="mailIn"/>
-					</p>
-					<p>
-						<label>password : </label>
-						<input type="password" name="password"  id="passwordIn"/>
-					</p>
-				</form>
-			</div>
-			<div id="sign_up">
-				<p>Sign out</p>
-				<form>
-					<p>
-						<label>email : </label>
-						<input type="email" name="email" id="emailUp"/>
-					</p>
-					<p>
-						<label>username : </label>
-						<input type="text" name="username"  id="userUp"/>
-					</p>
-					<p>
-						<label>password : </label>
-						<input type="password" name="password"  id="passUp"/>
-					</p>
-					<p>
-						<label>confirm password : </label>
-						<input type="password" name="confirm_password"  id="confPassUp"/>
-					</p>
-				</form>
-			</div>
-			</form>
-			<div class="buttons" id="sign_in_send">
-				<p>OK</p>
-			</div>
-			<div class="buttons" id="sign_up_send">
-				<p>OK</p>
+			<p>You need an account to save your work</p>
+			<div id="account">
+				<div id="sign_in">
+					<p>Sign in</p>
+					<form>
+						<p>
+							<label>email or username : </label>
+							<input type="email" name="email" id="mailIn"/>
+						</p>
+						<p>
+							<label>password : </label>
+							<input type="password" name="password"  id="passwordIn"/>
+						</p>
+					</form>
+					<i class="fas fa-check" id="sign_in_send"></i>
+				</div>
+				<div id="sign_up">
+					<p>Sign up</p>
+					<form>
+						<p>
+							<label>email : </label>
+							<input type="email" name="email" id="emailUp"/>
+						</p>
+						<p>
+							<label>username : </label>
+							<input type="text" name="username"  id="userUp"/>
+						</p>
+						<p>
+							<label>password : </label>
+							<input type="password" name="password"  id="passUp"/>
+						</p>
+						<p>
+							<label>confirm password : </label>
+							<input type="password" name="confirm_password"  id="confPassUp"/>
+						</p>
+					</form>
+					<i class="fas fa-check" id="sign_up_send"></i>
+				</div>
 			</div>
 			<div id="errorForm"></div>
 		</div>
