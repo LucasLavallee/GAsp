@@ -367,6 +367,39 @@
 			}
 		}
 		
+		// take an array, and construct a <tr> element with it
+		// return the <tr> element
+		function constructLine(myArray){
+			console.log(myArray); //test
+			var myLine = document.createElement("tr");
+			console.log(typeof myArray[0]);
+			// if myArray contains arrays (not strings or numbers)
+			if(
+				(typeof myArray[0] != "string")
+				&& (typeof myArray[0] != "number")
+			){
+				console.log("Array of array !");
+				for(var i=0; i<myArray.length; i++){
+					for(var j=0; j<myArray[i].length; j++){
+						var lineElt = document.createElement("td");
+						lineElt.innerHTML = myArray[i][j];
+						myLine.appendChild(lineElt);
+					}
+				}
+			}
+			// if myArray contains strings or numbers
+			else{
+				console.log("A simple array");
+				for(var i=0; i<myArray.length; i++){
+					var lineElt = document.createElement("td");
+					lineElt.innerHTML = myArray[i];
+					myLine.appendChild(lineElt);
+				}
+			}
+			
+			return myLine;
+		}
+		
 		function updateGAInfo(){
 			els.macrosContent.innerHTML='';
 			var description = retrieveGAInfo();
@@ -374,34 +407,20 @@
 			console.log(description);
 			
 			var metricTitle = document.createElement("p");
+			// if there is a GA description
 			if (description!=null){
 				metricTitle.innerHTML = "Metric";
 				els.macrosContent.appendChild(metricTitle);
 				
 				var metricTable = document.createElement("table");
-				
-				var basis = document.createElement("tr");
-				for(var i=0; i<description.basis.length; i++){
-					var basisElt = document.createElement("td");
-					basisElt.innerHTML = description.basis[i];
-					basis.appendChild(basisElt);
-				}
-				metricTable.appendChild(basis);
-				
-				var metric = document.createElement("tr");
-				for(var i=0; i<description.metric.length; i++){
-					var metricElt = document.createElement("td");
-					metricElt.innerHTML = description.metric[i];
-					metric.appendChild(metricElt);
-				}
-				metricTable.appendChild(metric);
+				metricTable.appendChild(constructLine(description.basis));
+				metricTable.appendChild(constructLine(description.metric));
 				
 				els.macrosContent.appendChild(metricTable);
 			}
+			// if there isn't a GA description
 			else{
-				var noGA = document.createElement("p");
-				noGA.innerHTML = "No Geometric Algebra in the console.";
-				metricTitle.appendChild(noGA);
+				metricTitle.innerHTML = "No Geometric Algebra in the console.";
 				els.macrosContent.appendChild(metricTitle);
 			}
 		}

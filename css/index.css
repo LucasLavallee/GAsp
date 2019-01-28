@@ -226,6 +226,11 @@ nav h1 span{
 #macrosHeader{
 	height: 40px;
 }
+
+#macrosContent{
+	overflow : scroll;
+}
+
 #viewerPanel{
 	position: absolute;
 	width: 60%;
