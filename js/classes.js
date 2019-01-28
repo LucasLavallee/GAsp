@@ -123,7 +123,6 @@ class Account{
               var msg = new Message(dataUser.msg,true,null);
               msg.display();
               popUp.classList.toggle("active");
-              console.log("data.user.email = "+dataUser.user.email+"data.user.username =" +data.user.username);
               console.log(this);
               this.changeData(dataUser.user.email,dataUser.user.username,true);
 
