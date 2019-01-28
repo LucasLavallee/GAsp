@@ -109,9 +109,10 @@ class Account{
             })
             .then(function(res){return res.json();})
             .then(function(data){
-            	
+
                	  console.log(data);
-               if(json.success){
+               if(json.success==true){
+               	  console.log(data);
                   var msg = new Message(json.msg,true,null);
                   msg.display();
                   els.pop_up_black.changeActive();
