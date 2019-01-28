@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
+	<div id="error"></div>
 	<nav id="nav">
 		<i id="home" class="fas fa-home"></i>
 		<h1>GAsp <span>a web GA manipulator</span></h1>
@@ -69,7 +70,7 @@
 			</div>
 		</div>
 	</section>
-	<section id="pop-up_black">
+	<section id="pop_up_black">
 		<div id="pop-up">
 			<div id="save_header">
 			</div>
@@ -170,7 +171,7 @@
 		var test;
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -420,85 +421,6 @@
 			}
 		}
 
-		function signUp(){
-			var mail = document.getElementById('emailUp');
-			var user= document.getElementById('userUp');
-			var pwd = document.getElementById('passUp');
-			var confPwd = document.getElementById('confPassUp');
-
-			if(mail.value!="" && user.value!="" && pwd.value!="" && confPwd.value!=""){
-				if (/^([a-z0-9._-]+)@([a-z0-9._-]+)\.([a-z]{2,6})$/.test(mail.value)){ //Checking mail
-					if(user.value.length>=5){
-						if(pwd.value==confPwd.value){
-							var payload = {
-								email: mail.value,
-								username: user.value,
-								password: pwd.value
-							};
-							/*var data = new FormData();
-							data.append( "json", JSON.stringify( payload ) );*/
-
-							var data = JSON.stringify( payload );
-
-							fetch('https://serene-forest-42732.herokuapp.com/signup',{
-								method: "POST",
-								body: data,
-								mode: 'cors',
-								headers: {
-									"Accept": "application/json",
-									"Content-Type": "application/json",
-									"Access-Control-Allow-Origin": "*"
-								}
-							})
-							.then(function(res){return res.json();})
-							.then(function(data){alert(JSON.stringify(data) ) })
-
-
-						}
-						else{
-							els.errorForm.innerHTML = "Different password";
-						}
-					}
-					else{
-						els.errorForm.innerHTML = "Username is too short (5 characters min)";
-					}
-				}
-				else{
-					els.errorForm.innerHTML = "Invalid email";
-				}
-			}
-			else{
-				els.errorForm.innerHTML = "Missing values";
-			}
-		}
-
-		function signIn(){
-			var mail = document.getElementById('mailIn');
-			var pwd = document.getElementById('passwordIn');
-			if(mail.value!="" && pwd.value!=""){
-				var payload = {
-					email: mail.value,
-					password: pwd.value
-				};
-				var data = JSON.stringify( payload );
-
-				fetch('https://serene-forest-42732.herokuapp.com/signin',{
-					method: "POST",
-					body: data,
-					mode: 'cors',
-					headers: {
-						"Accept": "application/json",
-						"Content-Type": "application/json",
-						"Access-Control-Allow-Origin": "*"
-					}
-				})
-				.then(function(res){return res.json();})
-				.then(function(data){alert(JSON.stringify(data) ) })
-			}
-			else{
-				els.errorForm.innerHTML = "Missing values";
-			}
-		}
 
     /********************
     	Event Listener
