@@ -95,7 +95,7 @@ class Account{
 	      	this._username = username;
 	      	this._state = state; 
       }
-    signIn(){
+    async signIn(){
          var mail = document.getElementById('mailIn');
          var pwd = document.getElementById('passwordIn');
 			var popUp = document.getElementById("pop_up_black");
@@ -107,8 +107,7 @@ class Account{
                password: pwd.value
             };
             var data = JSON.stringify( payload );
-
-            fetch('https://serene-forest-42732.herokuapp.com/signin',{
+            let response = await fetch('https://serene-forest-42732.herokuapp.com/signin',{
                method: "POST",
                body: data,
                mode: 'cors',
@@ -117,21 +116,20 @@ class Account{
                   "Content-Type": "application/json",
                   "Access-Control-Allow-Origin": "*"
                }
-            })
-            .then(function(res){return res.json();})
-            .then(function(data){
-               if(data.success){
-                  var msg = new Message(data.msg,true,null);
-                  msg.display();
-                  popUp.classList.toggle("active");
-                  console.log("data.user.email = "+data.user.email+"data.user.username =" +data.user.username);
-                  console.log(this);
-                  this.changeData(data.user.email,data.user.username,true);
+            });
 
-               }else{
-                  var msg = new Message(json.msg,false,errorForm).display();
-               }
-            })
+            let dataUser = await response.json();
+           if(data.success){
+              var msg = new Message(data.msg,true,null);
+              msg.display();
+              popUp.classList.toggle("active");
+              console.log("data.user.email = "+data.user.email+"data.user.username =" +data.user.username);
+              console.log(this);
+              this.changeData(data.user.email,data.user.username,true);
+
+           }else{
+              var msg = new Message(json.msg,false,errorForm).display();
+           }
          }
          else{
             var msg = new Message("Missing values", false, errorForm).display();
