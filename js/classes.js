@@ -2,7 +2,7 @@ class Account{
 	constructor(){
 		this._username = "";
 		this._mail = "";
-		this._state; 
+		this._state = false; 
 		this._listProject = []; 
  	}
 
@@ -28,6 +28,8 @@ class Account{
 		var user= document.getElementById('userUp');
 		var pwd = document.getElementById('passUp');
 		var confPwd = document.getElementById('confPassUp');
+		var popUp = document.getElementById("pop_up_black");
+		var errorForm = document.getElementById("errorForm");
 
 		if(mail.value!="" && user.value!="" && pwd.value!="" && confPwd.value!=""){
 			if (/^([a-z0-9._-]+)@([a-z0-9._-]+)\.([a-z]{2,6})$/.test(mail.value)){ //Checking mail
@@ -59,37 +61,39 @@ class Account{
                      if(json.success){
                            var msg = new Message(json.msg,true,null);
                            msg.display();
-                           els.pop_up_black.changeActive();
-                           _username = user.value;
-                           _mail = mail.value;
-                           _state = true;
+                           popUp.changeActive();
+                           this._username = user.value;
+                           this._mail = mail.value;
+                           this._state = true;
                      }else{
-                           var msg = new Message(json.msg, false, els.errorForm).display();
+                           var msg = new Message(json.msg, false, errorForm).display();
                      }
                   })
 
 
 					}
 					else{
-                  var msg = new Message("Different password", false, els.errorForm).display();
+                  var msg = new Message("Different password", false, errorForm).display();
 					}
 				}
 				else{
-               var msg = new Message("Username is too short (5 characters min)", false, els.errorForm).display();
+               var msg = new Message("Username is too short (5 characters min)", false, errorForm).display();
 				}
 			}
 			else{
-            var msg = new Message("Invalid email", false, els.errorForm).display();
+            var msg = new Message("Invalid email", false, errorForm).display();
 			}
 		}
 		else{
-         var msg = new Message("Missing values", false, els.errorForm).display();
+         var msg = new Message("Missing values", false, errorForm).display();
 		}
 	}
 
     signIn(){
          var mail = document.getElementById('mailIn');
          var pwd = document.getElementById('passwordIn');
+			var popUp = document.getElementById("pop_up_black");
+			var errorForm = document.getElementById("errorForm");
          if(mail.value!="" && pwd.value!=""){
             var payload = {
                email: mail.value,
@@ -116,16 +120,16 @@ class Account{
                	  console.log(data);
                   var msg = new Message(data.msg,true,null);
                   msg.display();
-                  els.pop_up_black.changeActive();
+                  popUp.changeActive();
                   this._mail = mail.value;
                   this._state = true; 
                }else{
-                  var msg = new Message(json.msg,false,els.errorForm).display();
+                  var msg = new Message(json.msg,false,errorForm).display();
                }
             })
          }
          else{
-            var msg = new Message("Missing values", false, els.errorForm).display();
+            var msg = new Message("Missing values", false, errorForm).display();
          }
       }
 
