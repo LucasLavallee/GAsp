@@ -110,6 +110,7 @@ class Account{
             .then(function(res){return res.json();})
             .then(function(data){
                if(json.success){
+               	  console.log(data);
                   var msg = new Message(json.message,true,null);
                   msg.display();
                   els.pop_up_black.changeActive();
