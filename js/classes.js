@@ -6,6 +6,23 @@ class Account{
 		this._listProject = []; 
  	}
 
+ 	isLoggedIn(){
+ 		fetch('https://serene-forest-42732.herokuapp.com/isLog',{
+			method: "GET",
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*"
+			}
+		})
+		.then(function(res){return res.json();})
+		.then(function(data){
+     		var json = JSON.stringify(data);
+     		json.success ? this._state = true : this._state = false;
+     	})
+ 	}
+
 	signUp(){
 		var mail = document.getElementById('emailUp');
 		var user= document.getElementById('userUp');
@@ -39,14 +56,16 @@ class Account{
 						.then(function(res){return res.json();})
 						.then(function(data){
                      var json = JSON.stringify(data);
-                     json.success ?
-                           var msg = new Message(json.message,true,null).display();
+                     if(json.success){
+                           var msg = new Message(json.message,true,null);
+                           msg.display();
                            els.pop_up_black.changeActive();
                            this._username = user.value;
                            this._mail = mail.value;
                            this._state = true;
-                     :
+                     }else{
                            var msg = new Message(json.message, false, els.errorForm).display();
+                     }
                   })
 
 
@@ -68,7 +87,7 @@ class Account{
 		}
 	}
 
-   signIn(){
+    signIn(){
          var mail = document.getElementById('mailIn');
          var pwd = document.getElementById('passwordIn');
          if(mail.value!="" && pwd.value!=""){
@@ -90,19 +109,23 @@ class Account{
             })
             .then(function(res){return res.json();})
             .then(function(data){
-               json.success ?
-                  var msg = new Message(json.message,true,null).display();
+               if(json.success){
+                  var msg = new Message(json.message,true,null);
+                  msg.display();
                   els.pop_up_black.changeActive();
                   this._mail = mail.value;
                   this._state = true; 
-               :
+               }else{
                   var msg = new Message(json.message,false,els.errorForm).display();
+               }
             })
          }
          else{
             var msg = new Message("Missing values", false, els.errorForm).display();
          }
       }
+
+
 
       getAllProject(){
          
@@ -117,12 +140,13 @@ class Message{
 		this._container = container;
 	}
 	display(){
-		this._typeContainer ?
+		if(this._typeContainer){
 			var msgCont = document.getElementById('error');
          msgCont.classList.add('error');
          msgCont.innerHTML = this._msg;
-		: 
+		}else{
          this._container.innerHTML = this._msg; 
+		}
 	}
 
 }

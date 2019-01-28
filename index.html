@@ -121,6 +121,8 @@
 	<script src="./js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
+		var account = new Account();
+		account.isLoggedIn();
 		var transitionTime = 800;
 		var macroDeploy = false;
 		var exampleList = ["complex_mandelbrot","complex_least_squares",
@@ -535,16 +537,15 @@
 		}
 
 		els.sign_up_send.onclick = (e) =>{
-			signUp();
+			account.signUp();
 		}
 		els.sign_in_send.onclick = (e) =>{
-			signIn();
+			account.signIn();
 		}
 
 		//Iframe loading
 		els.exampleView.onload = (e)=>{
 			preloadIframe();
-	      	
 	      	//Taking the script of the example
 	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
 	      	refreshConsole(currentScript.innerText);

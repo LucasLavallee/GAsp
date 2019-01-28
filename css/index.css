@@ -365,7 +365,7 @@ iframe.active{
 	box-shadow: 2px 2px 2px #dcdcdc;
 }
 
-#pop-up_black{
+#pop_up_black{
 	color : white;
 	display: none;
 	background-color: rgba(0,0,0,1);
@@ -376,7 +376,7 @@ iframe.active{
 	z-index: 3;
 }
 
-#pop-up_black.active{
+#pop_up_black.active{
 	display : block;
 }
 
