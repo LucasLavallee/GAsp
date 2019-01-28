@@ -6,8 +6,8 @@ class Account{
 		this._listProject = []; 
  	}
 
- 	isLoggedIn(){
- 		fetch('https://serene-forest-42732.herokuapp.com/isLog',{
+ 	async isLoggedIn(){
+ 		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
 			method: "GET",
 			mode: 'cors',
 			headers: {
@@ -15,12 +15,9 @@ class Account{
 				"Content-Type": "application/json",
 				"Access-Control-Allow-Origin": "*"
 			}
-		})
-		.then(function(res){return res.json();})
-		.then(function(data){
-     		var json = JSON.stringify(data);
-     		json.success ? this._state = true : this._state = false;
-     	})
+		});
+		let data = await response.json();
+ 		data.success ? this._state = true : this._state = false;
  	}
 
 	signUp(){
@@ -123,7 +120,6 @@ class Account{
               var msg = new Message(dataUser.msg,true,null);
               msg.display();
               popUp.classList.toggle("active");
-              console.log(this);
               this.changeData(dataUser.user.email,dataUser.user.username,true);
 
            }else{
