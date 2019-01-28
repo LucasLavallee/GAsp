@@ -89,6 +89,12 @@ class Account{
 		}
 	}
 
+      changeData(mail,username,state){
+      	console.log(mail + " " + username + " " + state);
+        	this._mail = mail;
+	      	this._username = username;
+	      	this._state = state; 
+      }
     signIn(){
          var mail = document.getElementById('mailIn');
          var pwd = document.getElementById('passwordIn');
@@ -119,6 +125,7 @@ class Account{
                   msg.display();
                   popUp.classList.toggle("active");
                   console.log("data.user.email = "+data.user.email+"data.user.username =" +data.user.username);
+                  console.log(this);
                   this.changeData(data.user.email,data.user.username,true);
 
                }else{
@@ -129,12 +136,6 @@ class Account{
          else{
             var msg = new Message("Missing values", false, errorForm).display();
          }
-      }
-      changeData(mail,username,state){
-      	console.log(mail + " " + username + " " + state);
-        	this._mail = mail;
-	      	this._username = username;
-	      	this._state = state; 
       }
 
 
