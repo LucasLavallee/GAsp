@@ -125,7 +125,7 @@ class Account{
               popUp.classList.toggle("active");
               console.log("data.user.email = "+dataUser.user.email+"data.user.username =" +data.user.username);
               console.log(this);
-              this.changeData(data.user.email,dataUser.user.username,true);
+              this.changeData(dataUser.user.email,dataUser.user.username,true);
 
            }else{
               var msg = new Message(dataUser.msg,false,errorForm).display();
