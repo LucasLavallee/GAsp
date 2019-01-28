@@ -110,9 +110,9 @@ class Account{
             .then(function(res){return res.json();})
             .then(function(data){
 
-               	  var json = JSON.stringify(data);
-               	  console.log(json);
-               if(json.success){
+               	  console.log(data);
+
+               if(data.success){
                	  console.log(data);
                   var msg = new Message(data.msg,true,null);
                   msg.display();
