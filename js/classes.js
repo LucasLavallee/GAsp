@@ -118,6 +118,7 @@ class Account{
                   var msg = new Message(data.msg,true,null);
                   msg.display();
                   popUp.classList.toggle("active");
+                  console.log("data.user.email = "+data.user.email+"data.user.username =" +data.user.username);
                   changeData(data.user.email,data.user.username,true);
 
                }else{
