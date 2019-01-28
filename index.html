@@ -342,6 +342,7 @@
 		}
 		
 		// take the code from the console, and retrieve the GA info
+		// return Algebra.describe() (object)
 		function retrieveGAInfo(){
 			var currentCode = editor.getValue();
 			if(currentCode.length!=0){
@@ -370,15 +371,12 @@
 		// take an array, and construct a <tr> element with it
 		// return the <tr> element
 		function constructLine(myArray){
-			console.log(myArray); //test
 			var myLine = document.createElement("tr");
-			console.log(typeof myArray[0]);
 			// if myArray contains arrays (not strings or numbers)
 			if(
 				(typeof myArray[0] != "string")
 				&& (typeof myArray[0] != "number")
 			){
-				console.log("Array of array !");
 				for(var i=0; i<myArray.length; i++){
 					for(var j=0; j<myArray[i].length; j++){
 						var lineElt = document.createElement("td");
@@ -389,7 +387,6 @@
 			}
 			// if myArray contains strings or numbers
 			else{
-				console.log("A simple array");
 				for(var i=0; i<myArray.length; i++){
 					var lineElt = document.createElement("td");
 					lineElt.innerHTML = myArray[i];
@@ -403,8 +400,6 @@
 		function updateGAInfo(){
 			els.macrosContent.innerHTML='';
 			var description = retrieveGAInfo();
-			//test
-			console.log(description);
 			
 			var metricTitle = document.createElement("p");
 			// if there is a GA description
