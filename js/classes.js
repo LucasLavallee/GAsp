@@ -14,8 +14,7 @@ class Account{
 				"Accept": "application/json",
 				"Content-Type": "application/json",
 				"Access-Control-Allow-Origin": "*"
-			},
-			credentials: 'include'
+			}
 		});
 		let data = await response.json();
  		data.success ? this._state = true : this._state = false;
@@ -92,7 +91,7 @@ class Account{
       	console.log(mail + " " + username + " " + state);
         	this._mail = mail;
 	      	this._username = username;
-	      	this._state = state; 
+	      	this._state = state;
       }
     async signIn(){
          var mail = document.getElementById('mailIn');
