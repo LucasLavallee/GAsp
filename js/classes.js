@@ -57,14 +57,14 @@ class Account{
 						.then(function(data){
                      var json = JSON.stringify(data);
                      if(json.success){
-                           var msg = new Message(json.message,true,null);
+                           var msg = new Message(json.msg,true,null);
                            msg.display();
                            els.pop_up_black.changeActive();
                            this._username = user.value;
                            this._mail = mail.value;
                            this._state = true;
                      }else{
-                           var msg = new Message(json.message, false, els.errorForm).display();
+                           var msg = new Message(json.msg, false, els.errorForm).display();
                      }
                   })
 
@@ -111,13 +111,13 @@ class Account{
             .then(function(data){
                if(json.success){
                	  console.log(data);
-                  var msg = new Message(json.message,true,null);
+                  var msg = new Message(json.msg,true,null);
                   msg.display();
                   els.pop_up_black.changeActive();
                   this._mail = mail.value;
                   this._state = true; 
                }else{
-                  var msg = new Message(json.message,false,els.errorForm).display();
+                  var msg = new Message(json.msg,false,els.errorForm).display();
                }
             })
          }
