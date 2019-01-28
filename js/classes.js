@@ -10,7 +10,7 @@ class Account{
  		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
 			method: "GET",
 			mode: 'cors',
-			credentials: "same-origin",
+			credentials: "include",
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",
@@ -46,7 +46,7 @@ class Account{
 						fetch('https://serene-forest-42732.herokuapp.com/signup',{
 							method: "POST",
 							body: data,
-							credentials: "same-origin",
+							credentials: "include",
 							mode: 'cors',
 							headers: {
 								"Accept": "application/json",
@@ -110,7 +110,7 @@ class Account{
                method: "POST",
                body: data,
                mode: 'cors',
-			   credentials: "same-origin",
+			   credentials: "include",
                headers: {
                   "Accept": "application/json",
                   "Content-Type": "application/json",
