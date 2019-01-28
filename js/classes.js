@@ -9,13 +9,13 @@ class Account{
  	async isLoggedIn(){
  		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
 			method: 'GET',
-			credentials: 'cors',
 			mode: 'cors',
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",
 				"Access-Control-Allow-Origin": "*"
-			}
+			},
+			credentials: 'include'
 		});
 		let data = await response.json();
  		data.success ? this._state = true : this._state = false;
@@ -46,13 +46,13 @@ class Account{
 						fetch('https://serene-forest-42732.herokuapp.com/signup',{
 							method: 'POST',
 							body: data,
-							credentials: 'cors',
 							mode: 'cors',
 							headers: {
 								"Accept": "application/json",
 								"Content-Type": "application/json",
 								"Access-Control-Allow-Origin": "*"
-							}
+							},
+			   				credentials: 'include'
 						})
 						.then(function(res){return res.json();})
 						.then(function(data){
@@ -109,13 +109,14 @@ class Account{
             let response = await fetch('https://serene-forest-42732.herokuapp.com/signin',{
                method: 'POST',
                body: data,
-			   credentials: 'cors',
                mode: 'cors',
                headers: {
                   "Accept": "application/json",
                   "Content-Type": "application/json",
                   "Access-Control-Allow-Origin": "*"
-               }
+               },
+			   credentials: 'include'
+
             });
 
             let dataUser = await response.json();
