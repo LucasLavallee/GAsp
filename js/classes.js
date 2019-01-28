@@ -110,10 +110,11 @@ class Account{
             .then(function(res){return res.json();})
             .then(function(data){
 
+               	  var json = JSON.stringify(data);
+               	  console.log(json);
+               if(json.success){
                	  console.log(data);
-               if(json.success==true){
-               	  console.log(data);
-                  var msg = new Message(json.msg,true,null);
+                  var msg = new Message(data.msg,true,null);
                   msg.display();
                   els.pop_up_black.changeActive();
                   this._mail = mail.value;
