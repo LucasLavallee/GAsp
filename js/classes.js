@@ -50,8 +50,7 @@ class Account{
 								"Accept": "application/json",
 								"Content-Type": "application/json",
 								"Access-Control-Allow-Origin": "*"
-							},
-			   				credentials: 'include'
+							}
 						})
 						.then(function(res){return res.json();})
 						.then(function(data){
@@ -114,7 +113,7 @@ class Account{
                   "Content-Type": "application/json",
                   "Access-Control-Allow-Origin": "*"
                },
-			   credentials: 'include'
+               credentials: 'include'
 
             });
 
