@@ -61,7 +61,7 @@ class Account{
                      if(json.success){
                            var msg = new Message(json.msg,true,null);
                            msg.display();
-                           popUp.changeActive();
+                  			popUp.classList.toggle("active");
                            this._username = user.value;
                            this._mail = mail.value;
                            this._state = true;
@@ -94,6 +94,7 @@ class Account{
          var pwd = document.getElementById('passwordIn');
 			var popUp = document.getElementById("pop_up_black");
 			var errorForm = document.getElementById("errorForm");
+            	console.log(popUp);
          if(mail.value!="" && pwd.value!=""){
             var payload = {
                email: mail.value,
@@ -113,14 +114,13 @@ class Account{
             })
             .then(function(res){return res.json();})
             .then(function(data){
-
                	  console.log(data);
 
                if(data.success){
                	  console.log(data);
                   var msg = new Message(data.msg,true,null);
                   msg.display();
-                  popUp.changeActive();
+                  popUp.classList.toggle("active");
                   this._mail = mail.value;
                   this._state = true; 
                }else{
