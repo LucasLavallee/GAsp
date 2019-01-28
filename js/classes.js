@@ -2,7 +2,7 @@ class Account{
 	constructor(){
 		this._username = "";
 		this._mail = "";
-		this._state = false; 
+		this._state; 
 		this._listProject = []; 
  	}
 
@@ -60,9 +60,9 @@ class Account{
                            var msg = new Message(json.msg,true,null);
                            msg.display();
                            els.pop_up_black.changeActive();
-                           this._username = user.value;
-                           this._mail = mail.value;
-                           this._state = true;
+                           _username = user.value;
+                           _mail = mail.value;
+                           _state = true;
                      }else{
                            var msg = new Message(json.msg, false, els.errorForm).display();
                      }
