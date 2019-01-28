@@ -118,9 +118,8 @@ class Account{
                   var msg = new Message(data.msg,true,null);
                   msg.display();
                   popUp.classList.toggle("active");
-                  this._mail = data.user.email;
-                  this._username = data.user.username;
-                  this._state = true; 
+                  changeData(data.user.email,data.user.username,true);
+
                }else{
                   var msg = new Message(json.msg,false,errorForm).display();
                }
@@ -130,7 +129,11 @@ class Account{
             var msg = new Message("Missing values", false, errorForm).display();
          }
       }
-
+      changeData(mail,username,state){
+        	this._mail = mail;
+	      	this._username = username;
+	      	this._state = state; 
+      }
 
 
       getAllProject(){
