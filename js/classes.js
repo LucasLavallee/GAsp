@@ -45,6 +45,7 @@ class Account{
 						fetch('https://serene-forest-42732.herokuapp.com/signup',{
 							method: "POST",
 							body: data,
+							credentials: "same-origin",
 							mode: 'cors',
 							headers: {
 								"Accept": "application/json",
@@ -108,6 +109,7 @@ class Account{
                method: "POST",
                body: data,
                mode: 'cors',
+			   credentials: "same-origin",
                headers: {
                   "Accept": "application/json",
                   "Content-Type": "application/json",
