@@ -13,8 +13,9 @@ class Account{
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",
-				"Access-Control-Allow-Origin": "*"
-			}
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
 		});
 		let data = await response.json();
  		data.success ? this._state = true : this._state = false;
