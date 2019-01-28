@@ -9,8 +9,8 @@ class Account{
  	async isLoggedIn(){
  		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
 			method: "GET",
-			mode: 'cors',
 			credentials: "include",
+			mode: 'cors',
 			headers: {
 				"Accept": "application/json",
 				"Content-Type": "application/json",
@@ -109,8 +109,8 @@ class Account{
             let response = await fetch('https://serene-forest-42732.herokuapp.com/signin',{
                method: "POST",
                body: data,
-               mode: 'cors',
 			   credentials: "include",
+               mode: 'cors',
                headers: {
                   "Accept": "application/json",
                   "Content-Type": "application/json",
