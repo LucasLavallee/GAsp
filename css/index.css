@@ -67,6 +67,7 @@ nav{
 	height : 45px;
 	align-items : center;
 	justify-content: center;
+	color: #eeeeee;
 }
 
 nav h1{
@@ -368,7 +369,7 @@ iframe.active{
 #pop_up_black{
 	color : white;
 	display: none;
-	background-color: rgba(0,0,0,1);
+	background-color: rgba(0,0,0,0.75);
 	position: fixed;
 	width: 100%;
 	height: 100%;
@@ -377,7 +378,108 @@ iframe.active{
 }
 
 #pop_up_black.active{
-	display : block;
+	display : flex;
+	justify-content : center;
+}
+
+#save_header {
+	display : flex;
+	align-self : flex-start;
+	align-items : center;
+	font-weight : bold;
+	font-size : 20px;
+}
+
+#save_header i{
+	margin-right: 5px;
+	background-color : #eeeeee;
+	color : #35605a;
+	border-radius : 50%;
+	height : 30px;
+	width : 30px;
+	display : flex;
+	align-items : center;
+	justify-content : center;
+}
+
+#pop-up{
+	background-color: rgba(53,96,90,1);
+	width : 75%;
+	margin : auto;
+	padding : 10px;
+	border : solid 3px #eeeeee;
+	border-radius : 9px;
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+}
+
+#pop-up > p{
+	color : #011c27;
+	font-weight : bold;
+	margin : 15px 0 30px 0;
+}
+
+#account{
+	display : flex;
+	width : 100%;
+	justify-content : center;
+}
+
+#account > *{
+	padding : 0 7%;
+}
+
+#sign_in{
+	border-right : solid #eeeeee 2px;
+}
+
+#account > div > p{
+	font-weight : bold;
+	margin-bottom : 15px;
+}
+
+#account > div{
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+}
+
+#account > div > form > p{
+	display : flex;
+	font-family : inherit;
+	color : inherit; /* don't work :( */
+}
+
+#account input{
+	height : 0.5em;
+	color : inherit;
+	background-color : #47827a;
+	border : solid #eeeeee 2px;
+}
+
+#account i{
+	background-color : #eeeeee;
+	color : #011c27;
+	padding : 5px;
+	font-weight : 20px;
+	border-radius : 5px;
+	align-self : flex-end;
+	margin-top : 15px;
+}
+
+#account i:hover{
+	color : #eeeeee;
+	background-color : #011c27;
+}
+
+#account label{
+	margin-right : 10px;
+}
+
+form > p{
+	display : flex;
+	align-items : center;
 }
 
 @media(max-width: 565px){
