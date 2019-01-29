@@ -1,3 +1,12 @@
+class Project{
+	constructor(id,link,name){
+		this._id = id;
+		this._link = link
+		this._srcCode = "";
+		this._name = name;
+	}
+}
+
 class Account{
 	constructor(){
 		this._username = "";
@@ -179,7 +188,9 @@ class Account{
 			credentials: 'include'
 		});
 		let data = await response.json();
- 		console.log(data);
+ 		for(var i = 0; i< data.projects.length; i++){
+ 			this._listProject[i] = new Project(data.projects[i].id_project,data.projects[i].link,data.projects[i].name);
+ 		}
       }
 }
 
