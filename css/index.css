@@ -57,7 +57,22 @@ nav{
 	align-items: center;
 	grid-template-columns: 45px auto auto;
 }
-
+#connectedButton{
+	position: absolute;
+	right: -200px;
+	top: 70px;
+	background-color: #fff;
+	padding: 15px;
+	color: #011c27;
+	transition: all ease 0.5s;
+}
+#connectedButton.active{
+	right: 0px;
+}
+#menuAccount{
+	margin-left: 20px;
+	display: none;
+}
 #home{
 	font-size : 20px;
 	display :flex;
@@ -95,7 +110,9 @@ nav h1 span{
 	border-radius: 4px;
 	margin-left: 10px;
 }
-
+#headerConnect{
+	height: 70px; 
+}
 
 #mainPart{
 	position: relative;
@@ -409,10 +426,11 @@ iframe.active{
 	align-items : center;
 }
 
-.cross{w
+.cross{
 	font-weight : bold;
 	position : relative;
 	top : -5px;
+	cursor : pointer;
 }
 
 .cross:hover{
@@ -479,10 +497,6 @@ iframe.active{
 	width : 100%;
 }
 
-#name_project input[type="radio"]{
-	border : solid #eeeeee 3px;
-}
-
 .validate_pop_up{
 	background-color : #eeeeee;
 	color : #011c27;
@@ -502,9 +516,18 @@ iframe.active{
 	margin-right : 10px;
 }
 
+#name_project form p{
+	width : 100%;
+}
+
+.pp_label{
+	width : auto;
+}
+
 form > p{
 	display : flex;
 	align-items : center;
+	justify-content : center;
 }
 
 @media(max-width: 565px){
