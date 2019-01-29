@@ -16,7 +16,7 @@
 		<h1>GAsp <span>a web GA manipulator</span></h1>
 		<div id="controlButtons">
 			<i class="fas fa-expand fa-lg" id="presentationMode" title="Presentation mode"></i>
-			<div class="buttons">Save</div>
+			<div class="buttons" id="saveButton">Save</div>
 			<div id="clear" class="buttons">Clear</div>
 		</div>
 	</nav>
@@ -77,9 +77,9 @@
 					<i class="fas fa-save"></i>
 					<p>Save your work</p>
 				</div>
-				<p class="cross">x</p>
+				<p id="cross">x</p>
 			</div>
-			<p class="message_info">You need an account to save your work</p>
+			<p id="message_info">You need an account to save your work</p>
 			<div id="account">
 				<div id="sign_in">
 					<p>Sign in</p>
@@ -203,7 +203,7 @@
 		var test;
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black","#saveButton"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
@@ -580,6 +580,13 @@
 	      	currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
 	      	refreshConsole(currentScript.innerText);
 			updateGAInfo();
+	    }
+	    els.saveButton.onclick = () =>{
+	    	/*(account.state) ?
+	    	(
+	    	)
+	    	:
+	    	()*/
 	    }
 
 		//EVENTS LISTENER ON CONSOLE 
