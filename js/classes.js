@@ -5,6 +5,9 @@ class Account{
 		this._state = false; 
 		this._listProject = []; 
  	}
+ 	get state(){ return this._state;}
+ 	get mail(){ return this._mail;}
+ 	get username(){ return this._username;}
 
  	async isLoggedIn(){
  		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
@@ -20,8 +23,7 @@ class Account{
 		let data = await response.json();
  		data.success ? this._state = true : this._state = false;
  	}
-
-	signUp(){
+	async signUp(){
 		var mail = document.getElementById('emailUp');
 		var user= document.getElementById('userUp');
 		var pwd = document.getElementById('passUp');
@@ -43,30 +45,30 @@ class Account{
 
 						var data = JSON.stringify( payload );
 
-						fetch('https://serene-forest-42732.herokuapp.com/signup',{
+						let response = await fetch('https://serene-forest-42732.herokuapp.com/signup',{
 							method: 'POST',
 							body: data,
 							mode: 'cors',
 							headers: {
 								"Accept": "application/json",
 								"Content-Type": "application/json",
-								"Access-Control-Allow-Origin": "*"
-							}
-						})
-						.then(function(res){return res.json();})
-						.then(function(data){
-                     var json = JSON.stringify(data);
-                     if(json.success){
-                           var msg = new Message(json.msg,true,null);
-                           msg.display();
-                  			popUp.classList.toggle("active");
-                           this._username = user.value;
-                           this._mail = mail.value;
-                           this._state = true;
-                     }else{
-                           var msg = new Message(json.msg, false, errorForm).display();
-                     }
-                  })
+								"Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+							},
+							credentials: true
+						});
+						let dataUser = await response.json();
+						
+	                     if(dataUser.success){
+	                           var msg = new Message(dataUser.msg,true,null);
+	                           msg.display();
+	                  			popUp.classList.toggle("active");
+	                           this._username = user.value;
+	                           this._mail = mail.value;
+	                           this._state = true;
+	                     }else{
+	                           var msg = new Message(dataUser.msg, false, errorForm).display();
+	                     }
+                  }
 
 
 					}
@@ -87,12 +89,12 @@ class Account{
 		}
 	}
 
-      changeData(mail,username,state){
-      	console.log(mail + " " + username + " " + state);
-        	this._mail = mail;
+	  changeData(mail,username,state){
+	  	console.log(mail + " " + username + " " + state);
+	    	this._mail = mail;
 	      	this._username = username;
 	      	this._state = state;
-      }
+	  }
     async signIn(){
          var mail = document.getElementById('mailIn');
          var pwd = document.getElementById('passwordIn');
