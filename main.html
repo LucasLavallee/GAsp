@@ -114,6 +114,10 @@
     </div>
 
     <script>
+	
+		var els={};
+		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+			
         changeActive = (element) => {
             element.classList.toggle("active");
         }
@@ -123,38 +127,23 @@
         changeActiveThis = (element) => {
             element.classList.toggle("activeThis");
         }
-        function myFunction() {
-            var elsClass = {};
-            [".circleBase", ".type1"].forEach(x => elsClass[x.replace(/[.]/g, '')] = document.querySelectorAll(x));
-            for (var i = 0; i < elsClass.circleBase.length; i++) {
-                elsClass.circleBase[i].onclick = (function (i) {
-                    return function () {
-                        // indice i pour la div cliquée et (i+1)%3 et (i+2)%3 pour les deux classes restantes 
-                        if (elsClass.circleBase[i].classList.contains("indexPage"))
-                        {
-                            changeActiveThis(elsClass.circleBase[i]);
-                            console.log("wesh ça va ?");
-                        }
-                        else {
-                        changeActive(elsClass.circleBase[i]);
-                        }
-                        document.getElementById("icons").classList.toggle("activeDiv");
-                        changeUnactive(elsClass.circleBase[(i + 1) % 3]);
-                        changeUnactive(elsClass.circleBase[(i + 2) % 3]);
-                    }
-                })(i);
-            }
-        }
+        
         myFunction();
-        document.getElementById("iconOpen").addEventListener("click", DisplaySignIn)
+        els.iconOpen.addEventListener("click", DisplaySignIn)
         function DisplaySignIn() {
-            document.getElementById("signIn").classList.toggle("activeClass");
+			if (els.iconOpen.classList.contains("unclickable")==false){
+				els.signIn.classList.toggle("activeClass");
+				els.iconOpen.classList.add("unclickable");
+			}
         }
 
-        document.getElementById("iconCreate").addEventListener("click", DisplayChooseGA)
+        els.iconCreate.addEventListener("click", DisplayChooseGA)
         function DisplayChooseGA() {
-            document.getElementById("chooseGA").classList.toggle("activeClass2");
-        }
+			if ( els.iconCreate.classList.contains("unclickable")==false){
+				els.chooseGA.classList.toggle("activeClass2");
+				els.iconCreate.classList.add("unclickable");
+			}
+		}
 
         document.getElementById("createGA").addEventListener("click", DisplayCreateGA)
         function DisplayCreateGA() {
@@ -166,6 +155,28 @@
         function DisplayExample(){
             window.open("index.html");
         }*/
+		function myFunction() {
+            var elsClass = {};
+            [".circleBase", ".type1"].forEach(x => elsClass[x.replace(/[.]/g, '')] = document.querySelectorAll(x));
+            for (var i = 0; i < elsClass.circleBase.length; i++) {
+                elsClass.circleBase[i].onclick = (function (i) {
+                    return function () {
+                        // indice i pour la div cliquée et (i+1)%3 et (i+2)%3 pour les deux classes restantes 
+                        if (elsClass.circleBase[i].classList.contains("indexPage"))
+                        {
+                            changeActiveThis(elsClass.circleBase[i]);
+                            console.log("wesh ça va ?");
+                        }
+                        else if (elsClass.circleBase[i].classList.contains("active")==false){
+                        changeActive(elsClass.circleBase[i]);
+						document.getElementById("icons").classList.toggle("activeDiv");
+                        changeUnactive(elsClass.circleBase[(i + 1) % 3]);
+                        changeUnactive(elsClass.circleBase[(i + 2) % 3]);
+                        }
+                    }
+                })(i);
+            }
+        }
     </script>
 </body>
 
