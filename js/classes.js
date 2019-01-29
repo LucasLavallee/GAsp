@@ -10,6 +10,7 @@ class Account{
  	get username(){ return this._username;}
 
  	async isLoggedIn(){
+ 		var menuAccount = document.getElementById("menuAccount");
  		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
 			method: 'GET',
 			mode: 'cors',
@@ -21,8 +22,30 @@ class Account{
 			credentials: 'include'
 		});
 		let data = await response.json();
- 		data.success ? this._state = true : this._state = false;
+ 		if(data.success){
+ 			this._state = true;
+ 			menuAccount.style.display = "block";
+ 		}
+ 		else{
+ 			this._state = false;
+ 		}	 
  	}
+
+ 	async logout(){
+ 		let response = await fetch('https://serene-forest-42732.herokuapp.com/logout',{
+			method: 'GET',
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
+		});
+		let data = await response.json();
+ 		data.success ? this.changeData("","",false) : this._state = true;
+ 	}
+
 	async signUp(){
 		var mail = document.getElementById('emailUp');
 		var user= document.getElementById('userUp');
@@ -64,9 +87,7 @@ class Account{
 	                           	msg.display();
 	                  			popUp.classList.toggle("active");
 	                  			save.classList.toggle("active");
-	                           	this._username = user.value;
-	                           	this._mail = mail.value;
-	                           	this._state = true;
+	                  			this.changeData(dataUser.user.email,dataUser.user.username,true);
 	                     }else{
 	                           var msg = new Message(dataUser.msg, false, errorForm).display();
 	                     }
@@ -128,6 +149,7 @@ class Account{
               	save.classList.toggle("active");
               	this.changeData(dataUser.user.email,dataUser.user.username,true);
 
+              	//
            	}else{
               	var msg = new Message(dataUser.msg,false,errorForm).display();
            	}

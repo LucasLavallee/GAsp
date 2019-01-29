@@ -57,7 +57,22 @@ nav{
 	align-items: center;
 	grid-template-columns: 45px auto auto;
 }
-
+#connectedButton{
+	position: absolute;
+	right: -200px;
+	top: 70px;
+	background-color: #fff;
+	padding: 15px;
+	color: #011c27;
+	transition: all ease 0.5s;
+}
+#connectedButton.active{
+	right: 0px;
+}
+#menuAccount{
+	margin-left: 20px;
+	display: none;
+}
 #home{
 	font-size : 20px;
 	display :flex;
@@ -95,7 +110,9 @@ nav h1 span{
 	border-radius: 4px;
 	margin-left: 10px;
 }
-
+#headerConnect{
+	height: 70px; 
+}
 
 #mainPart{
 	position: relative;
