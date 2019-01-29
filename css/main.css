@@ -64,7 +64,7 @@ body{
 #signIn {
     display: none;
     width: 40%;
-    height: 40%;
+    height: 25%;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
@@ -76,6 +76,10 @@ body{
     justify-content: center;
     align-items: center;
 }
+#projectContainer{
+    display: flex;
+    flex-direction: row;
+}
 #project>*{
     margin: 10px;
 }
@@ -85,16 +89,30 @@ body{
     border-radius: 5px;
     color: #eeeeee;
 }
+#projects2{
+    padding: 0 20px;
+    border-left: solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#projects1{
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 #projectList{
-    width: 40%;
-    height: 50%;
+    width: auto;
+    height: auto;
+    padding: 20px;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
     margin: auto;
 }
 #projectList>h4{
-    padding: 10px;
+    padding: 30px;
 }
 #signIn.active{
     display: block;
@@ -255,7 +273,7 @@ body{
 .activeClass{
     display: flex !important;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     z-index: 2;
 }

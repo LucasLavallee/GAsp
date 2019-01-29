@@ -31,14 +31,24 @@
             <i id = "check " class="fas fa-check-square"></i>
         </div>
     </div>
-    <div id ="projectList" >
+    <div id ="projectList" class ="unactive">
         <h4> Hello Username, here are your projects </h4>
+        <div id = "projectContainer">
+    <div id = "projects1">
         <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
         <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
         <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
         <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
         <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-
+    </div>
+    <div id = "projects2">
+        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
+        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
+        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
+        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
+        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
+    </div>
+</div>
     </div>
     <div id="chooseGA" class="chooseGA">
         <div class="chooseInfo">
@@ -124,7 +134,7 @@
     <script>
 	
 		var els={};
-		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 			
         changeActive = (element) => {
             element.classList.toggle("active");
@@ -157,6 +167,12 @@
         function DisplayCreateGA() {
             document.getElementById("chooseGA").classList.toggle("activeClass2");
             document.getElementById("createAlgebra").classList.toggle("activeClass");
+        }
+
+        els.validate.addEventListener("click",DisplayProjectList)
+        function DisplayProjectList(){
+            els.projectList.classList.toggle("activeClass");
+            els.signIn.classList.toggle("activeClass");
         }
 
         /*document.getElementById("iconExample").addEventListener("click",DisplayExample)
