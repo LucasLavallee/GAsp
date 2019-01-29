@@ -30,7 +30,9 @@ body{
     display: flex;
     flex-flow: column;
 }
-
+#header{
+    z-index: -1;
+}
 #title{
     font-size: 61px;
     font-style: bold;
@@ -70,6 +72,7 @@ body{
 }
 #signIn.active{
     display: block;
+    z-index: 2;
 }
 #chooseGA{
     display: none;
@@ -79,6 +82,7 @@ body{
 
 #chooseGA.active{
     display: block;
+    z-index: 2;
 }
 
 .chooseGA{
@@ -197,6 +201,7 @@ body{
 }
 #createAlgebra.active{
     display: block;
+    z-index: 2;
 }
 
 #createAlgebra{
@@ -218,18 +223,24 @@ body{
     top:0px;
     left:25px !important;   
     transform: translate3d(0,0,0) scale(0.75)!important; 
+    
+}
+#icons.activeDiv{
+    z-index: 1;
 }
 .activeClass{
     display: block !important;
+    z-index: 2;
 }
 .active h3{
     color: #011c27 !important;
     font-size: 30px !important;
     position: absolute !important;
-    bottom: -100px !important;
+    bottom: -40px !important;
 }
 .activeClass2{
     display: flex !important;
+    z-index: 2;
 }
 .unactive{
     display: none;
@@ -246,6 +257,7 @@ body{
     font-family: 'PT Sans Narrow', sans-serif;
     position: absolute;
     bottom: -30px;
+    white-space: nowrap;
 }
 .type1 {
     width: 150px;
@@ -261,6 +273,7 @@ body{
     /* display: flex; */
     justify-content: space-evenly;
 }
+
 .circleBase:nth-child(1){
     left: 25%;
     transform: translate3d(-50%,0,0);

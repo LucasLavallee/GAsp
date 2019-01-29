@@ -17,25 +17,6 @@
         <h1> a web GA manipulator</h1>
     </div>
 
-    <div id="icons">
-        <a href ="index.html" >
-        <div id="iconExample" class="circleBase type1 indexPage" target="_blank">
-            <img  src="media/img/examples_icon.png" alt="new file" >
-            <h3>Discover with examples</h3>
-        </div>
-    </a>
-
-        <div id="iconCreate" class="circleBase">
-            <img  src="media/img/new_file_icon.png" alt="new file">
-            <h3>Create a new project</h3>
-        </div>
-
-        <div id="iconOpen" class="circleBase type1">
-            <img  src="media/img/open_file_icon.png" alt="new file">
-            <h3>Open a project</h3>
-        </div>
-
-    </div>
     <div id="signIn" class="sign ">
         <h4> Sign in </h4>
         <form id="form" method="post" action="traitemebt.php">
@@ -111,6 +92,27 @@
             </p>
         </form>
     </div>
+    
+    <div id="icons">
+        <a href ="index.html" >
+        <div id="iconExample" class="circleBase type1 indexPage" target="_blank">
+            <img  src="media/img/examples_icon.png" alt="new file" >
+            <h3>Discover with examples</h3>
+        </div>
+    </a>
+
+        <div id="iconCreate" class="circleBase">
+            <img  src="media/img/new_file_icon.png" alt="new file">
+            <h3>Create a new project</h3>
+        </div>
+
+        <div id="iconOpen" class="circleBase type1">
+            <img  src="media/img/open_file_icon.png" alt="new file">
+            <h3>Open a project</h3>
+        </div>
+
+    </div>
+
     <script>
         changeActive = (element) => {
             element.classList.toggle("active");
@@ -136,6 +138,7 @@
                         else {
                         changeActive(elsClass.circleBase[i]);
                         }
+                        document.getElementById("icons").classList.toggle("activeDiv");
                         changeUnactive(elsClass.circleBase[(i + 1) % 3]);
                         changeUnactive(elsClass.circleBase[(i + 2) % 3]);
                     }
