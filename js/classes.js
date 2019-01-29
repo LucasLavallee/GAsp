@@ -167,8 +167,19 @@ class Account{
       }
 
 
-      getAllProject(){
-         
+      async getAllProject(){
+         let response = await fetch('https://serene-forest-42732.herokuapp.com/project/all',{
+			method: 'GET',
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
+		});
+		let data = await response.json();
+ 		console.log(data);
       }
 }
 
