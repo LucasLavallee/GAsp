@@ -13,7 +13,7 @@ class Project{
 		this._name = name;
 	}
 
-	get srcCode(){
+	get src(){
 		return this._srcCode;
 	}
 
