@@ -43,7 +43,10 @@ class Account{
 			credentials: 'include'
 		});
 		let data = await response.json();
- 		data.success ? this.changeData("","",false) : this._state = true;
+ 		if(data.success) {
+ 			this.changeData("","",false);
+ 			document.location.replace('https://lucaslavallee.github.io/GAsp/');
+ 		} 
  	}
 
 	async signUp(){
