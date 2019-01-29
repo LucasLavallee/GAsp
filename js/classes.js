@@ -68,24 +68,21 @@ class Account{
 	                     }else{
 	                           var msg = new Message(dataUser.msg, false, errorForm).display();
 	                     }
-                  }
-
-
 					}
 					else{
-                  var msg = new Message("Different password", false, errorForm).display();
+                  		var msg = new Message("Different password", false, errorForm).display();
 					}
 				}
 				else{
-               var msg = new Message("Username is too short (5 characters min)", false, errorForm).display();
+               		var msg = new Message("Username is too short (5 characters min)", false, errorForm).display();
 				}
 			}
 			else{
-            var msg = new Message("Invalid email", false, errorForm).display();
+            	var msg = new Message("Invalid email", false, errorForm).display();
 			}
 		}
 		else{
-         var msg = new Message("Missing values", false, errorForm).display();
+         	var msg = new Message("Missing values", false, errorForm).display();
 		}
 	}
 
