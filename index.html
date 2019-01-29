@@ -70,16 +70,16 @@
 			</div>
 		</div>
 	</section>
-	<section id="pop_up_black">
+	<section id="pop_up_black" class="active">
 		<div id="save" class="pop_up">
 			<div class="save_header">
 				<div class="title_icon">
 					<i class="fas fa-save"></i>
 					<p>Save your work</p>
 				</div>
-				<p id="cross">x</p>
+				<p class="cross">x</p>
 			</div>
-			<p id="message_info">You need an account to save your work</p>
+			<p class="message_info">You need an account to save your work</p>
 			<div id="account">
 				<div id="sign_in">
 					<p>Sign in</p>
@@ -120,7 +120,7 @@
 			</div>
 			<div id="errorForm"></div>
 		</div>
-		<div id="name_project" class="pop_up">
+		<div id="name_project" class="pop_up active">
 			<div class="save_header">
 				<div class="title_icon">
 					<i class="fas fa-save"></i>
@@ -136,15 +136,11 @@
 				</p>
 				<p>
 					<input type="radio" name="shared_status" value="private" checked />
-					<label>private</label>
+					<label class="pp_label">private</label>
 					<input type="radio" name="shared_status" value="public" />
-					<label>public</label>
+					<label class="pp_label">public</label>
 				</p>
 			</form>
-			<div id="link_div">
-				<p>Link : </p>
-				<p id="link_area"></p>
-			</div>
 			<i class="fas fa-check validate_pop_up" id="sign_up_send"></i>
 		</div>
 	</section>
