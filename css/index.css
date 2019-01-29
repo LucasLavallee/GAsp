@@ -426,10 +426,11 @@ iframe.active{
 	align-items : center;
 }
 
-.cross{w
+.cross{
 	font-weight : bold;
 	position : relative;
 	top : -5px;
+	cursor : pointer;
 }
 
 .cross:hover{
@@ -496,10 +497,6 @@ iframe.active{
 	width : 100%;
 }
 
-#name_project input[type="radio"]{
-	border : solid #eeeeee 3px;
-}
-
 .validate_pop_up{
 	background-color : #eeeeee;
 	color : #011c27;
@@ -519,9 +516,18 @@ iframe.active{
 	margin-right : 10px;
 }
 
+#name_project form p{
+	width : 100%;
+}
+
+.pp_label{
+	width : auto;
+}
+
 form > p{
 	display : flex;
 	align-items : center;
+	justify-content : center;
 }
 
 @media(max-width: 565px){
