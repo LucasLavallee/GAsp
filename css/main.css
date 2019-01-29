@@ -19,7 +19,7 @@ p,h1,h2,h3,h4{
 	margin: 0;
     text-align: center;
     font-family: 'PT Sans Narrow', sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     color: #011c27;
 }
 body{
@@ -88,8 +88,8 @@ body{
     align-items: center;
 }
 .choose{
-    width: 700px;
-    height: 400px;
+    width: 400px;
+    height: 300px;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
@@ -98,7 +98,7 @@ body{
 .choose>h4{
     padding: 30px;
     color: #011c27;
-    font-size: 40px;
+    font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
 }
 .chooseInfo{
@@ -107,8 +107,8 @@ body{
     justify-content: space-around;
 }
 .infoGA{
-    width: 350px;
-    height: 400px;
+    width: 250px;
+    height: 300px;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
@@ -116,20 +116,20 @@ body{
 .infoGA>h4{
     padding: 30px;
     color: #35605a;
-    font-size: 40px;
+    font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
 }
 
 #signIn>h4{
     padding: 30px;
     color: #011c27;
-    font-size: 40px;
+    font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
 }
 #form {
    margin-left: auto;
    margin-right: auto;
-    padding: 50px;
+    padding: 20px;
 }
 #form2>input{
     width: 20px;
@@ -137,7 +137,7 @@ body{
 }
 #form>p{
     font-family: 'PT Sans Narrow', sans-serif;
-    font-size: 35px;
+    font-size: 20px;
 }
 
 #signIn>input{
@@ -154,7 +154,7 @@ body{
 }
 .fas{
     font-weight: 900;
-    font-size: 60px;
+    font-size: 40px;
 }
 
 .validateGA{
@@ -162,12 +162,11 @@ body{
     height: 50px;
     position: relative;
     left: 90%;
-    top: 5%;
 }
 
 .create{
-    width: 350px;
-    height: 50px;
+    width: 250px;
+    height: 35px;
     background :  #011c27;
     border-radius: 10px;
 }
@@ -175,7 +174,7 @@ body{
 .create>h4{
     text-align: center;
     color: aliceblue;
-    font-size: 35px;
+    font-size: 25px;
 }
 
 .or>h3{
@@ -211,9 +210,8 @@ body{
     margin: auto;
 }
 #createAlgebra>h3{
-    padding: 30px;
     color: #011c27;
-    font-size: 40px;
+    font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
 }
 .active{
@@ -226,9 +224,9 @@ body{
 }
 .active h3{
     color: #011c27 !important;
-    font-size: 40px !important;
+    font-size: 30px !important;
     position: absolute !important;
-    bottom: -150px !important;
+    bottom: -100px !important;
 }
 .activeClass2{
     display: flex !important;
