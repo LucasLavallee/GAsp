@@ -141,6 +141,8 @@ body{
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
+	display : flex;
+	flex-direction : column;
 }
 
 .choose>h4{
@@ -149,6 +151,7 @@ body{
     font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
 }
+
 .chooseInfo{
     display: flex;
     flex-direction: row;
@@ -166,6 +169,14 @@ body{
     color: #35605a;
     font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.choose > p{
+	cursor : pointer;
+}
+
+.choose>p:hover, .infoGA>p{
+	color : #47827a;
 }
 
 #signIn>h4{
@@ -193,7 +204,7 @@ body{
     height: 35px;
     border: 2px solid #011c27; 
 }
-#validate{
+.validate{
     width: 50px;
     height: 50px;
     align-self: flex-end;
@@ -203,18 +214,25 @@ body{
     font-size: 40px;
 }
 
-.validateGA{
-    width: 50px;
-    height: 50px;
-    position: relative;
-    left: 90%;
+.validate>i{
+	color : #011c27;
+	cursor : pointer;
 }
 
+ .validate>i:hover{
+	 color : #5a352a;
+ }
+
 .create{
+	cursor : pointer;
     width: 250px;
     height: 35px;
     background :  #011c27;
     border-radius: 10px;
+}
+
+.create:hover{
+	background-color : #5a352a;
 }
 
 .create>h4{
@@ -227,7 +245,22 @@ body{
     font-size: 70px;
     color: #eeeeee;
 }
+
+#goBackStart{
+	position: absolute;
+    top: 0;
+	left : 25px;
+    border-radius: 70%;
+	z-index : 2;
+	width: 150px;
+    height: 150px;
+    background: none;
+	transform : scale(0.75);
+	cursor : pointer;
+}
+
 .circleBase {
+	cursor : pointer;
     position: absolute;
     top: 50%;
     border-radius: 70%;
@@ -241,6 +274,7 @@ body{
         justify-content: space-around;
 
 }
+
 #createAlgebra.active{
     display: block;
     z-index: 2;
@@ -326,7 +360,6 @@ body{
 .circleBase:nth-child(2){
     left: 50%;
     transform: translate3d(-50%,0,0);
-
 }
 .circleBase:nth-child(3){
     left: 75%;

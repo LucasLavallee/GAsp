@@ -12,6 +12,7 @@
 </head>
 
 <body>
+	<div id="goBackStart"></div>
     <div id="header">
         <h4 id="title"> GAsp</h4>
         <h1> a web GA manipulator</h1>
@@ -27,7 +28,7 @@
                 <label> Password </label> : <input type="text" name="password" />
             </p>
         </form>
-        <div id="validate">
+        <div class="validate">
             <i id = "check " class="fas fa-check-square"></i>
         </div>
     </div>
@@ -60,7 +61,7 @@
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
                 <p> lorem ipsum </p>
-                <div class="validateGA">
+                <div class="validate">
                     <i class="fas fa-check-square"></i>
                 </div>
             </div>
@@ -132,11 +133,32 @@
     </div>
 
     <script>
-	
+		function myFunction() {
+			var elsClass = {};
+			[".circleBase", ".type1"].forEach(x => elsClass[x.replace(/[.]/g, '')] = document.querySelectorAll(x));
+            for (var i = 0; i < elsClass.circleBase.length; i++) {
+                elsClass.circleBase[i].onclick = (function (i) {
+                    return function () {
+                        // indice i pour la div cliquée et (i+1)%3 et (i+2)%3 pour les deux classes restantes 
+                        if (elsClass.circleBase[i].classList.contains("indexPage"))
+                        {
+                            changeActiveThis(elsClass.circleBase[i]);
+                            console.log("wesh ça va ?");
+                        }
+                        else if (elsClass.circleBase[i].classList.contains("active")==false){
+							changeActive(elsClass.circleBase[i]);
+							document.getElementById("icons").classList.toggle("activeDiv");
+							changeUnactive(elsClass.circleBase[(i + 1) % 3]);
+							changeUnactive(elsClass.circleBase[(i + 2) % 3]);
+                        }
+                    }
+                })(i);
+            }
+        }
+		
 		var els={};
-		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
-			
-        changeActive = (element) => {
+		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+		changeActive = (element) => {
             element.classList.toggle("active");
         }
         changeUnactive = (element) => {
@@ -145,9 +167,11 @@
         changeActiveThis = (element) => {
             element.classList.toggle("activeThis");
         }
+		
+		/*//// EVENT LISTENERS ////*/
         
         myFunction();
-        els.iconOpen.addEventListener("click", DisplaySignIn)
+        els.iconOpen.addEventListener("click", DisplaySignIn);
         function DisplaySignIn() {
 			if (els.iconOpen.classList.contains("unclickable")==false){
 				els.signIn.classList.toggle("activeClass");
@@ -168,6 +192,29 @@
             document.getElementById("chooseGA").classList.toggle("activeClass2");
             document.getElementById("createAlgebra").classList.toggle("activeClass");
         }
+		
+		els.goBackStart.addEventListener("click", goBackStart);
+		function goBackStart(){
+			var elsClass = {};
+			[".activeClass", ".activeClass2", ".unclickable", ".activeDiv", ".active", ".unactive"].forEach(x => elsClass[x.replace(/[.]/g, '')] = document.querySelectorAll(x));
+			for(var i=0; i<elsClass.activeClass.length; i++)
+				elsClass.activeClass[i].classList.remove("activeClass");
+								
+			for(var i=0; i<elsClass.activeClass2.length; i++)
+				elsClass.activeClass2[i].classList.remove("activeClass2");
+			
+			for(var i=0; i<elsClass.unclickable.length; i++)
+				elsClass.unclickable[i].classList.remove("unclickable");
+				
+			for(var i=0; i<elsClass.activeDiv.length; i++)
+				elsClass.activeDiv[i].classList.remove("activeDiv");
+				
+			for(var i=0; i<elsClass.active.length; i++)
+				elsClass.active[i].classList.remove("active");
+				
+			for(var i=0; i<elsClass.unactive.length; i++)
+				elsClass.unactive[i].classList.remove("unactive");
+		}
 
         els.validate.addEventListener("click",DisplayProjectList)
         function DisplayProjectList(){
@@ -179,28 +226,7 @@
         function DisplayExample(){
             window.open("index.html");
         }*/
-		function myFunction() {
-            var elsClass = {};
-            [".circleBase", ".type1"].forEach(x => elsClass[x.replace(/[.]/g, '')] = document.querySelectorAll(x));
-            for (var i = 0; i < elsClass.circleBase.length; i++) {
-                elsClass.circleBase[i].onclick = (function (i) {
-                    return function () {
-                        // indice i pour la div cliquée et (i+1)%3 et (i+2)%3 pour les deux classes restantes 
-                        if (elsClass.circleBase[i].classList.contains("indexPage"))
-                        {
-                            changeActiveThis(elsClass.circleBase[i]);
-                            console.log("wesh ça va ?");
-                        }
-                        else if (elsClass.circleBase[i].classList.contains("active")==false){
-                        changeActive(elsClass.circleBase[i]);
-						document.getElementById("icons").classList.toggle("activeDiv");
-                        changeUnactive(elsClass.circleBase[(i + 1) % 3]);
-                        changeUnactive(elsClass.circleBase[(i + 2) % 3]);
-                        }
-                    }
-                })(i);
-            }
-        }
+		
     </script>
 </body>
 

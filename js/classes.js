@@ -1,3 +1,12 @@
+class Project{
+	constructor(id,link,name){
+		this._id = id;
+		this._link = link
+		this._srcCode = "";
+		this._name = name;
+	}
+}
+
 class Account{
 	constructor(){
 		this._username = "";
@@ -167,8 +176,21 @@ class Account{
       }
 
 
-      getAllProject(){
-         
+      async getAllProject(){
+         let response = await fetch('https://serene-forest-42732.herokuapp.com/project/all',{
+			method: 'GET',
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
+		});
+		let data = await response.json();
+ 		for(var i = 0; i< data.projects.length; i++){
+ 			this._listProject[i] = new Project(data.projects[i].id_project,data.projects[i].link,data.projects[i].name);
+ 		}
       }
 }
 
