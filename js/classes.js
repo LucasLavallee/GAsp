@@ -5,6 +5,45 @@ class Project{
 		this._srcCode = "";
 		this._name = name;
 	}
+
+	set setSrcCode(src){
+		this._srcCode = src;
+	}
+	set setName(name){
+		this._name = name;
+	}
+
+	get srcCode(){
+		return this._srcCode;
+	}
+
+	async saveProject(name, src){
+		var payload = {
+			src: src,
+			name: name,
+		};
+		var data = JSON.stringify( payload );
+
+ 		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/create',{
+			method: 'POST',
+			body: data,
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
+		});
+
+		let data = await response.json();
+ 		if(data.success){
+ 			window.location.replace("https://lucaslavallee.github.io/GAsp#"+data.link);
+ 			menuAccount.style.display = "block";
+ 		}
+ 		else{
+ 		}	 
+	}
 }
 
 class Account{
@@ -210,7 +249,6 @@ class Message{
          this._container.innerHTML = this._msg; 
 		}
 	}
-
 }
 
 class Modal{
