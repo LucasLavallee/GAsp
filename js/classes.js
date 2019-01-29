@@ -29,6 +29,7 @@ class Account{
 		var pwd = document.getElementById('passUp');
 		var confPwd = document.getElementById('confPassUp');
 		var popUp = document.getElementById("pop_up_black");
+		var save = document.getElementById("save");
 		var errorForm = document.getElementById("errorForm");
 
 		if(mail.value!="" && user.value!="" && pwd.value!="" && confPwd.value!=""){
@@ -59,12 +60,13 @@ class Account{
 						let dataUser = await response.json();
 						
 	                     if(dataUser.success){
-	                           var msg = new Message(dataUser.msg,true,null);
-	                           msg.display();
+	                           	var msg = new Message(dataUser.msg,true,null);
+	                           	msg.display();
 	                  			popUp.classList.toggle("active");
-	                           this._username = user.value;
-	                           this._mail = mail.value;
-	                           this._state = true;
+	                  			save.classList.toggle("active");
+	                           	this._username = user.value;
+	                           	this._mail = mail.value;
+	                           	this._state = true;
 	                     }else{
 	                           var msg = new Message(dataUser.msg, false, errorForm).display();
 	                     }
@@ -87,7 +89,7 @@ class Account{
 	}
 
 	  changeData(mail,username,state){
-	  	console.log(mail + " " + username + " " + state);
+	  		console.log(mail + " " + username + " " + state);
 	    	this._mail = mail;
 	      	this._username = username;
 	      	this._state = state;
@@ -97,6 +99,7 @@ class Account{
          var pwd = document.getElementById('passwordIn');
 			var popUp = document.getElementById("pop_up_black");
 			var errorForm = document.getElementById("errorForm");
+		var save = document.getElementById("save");
             
          if(mail.value!="" && pwd.value!=""){
             var payload = {
@@ -119,14 +122,15 @@ class Account{
 
             let dataUser = await response.json();
            if(dataUser.success){
-              var msg = new Message(dataUser.msg,true,null);
-              msg.display();
-              popUp.classList.toggle("active");
-              this.changeData(dataUser.user.email,dataUser.user.username,true);
+              	var msg = new Message(dataUser.msg,true,null);
+              	msg.display();
+              	popUp.classList.toggle("active");
+              	save.classList.toggle("active");
+              	this.changeData(dataUser.user.email,dataUser.user.username,true);
 
-           }else{
-              var msg = new Message(dataUser.msg,false,errorForm).display();
-           }
+           	}else{
+              	var msg = new Message(dataUser.msg,false,errorForm).display();
+           	}
          }
          else{
             var msg = new Message("Missing values", false, errorForm).display();
