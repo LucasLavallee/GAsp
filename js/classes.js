@@ -36,9 +36,9 @@ class Project{
 			credentials: 'include'
 		});
 
-		let data = await response.json();
- 		if(data.success){
- 			window.location.replace("https://lucaslavallee.github.io/GAsp#"+data.link);
+		let result = await response.json();
+ 		if(result.success){
+ 			window.location.replace("https://lucaslavallee.github.io/GAsp#"+result.link);
  			menuAccount.style.display = "block";
  		}
  		else{
