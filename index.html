@@ -152,10 +152,13 @@
 	<script src="./js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
+
+		var currentMode = 1; // 0 = project Mode | 1 = Example Mode 
 		var account = new Account();
 		account.isLoggedIn();
 
 		var project = new Project(0,"","");
+
 		var transitionTime = 800;
 		var macroDeploy = false;
 		var exampleList = ["complex_mandelbrot","complex_least_squares",
@@ -170,7 +173,21 @@
                     "ccga3d_points_quadrics",
                     "qcga3d_points_and_more",
                     "game_wedge"];
-				
+		
+		//Check if there is an hash
+		async function loadProj(){
+			var linkProj = window.location.hash.substr(1);
+			if(linkProj!="undefined"){
+				currentMode = 0;
+				var res = await project.loadProject(linkProj);
+				editor.setValue(project.srcCode());
+				loadProjInfo("author",project.name());
+			}
+		}
+
+
+
+
 		// build an array (exampleCategories) with the names of the categories, and their occurrences
 		// example : ["Complex", 2, "Differentiation", 2,... ]
 		var exampleCategories=[];
@@ -202,7 +219,6 @@
 			}
 		}
 		var currentScript;
-		var currentMode = 1; // 0 = project Mode | 1 = Example Mode 
 		var test;
 		// Elements.
    		var els={};
@@ -628,6 +644,7 @@
 		
 
 	    refreshOption();
+	    loadProj();
 	    displayInterface();
 	    preloadIframe();
 		

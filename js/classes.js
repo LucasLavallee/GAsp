@@ -17,6 +17,11 @@ class Project{
 		return this._srcCode;
 	}
 
+	get name(){
+		return this._name;
+	}
+
+
 	async saveProject(name, src){
 		var payload = {
 			src: src,
@@ -43,6 +48,36 @@ class Project{
  		}
  		else{
  		}	 
+	}
+
+	async loadProject(link){
+		var payload = {
+			link: link
+		};
+		var data = JSON.stringify( payload );
+
+ 		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/infos',{
+			method: 'POST',
+			body: data,
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
+		});
+
+		let result = await response.json();
+ 		if(result.success){
+ 			result.projects[i].id_project
+	 		this._id = result.projects[i].id;
+			this._link = result.projects[i].link;
+			this._srcCode = result.projects[i].srcCode;
+			this._name = result.projects[i].name;
+ 		}
+ 		else{
+ 		}	
 	}
 }
 
