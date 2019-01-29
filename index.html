@@ -152,7 +152,7 @@
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
 		var account = new Account();
-		//account.isLoggedIn();
+		account.isLoggedIn();
 		var transitionTime = 800;
 		var macroDeploy = false;
 		var exampleList = ["complex_mandelbrot","complex_least_squares",
@@ -582,11 +582,11 @@
 			updateGAInfo();
 	    }
 	    els.saveButton.onclick = () =>{
-	    	(account.state) ?
+	    	/*(account.state) ?
 	    	(
 	    	)
 	    	:
-	    	()
+	    	()*/
 	    }
 
 		//EVENTS LISTENER ON CONSOLE 
