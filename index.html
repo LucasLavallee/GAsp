@@ -71,15 +71,15 @@
 		</div>
 	</section>
 	<section id="pop_up_black">
-		<div id="pop-up">
-			<div id="save_header">
-				<div id="title_icon">
+		<div id="save" class="pop-up">
+			<div class="save_header">
+				<div class="title_icon">
 					<i class="fas fa-save"></i>
 					<p>Save your work</p>
 				</div>
-				<p id="cross">x</p>
+				<p class="cross">x</p>
 			</div>
-			<p id="message_info">You need an account to save your work</p>
+			<p class="message_info">You need an account to save your work</p>
 			<div id="account">
 				<div id="sign_in">
 					<p>Sign in</p>
@@ -93,7 +93,7 @@
 							<input type="password" name="password"  id="passwordIn"/>
 						</p>
 					</form>
-					<i class="fas fa-check" id="sign_in_send"></i>
+					<i class="fas fa-check validate_pop-up" id="sign_in_send"></i>
 				</div>
 				<div id="sign_up">
 					<p>Sign up</p>
@@ -115,10 +115,37 @@
 							<input type="password" name="confirm_password"  id="confPassUp"/>
 						</p>
 					</form>
-					<i class="fas fa-check" id="sign_up_send"></i>
+					<i class="fas fa-check validate_pop-up" id="sign_up_send"></i>
 				</div>
 			</div>
 			<div id="errorForm"></div>
+		</div>
+		<div id="name_project">
+			<div class="save_header">
+				<div class="title_icon">
+					<i class="fas fa-save"></i>
+					<p>Save your work</p>
+				</div>
+				<p class="cross">x</p>
+			</div>
+			<p class="message_info">Hello <span>Username</span> !</p>
+			<form>
+				<p>
+					<label>Name your project : </label>
+					<input type="text" name="project_name" id="nameProjectUp"/>
+				</p>
+				<p>
+					<input type="radio" name="shared_status" value="private" checked />
+					<label>private</label>
+					<input type="radio" name="shared_status" value="public" />
+					<label>public</label>
+				</p>
+			</form>
+			<div id="link_div">
+				<p>Link : </p>
+				<p id="link_area"></p>
+			</div>
+			<i class="fas fa-check validate_pop-up" id="sign_up_send"></i>
 		</div>
 	</section>
 	<script src="./js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>

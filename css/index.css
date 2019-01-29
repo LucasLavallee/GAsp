@@ -256,7 +256,7 @@ nav h1 span{
 	margin-left: 40%;
 	overflow: hidden;
 }
-form input, form label,form textarea{
+form input[type=text], form input[type=password], form input[type=email], form label,form textarea{
 	display: block;
 	padding: 8px 0;
 	width: 100%;
@@ -382,7 +382,7 @@ iframe.active{
 	justify-content : center;
 }
 
-#save_header {
+.save_header {
 	width : 100%;
 	display : flex;
 	justify-content : space-between;
@@ -391,7 +391,7 @@ iframe.active{
 	font-size : 20px;
 }
 
-#save_header i{
+.save_header i{
 	margin-right: 5px;
 	background-color : #eeeeee;
 	color : #35605a;
@@ -404,34 +404,38 @@ iframe.active{
 	cursor : default;
 }
 
-#title_icon{
+.title_icon{
 	display : flex;
 	align-items : center;
 }
 
-#cross{
+.cross{w
 	font-weight : bold;
 	position : relative;
 	top : -5px;
 }
 
-#cross:hover{
+.cross:hover{
 	color : #011c27;
 }
 
-#pop-up{
+.pop-up{
+	display : none;
 	background-color: rgba(53,96,90,1);
 	width : 75%;
 	margin : auto;
 	padding : 10px;
 	border : solid 3px #eeeeee;
 	border-radius : 9px;
-	display : flex;
 	flex-direction : column;
 	align-items : center;
 }
 
-#message_info{
+.pop-up.active{
+	display : flex;
+}
+
+.message_info{
 	color : #011c27;
 	font-weight : bold;
 	margin : 15px 0 30px 0;
@@ -467,7 +471,7 @@ iframe.active{
 	color : inherit;
 }
 
-#account input{
+.pop-up input[type=text], .pop-up input[type=password], .pop-up input[type=email]{
 	height : 0.5em;
 	color : inherit;
 	background-color : #47827a;
@@ -475,7 +479,11 @@ iframe.active{
 	width : 100%;
 }
 
-#account i{
+#name_project input[type="radio"]{
+	border : solid #eeeeee 3px;
+}
+
+.validate_pop-up{
 	background-color : #eeeeee;
 	color : #011c27;
 	padding : 5px;
@@ -485,12 +493,12 @@ iframe.active{
 	margin-top : 15px;
 }
 
-#account i:hover{
+.validate_pop-up:hover{
 	color : #eeeeee;
 	background-color : #011c27;
 }
 
-#account label{
+.pop-up label{
 	margin-right : 10px;
 }
 
