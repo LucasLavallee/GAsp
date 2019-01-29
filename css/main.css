@@ -123,6 +123,8 @@ body{
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
+	display : flex;
+	flex-direction : column;
 }
 
 .choose>h4{
@@ -192,10 +194,6 @@ body{
 .fas{
     font-weight: 900;
     font-size: 40px;
-}
-
-#validateGA{
-	top :auto;
 }
 
 .validate>i{
