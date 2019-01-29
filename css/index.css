@@ -419,7 +419,7 @@ iframe.active{
 	color : #011c27;
 }
 
-.pop-up{
+.pop_up{
 	display : none;
 	background-color: rgba(53,96,90,1);
 	width : 75%;
@@ -431,7 +431,7 @@ iframe.active{
 	align-items : center;
 }
 
-.pop-up.active{
+.pop_up.active{
 	display : flex;
 }
 
@@ -471,7 +471,7 @@ iframe.active{
 	color : inherit;
 }
 
-.pop-up input[type=text], .pop-up input[type=password], .pop-up input[type=email]{
+.pop_up input[type=text], .pop_up input[type=password], .pop_up input[type=email]{
 	height : 0.5em;
 	color : inherit;
 	background-color : #47827a;
@@ -483,7 +483,7 @@ iframe.active{
 	border : solid #eeeeee 3px;
 }
 
-.validate_pop-up{
+.validate_pop_up{
 	background-color : #eeeeee;
 	color : #011c27;
 	padding : 5px;
@@ -493,12 +493,12 @@ iframe.active{
 	margin-top : 15px;
 }
 
-.validate_pop-up:hover{
+.validate_pop_up:hover{
 	color : #eeeeee;
 	background-color : #011c27;
 }
 
-.pop-up label{
+.pop_up label{
 	margin-right : 10px;
 }
 
