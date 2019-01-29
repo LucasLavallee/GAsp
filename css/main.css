@@ -70,50 +70,7 @@ body{
     border-radius: 15px;
     margin: auto;
 }
-#project{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-#projectContainer{
-    display: flex;
-    flex-direction: row;
-}
-#project>*{
-    margin: 10px;
-}
-#rename{
-    border: 2px solid #011c27;
-    background: #011c27;
-    border-radius: 5px;
-    color: #eeeeee;
-}
-#projects2{
-    padding: 0 20px;
-    border-left: solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-#projects1{
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-#projectList{
-    width: auto;
-    height: auto;
-    padding: 20px;
-    border: 2px solid #011c27;
-    background: #eeeeee;
-    border-radius: 15px;
-    margin: auto;
-}
-#projectList>h4{
-    padding: 30px;
-}
+
 #signIn.active{
     display: block;
     z-index: 2;
@@ -365,15 +322,3 @@ body{
     left: 75%;
     transform: translate3d(-50%,0,0);
 }
-
-/*<div id = "title2">
-<h3>Create a new project</h3>
-</div>
-
-<div id = "title1">
-<h3>Discover with examples</h3>
-</div>
-
-<div id ="title3"
-<h3>Open a project</h3>
-</div>*/
