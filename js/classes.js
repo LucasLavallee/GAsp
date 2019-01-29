@@ -50,6 +50,7 @@ class Account{
  	}
 
 	async signUp(){
+ 		var menuAccount = document.getElementById("menuAccount");
 		var mail = document.getElementById('emailUp');
 		var user= document.getElementById('userUp');
 		var pwd = document.getElementById('passUp');
@@ -81,7 +82,7 @@ class Account{
 								"Content-Type": "application/json",
 								"Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
 							},
-							credentials: true
+							credentials: 'include'
 						});
 						let dataUser = await response.json();
 						
@@ -90,6 +91,7 @@ class Account{
 	                           	msg.display();
 	                  			popUp.classList.toggle("active");
 	                  			save.classList.toggle("active");
+ 								menuAccount.style.display = "block";
 	                  			this.changeData(dataUser.user.email,dataUser.user.username,true);
 	                     }else{
 	                           var msg = new Message(dataUser.msg, false, errorForm).display();
@@ -119,6 +121,7 @@ class Account{
 	      	this._state = state;
 	  }
     async signIn(){
+ 		var menuAccount = document.getElementById("menuAccount");
          var mail = document.getElementById('mailIn');
          var pwd = document.getElementById('passwordIn');
 			var popUp = document.getElementById("pop_up_black");
@@ -150,6 +153,7 @@ class Account{
               	msg.display();
               	popUp.classList.toggle("active");
               	save.classList.toggle("active");
+ 				menuAccount.style.display = "block";
               	this.changeData(dataUser.user.email,dataUser.user.username,true);
 
               	//
