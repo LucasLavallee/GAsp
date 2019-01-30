@@ -119,10 +119,10 @@ class Project{
 		});
 
 		let coworks = await response.json();
+		document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
+		var list = document.getElementById('allCoworkers');
 		if(coworks.success){
-			console.log(coworks);
-			document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
-			var list = document.getElementById('allCoworkers');
+			list.innerHTML = "";
 			coworks.project.forEach(function(element) {
 	            var div = document.createElement('div');
 	            div.classList.add('coworkers');
@@ -131,8 +131,7 @@ class Project{
 	        });
 	    }
 	    else{
-	    	var mess = new Message(coworks.msg,true,null);
-	    	mess.display();
+	    	list.innerHTML = "(empty)";
 	    }
 	}
 }
