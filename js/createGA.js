@@ -13,11 +13,11 @@ class GA{
 	var res =
 		"// " + this.name +"\n"
 		+ "Algebra({metric:[" + this.metric + "], basis: [" + this.basis + "]}, ()=>{\n"
-		+ "//define new vectors\n"
-		+ this.vectorsDef + ";\n"
+		+ "	//define new vectors\n"
+		+ "	" + this.vectorsDef + ";\n"
 		+ "	var point = (x,y,z)=>" + this.pointDef + ";\n"
 		+ "	//To create a point, do point(x,y,z)\n"
-		+ "\n	//Write your code here !"
+		+ "\n	//Write your code here !\n\n\n"
 		+ "\n});"
 	;
 	return res;
