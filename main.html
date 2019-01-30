@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
     <script type="text/javascript" src="./js/lib/ganja.js"></script>
+	<script type="text/javascript" src="./js/createGA.js"></script>	
 </head>
 
 <body>
@@ -70,29 +71,39 @@
         </div>
     </div>
 
-    <div id="createAlgebra" class="createAlgebra">
+   <div id="createAlgebra" class="createAlgebra">
         <h3>Create a geometric algebra</h3>
-        <form id="form2" method="post" action="traitemebt.php">
+        <form id="formCreateGA">
             <p>
                 <label> Name </label> : <input type="text" name="nameGA" />
             </p>
             <p>
                 <label> Dimension </label> : <input type="text" name="dimensionGA" />
+				<span class="GADefExamples">ex : 5</span>
+			</p>
+            <p>
+                <label> Basis </label> : <input type="text" name="basisGA" />
+				<span class="GADefError">Enter <em></em>values</span>
             </p>
             <p>
-                <label> Basis </label> : <input type="text" name="dimensionGA" />
-
+                <label> Metric </label> : <input type="text" name="metricGA" />
+				<span class="GADefError">Enter <em></em>values</span>
+				<span class="GADefExamples">ex : 1, 1, 1, 1, -1</span>
             </p>
             <p>
-                <label> Metric </label> : <input type="text" name="dimensionGA" />
+                <label>(optional) Definition of new vectors from basis</label> : <textarea name="vectorsGA"></textarea>
+				<span class="GADefExamples">ex : e0 = 0.5*(e+ + e-); ei = e- - e+</span>
             </p>
             <p>
-                <label> Definition of a new vector </label> : <input type="text" name="dimensionGA" />
-            </p>
-            <p>
-                <label> definition from an 3D Euclidean point </label> : <input type="text" name="dimensionGA" />
-            </p>
+                <label>(optional) Definition from a 3D Euclidean point (x,y,z)</label> : <input type="text" name="pointGA" />
+				<span class="GADefExamples">ex : e0 + x*e1 + y*e2 + z*e2 + 0.5*(x*x + y*y + z*z)*ei</span>
+			</p>
         </form>
+		<div class="validate">
+			<a href="index.html">
+				<i class="fas fa-check-square"></i>
+			</a>
+        </div>
     </div>
     
     <div id="icons">
@@ -140,7 +151,7 @@
         }
 		
 		var els={};
-		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 		changeActive = (element) => {
             element.classList.toggle("active");
         }
@@ -199,11 +210,32 @@
 				elsClass.unactive[i].classList.remove("unactive");
 		}
 
-        els.validate.addEventListener("click",DisplayProjectList)
+        /*els.validate.addEventListener("click",DisplayProjectList)
         function DisplayProjectList(){
             els.projectList.classList.toggle("activeClass");
             els.signIn.classList.toggle("activeClass");
-        }
+        }*/
+		
+		document.querySelector("#createAlgebra>.validate>a>i").addEventListener("click", createGA);
+		function createGA(){
+			// retrieve info form form
+			var name = els.formCreateGA.nameGA.value;
+			var dimensions = els.formCreateGA.dimensionGA.value;
+			var basis = els.formCreateGA.basisGA.value;
+			var metric = els.formCreateGA.metricGA.value;
+			var vectorsDef = els.formCreateGA.vectorsGA;
+			var pointDef = els.formCreateGA.pointGA;
+			// create the GA object
+			var userGA = new GA(name, dimensions, basis, metric, vectorsDef, pointDef);
+			
+			//localStorage
+			if (typeof(Storage) !== "undefined") {
+				console.log(userGA.consoleString());
+				localStorage.setItem("createGA", userGA.consoleString());
+			} else {
+				console.log("Sorry! No Web Storage support.");
+			}
+		}
 
         /*document.getElementById("iconExample").addEventListener("click",DisplayExample)
         function DisplayExample(){

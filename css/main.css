@@ -145,12 +145,18 @@ body{
 #form {
    margin-left: auto;
    margin-right: auto;
-    padding: 20px;
+   padding: 15px;
 }
-#form2>input{
+
+#formCreateGA>input{
     width: 20px;
     height: 20px;
 }
+
+#formCreateGA{
+	padding : 20px 0;
+}
+
 #form>p{
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 20px;
@@ -171,12 +177,12 @@ body{
     font-size: 40px;
 }
 
-.validate>i{
+.validate>i, .validate>a{
 	color : #011c27;
 	cursor : pointer;
 }
 
- .validate>i:hover{
+ .validate>i:hover, .validate>a:hover{
 	 color : #5a352a;
  }
 
@@ -233,25 +239,45 @@ body{
 }
 
 #createAlgebra.active{
-    display: block;
+    display : flex;
+	flex-direction : column;
     z-index: 2;
 }
 
 #createAlgebra{
     display: none;
-    width: 60%;
-    height: 35%;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
     padding: 40px;
-    margin: auto;
+    margin: auto 5%;
 }
 #createAlgebra>h3{
     color: #011c27;
     font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
 }
+
+#createAlgebra p{
+	text-align: left;
+}
+
+#createAlgebra p span{
+	margin-left : 5px;
+	white-space : nowrap;
+}
+
+.GADefExamples{
+	color : #35605a;
+	font-size : 18px;
+}
+
+.GADefError{
+	display : none;
+	font-size : 18px;
+	color : #bc2929;
+}
+
 .active{
     top:0px;
     left:25px !important;   
