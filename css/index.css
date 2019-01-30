@@ -568,6 +568,7 @@ form > p{
 	padding: 5px 15px;
 	margin-top: 15px;
 	color: #fff;
+	cursor: pointer;
 }
 @media(max-width: 565px){
 	#nav > h1 > span{
