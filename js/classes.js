@@ -119,15 +119,21 @@ class Project{
 		});
 
 		let coworks = await response.json();
-		console.log(coworks);
-		document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
-		var list = document.getElementById('allCoworkers');
-		coworks.project.forEach(function(element) {
-            var div = document.createElement('div');
-            div.classList.add('coworkers');
-            div.innerHTML = '<p>'+element.username+'</p>';
-            list.appendChild(div);
-        });
+		if(coworks.success){
+			console.log(coworks);
+			document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
+			var list = document.getElementById('allCoworkers');
+			coworks.project.forEach(function(element) {
+	            var div = document.createElement('div');
+	            div.classList.add('coworkers');
+	            div.innerHTML = '<p>'+element.username+'</p>';
+	            list.appendChild(div);
+	        });
+	    }
+	    else{
+	    	var mess = new Message(coworks.msg,true,null);
+	    	mess.display();
+	    }
 	}
 }
 
