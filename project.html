@@ -45,7 +45,7 @@
         var els={};
         ["#projects1","#projects2"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 
-        account.getAllProject();
+        var res = await account.getAllProject();
 
         var allProj = account.projects;
         allProj.forEach(function(element) {
