@@ -287,7 +287,7 @@ class Account{
  		for(var i = 0; i< data.projects.length; i++){
  			this._listProject[i] = new Project(data.projects[i].id_project,data.projects[i].link,data.projects[i].name,data.projects[i].role);
  		}
- 		displayAllProject();
+ 		this.displayAllProject();
       }
 
       displayAllProject(){
