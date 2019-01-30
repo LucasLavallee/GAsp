@@ -380,8 +380,11 @@ class Message{
 	display(){
 		if(this._typeContainer){
 			var msgCont = document.getElementById('error');
-			msgCont.style.animation = 'error 10s';
-         	msgCont.innerHTML = this._msg;
+			msgCont.classList.add("error");
+			//Reset css animation
+			var newone = msgCont.cloneNode(true);
+			msgCont.parentNode.replaceChild(newone, msgCont);
+         	newone.innerHTML = this._msg;
 		}else{
          this._container.innerHTML = this._msg; 
 		}
