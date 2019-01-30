@@ -90,7 +90,7 @@ class Project{
 		}
 		var data = JSON.stringify(payload);
 		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/changeCode',{
-			method: 'POST',
+			method: 'PUT',
 			body: data,
 			mode: 'cors',
 			headers: {
