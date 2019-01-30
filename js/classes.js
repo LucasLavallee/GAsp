@@ -115,6 +115,7 @@ class Account{
  	get projects(){return this._listProject;}
 
  	async isLoggedIn(){
+ 		var menuAccount = document.getElementById("menuAccount");
  		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
 			method: 'GET',
 			mode: 'cors',
@@ -128,6 +129,7 @@ class Account{
 		let data = await response.json();
  		if(data.success){
  			this._state = true;
+ 			menuAccount.style.display = "block";
  		}
  		else{
  			this._state = false;
