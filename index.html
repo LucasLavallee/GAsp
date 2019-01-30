@@ -177,7 +177,7 @@
 		//Check if there is an hash
 		async function loadProj(){
 			var linkProj = window.location.hash.substr(1);
-			if(linkProj!="undefined"){
+			if(linkProj!=""){
 				currentMode = 0;
 				var res = await project.loadProject(linkProj);
 				editor.setValue(project.src);
