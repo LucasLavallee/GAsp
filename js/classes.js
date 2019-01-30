@@ -100,6 +100,34 @@ class Project{
 	    var msg = new Message(result.msg,true,null);
 	    msg.display();
 	}
+
+	async updateShareInfos(){
+		var payload = {
+			id: this._id
+		}
+		var data = JSON.stringify(payload);
+		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/coworkers',{
+			method: 'POST',
+			body: data,
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
+		});
+
+		let coworks = await response.json();
+		document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
+		var list = document.getElementById('allCoworkers');
+		coworks.project.forEach(function(element) {
+            var div = document.createElement('div');
+            div.classList.add('coworkers');
+            div.innerHTML = '<p>'+element.username+'</p>';
+            list.appendChild(div);
+        });
+	}
 }
 
 class Account{
@@ -115,6 +143,7 @@ class Account{
  	get projects(){return this._listProject;}
 
  	async isLoggedIn(){
+ 		var menuAccount = document.getElementById("menuAccount");
  		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
 			method: 'GET',
 			mode: 'cors',
@@ -128,6 +157,7 @@ class Account{
 		let data = await response.json();
  		if(data.success){
  			this._state = true;
+ 			menuAccount.style.display = "block";
  		}
  		else{
  			this._state = false;
@@ -285,6 +315,22 @@ class Account{
  		for(var i = 0; i< data.projects.length; i++){
  			this._listProject[i] = new Project(data.projects[i].id_project,data.projects[i].link,data.projects[i].name,data.projects[i].role);
  		}
+ 		this.displayAllProject();
+      }
+
+      displayAllProject(){
+        this._listProject.forEach(function(element) {
+            var div = document.createElement('div');
+
+            div.classList.add('project');
+            div.innerHTML = '<i class="far fa-trash-alt"></i><div class ="rename">rename</div> <a href="https://lucaslavallee.github.io/GAsp/#'+element.link+'"><p> '+element.name+'</p></a> ';
+            if(element.role == 1){
+                els.projects1.appendChild(div);
+            }
+            else if(element.role == 2 || element.role == 3){
+                els.projects2.appendChild(div);
+            }
+        });
       }
 }
 
@@ -298,8 +344,9 @@ class Message{
 	display(){
 		if(this._typeContainer){
 			var msgCont = document.getElementById('error');
-         msgCont.classList.add('error');
-         msgCont.innerHTML = this._msg;
+			msgCont.classList.remove('error');
+         	msgCont.classList.add('error');
+         	msgCont.innerHTML = this._msg;
 		}else{
          this._container.innerHTML = this._msg; 
 		}
