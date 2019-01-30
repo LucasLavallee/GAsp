@@ -84,7 +84,7 @@
             <p>
                 <label> Basis </label> : <input type="text" name="basisGA" />
 				<span class="GADefError">Enter <em></em>values</span>
-				<span class="GADefExamples">ex : 'e1', 'e2', 'e3', 'ek', 'ej'</span>
+				<span class="GADefExamples">ex : '1', 'e12', 'e13', 'e23'</span>
             </p>
             <p>
                 <label> Metric </label> : <input type="text" name="metricGA" />
@@ -93,11 +93,11 @@
             </p>
             <p>
                 <label>(optional) Definition of new vectors from basis</label> : <textarea name="vectorsGA"></textarea>
-				<span class="GADefExamples">ex : e0 = 0.5*(ej + ek); ei = ek - ej</span>
+				<span class="GADefExamples">ex : e0 = 0.5*(e12 + e23); ei = e12 - e23</span>
             </p>
             <p>
                 <label>(optional) Definition from a 3D Euclidean point (x,y,z)</label> : <input type="text" name="pointGA" />
-				<span class="GADefExamples">ex : e0 + x*e1 + y*e2 + z*e2 + 0.5*(x*x + y*y + z*z)*ei</span>
+				<span class="GADefExamples">ex : e0 + x*e12 + y*e13 + z*e23 + 0.5*(x*x + y*y + z*z)*ei</span>
 			</p>
         </form>
 		<div class="validate">
