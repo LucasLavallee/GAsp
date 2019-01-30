@@ -61,7 +61,7 @@
 					</div>
 					<div id="addCoword" class="shareParts">
 						<p>Add a new coworker</p>
-						<input type="text" placeholder="Coworker's Username">
+						<input type="text" placeholder="Coworker's Username" id="inpNewCowork">
 						<div id="submitCoword">Add</div>
 					</div>
 					<div id="listCowork" class="shareParts">
@@ -173,7 +173,7 @@
 		var test;
 		// Elements.
    		var els={};
-    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black","#saveButton","#name_project","#save","#menuAccount","#connectedButton","#logout","#shareIcon","#sharePanel","#newProject_send"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+    	["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black","#saveButton","#name_project","#save","#menuAccount","#connectedButton","#logout","#shareIcon","#sharePanel","#newProject_send","#submitCoword","#inpNewCowork"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
    		var elsClass={};
     	[".selectMode",".optionSetting"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 		
@@ -657,6 +657,9 @@
 	    }
 	    els.newProject_send.onclick = () =>{
 	    	project.saveProject(document.getElementById("nameProjectUp").value, editor.getValue());
+	    }
+	    els.submitCoword.onclick = () =>{
+	    	project.addCoworkers(els.inpNewCowork.value, project.id);
 	    }
 
 

@@ -18,6 +18,7 @@ class Project{
 	get name(){return this._name;}
 	get link(){return this._link;}
 	get role(){return this._role;}
+	get id(){return this._id};
 
 
 	async saveProject(name, src){
@@ -177,6 +178,7 @@ class Account{
 
  	async isLoggedIn(){
  		var menuAccount = document.getElementById("menuAccount");
+ 		var share = document.getElementById("sharePanel");
  		let response = await fetch('https://serene-forest-42732.herokuapp.com/isLog',{
 			method: 'GET',
 			mode: 'cors',
@@ -191,9 +193,12 @@ class Account{
  		if(data.success){
  			this._state = true;
  			menuAccount.style.display = "block";
+ 			response.style.display = "block";
  		}
  		else{
  			this._state = false;
+ 			menuAccount.style.display = "none";
+ 			response.style.display = "none";
  		}	 
  	}
 

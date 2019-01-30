@@ -537,6 +537,7 @@ form > p{
 	right: -50%;
 	background-color: #fff;
 	text-align: center;
+	display: none;
 }
 #shareIcon{
 	position: absolute;
