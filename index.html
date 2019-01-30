@@ -201,6 +201,18 @@
 				loadProjInfos("author",project.name);
 			}
 		}
+		
+		//manage the creation of a new algebra, if there is one in the local storage
+		function loadAlgebra(){
+			var userGA = localStorage.getItem("createGA");
+			if(userGA!=null){
+				currentMode = 0;
+				editor.setValue(userGA);
+				loadProjInfos("author",project.name)
+				//remove the string form localStorage
+				localStorage.removeItem("createGA");
+			}
+		}
 
 
 		// build an array (exampleCategories) with the names of the categories, and their occurrences
@@ -671,20 +683,9 @@
 
 	    refreshOption();
 	    loadProj();
+		loadAlgebra();
 	    displayInterface();
 	    preloadIframe();
-		
-		
-		//manage the creation of a new algebra, if there is one in the local storage
-		var userGA = localStorage.getItem("createGA");
-		if(userGA!=null){
-			editor.setValue(userGA);
-			loadProjInfos("author",project.name)
-			//remove the string form localStorage
-			localStorage.removeItem("createGA");
-			updateViewer();
-			updateGAInfo();
-		}
 		
 		
 
