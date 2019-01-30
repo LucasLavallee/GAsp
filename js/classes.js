@@ -295,7 +295,7 @@ class Account{
             var div = document.createElement('div');
 
             div.classList.add('project');
-            div.innerHTML = '<i class="far fa-trash-alt"></i><div class ="rename">rename</div> <a href="https://lucaslavallee.github.io/GAsp/'+element.link+'"><p> '+element.name+'</p></a> ';
+            div.innerHTML = '<i class="far fa-trash-alt"></i><div class ="rename">rename</div> <a href="https://lucaslavallee.github.io/GAsp/#'+element.link+'"><p> '+element.name+'</p></a> ';
             if(element.role == 1){
                 els.projects1.appendChild(div);
             }
