@@ -11,14 +11,14 @@ class GA{
 	consoleString(){
 	// it exists default basis names which come with some specific dimensions
 	var res =
-		"// " + this.name
-		+ "Algebra(metric:[" + this.metric + "], basis: [" + this.basis + "], ()=>{\n"
+		"// " + this.name +"\n"
+		+ "Algebra({metric:[" + this.metric + "], basis: [" + this.basis + "]}, ()=>{\n"
 		+ "//define new vectors\n"
 		+ this.vectorsDef + ";\n"
 		+ "	var point = (x,y,z)=>" + this.pointDef + ";\n"
 		+ "	//To create a point, do point(x,y,z)\n"
 		+ "\n	//Write your code here !"
-		+ "});"
+		+ "\n});"
 	;
 	return res;
 	}
