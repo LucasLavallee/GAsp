@@ -5,6 +5,7 @@ class Project{
 		this._srcCode = "";
 		this._name = name;
 		this._role = role;
+		this._author = "";
 	}
 
 	set setSrcCode(src){
@@ -18,7 +19,8 @@ class Project{
 	get name(){return this._name;}
 	get link(){return this._link;}
 	get role(){return this._role;}
-	get id(){return this._id};
+	get id(){return this._id;}
+	get author(){return this._author;}
 
 
 	async saveProject(name, src){
@@ -74,6 +76,7 @@ class Project{
 			this._link = result.projects[0].link;
 			this._srcCode = result.projects[0].srcCode;
 			this._name = result.projects[0].name;
+			this._author = result.projects[0].username;
  		}
  		else{
  		}	
