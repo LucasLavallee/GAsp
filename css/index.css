@@ -557,7 +557,17 @@ form > p{
 	border-bottom: 1px solid #dcdcdc;
 	padding: 5px 0;
 }
-
+.shareTitle{
+	text-decoration: underline;
+	padding-bottom: 15px;
+}
+#submitCoword{
+	display: inline-block;
+	background: #011c27;
+	width: auto;
+	padding: 5px 15px;
+	margin-top: 15px;
+}
 @media(max-width: 565px){
 	#nav > h1 > span{
 		display : none;
