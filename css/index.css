@@ -530,6 +530,33 @@ form > p{
 	justify-content : center;
 }
 
+#sharePanel{
+	position: absolute;
+	height: 100%;
+	width: 50%;
+	right: -50%;
+	background-color: #fff;
+	text-align: center;
+}
+#shareIcon{
+	position: absolute;
+	left: -40px;
+	top:20px;
+}
+#sharePanel.active{
+	right: 0px;
+}
+#shareInfos{
+	padding: 15px;
+}
+.shareParts>*{
+	width: 100%;
+}
+.shareParts{
+	border-bottom: 1px solid #dcdcdc;
+	padding: 5px 0;
+}
+
 @media(max-width: 565px){
 	#nav > h1 > span{
 		display : none;

@@ -100,6 +100,35 @@ class Project{
 	    var msg = new Message(result.msg,true,null);
 	    msg.display();
 	}
+
+	async updateShareInfos(){
+		var payload = {
+			id: this._id
+		}
+		var data = JSON.stringify(payload);
+		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/coworkers',{
+			method: 'GET',
+			body: data,
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
+		});
+
+		let coworks = await response.json();
+		document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
+		var list = document.getElementById('allCoworkers');
+		coworks.project.forEach(function(element) {
+            var div = document.createElement('div');
+            div.classList.add('coworkers');
+            div.innerHTML = '<p>'+element.username+'</p>';
+            list.appendChild(div);
+        });
+
+	}
 }
 
 class Account{
@@ -316,8 +345,9 @@ class Message{
 	display(){
 		if(this._typeContainer){
 			var msgCont = document.getElementById('error');
-         msgCont.classList.add('error');
-         msgCont.innerHTML = this._msg;
+			msgCont.classList.remove('error');
+         	msgCont.classList.add('error');
+         	msgCont.innerHTML = this._msg;
 		}else{
          this._container.innerHTML = this._msg; 
 		}
