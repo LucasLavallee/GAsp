@@ -73,11 +73,11 @@ class Project{
 
 		let result = await response.json();
  		if(result.success){
- 			result.projects[i].id_project
-	 		this._id = result.projects[i].id;
-			this._link = result.projects[i].link;
-			this._srcCode = result.projects[i].srcCode;
-			this._name = result.projects[i].name;
+ 			result.projects[0].id_project
+	 		this._id = result.projects[0].id;
+			this._link = result.projects[0].link;
+			this._srcCode = result.projects[0].srcCode;
+			this._name = result.projects[0].name;
  		}
  		else{
  		}	
