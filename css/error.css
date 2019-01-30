@@ -1,0 +1,15 @@
+#error{
+	position: fixed;
+	top: -50px;
+	left: 50%;
+	transform: translate3d(-50%,0,0);
+	transition: all ease .5s;
+	opacity: 0;
+	z-index: 3;
+	background: #fff;
+	padding: 15px;
+}
+#error.error{
+	top: 10px;
+	opacity: 1;
+}

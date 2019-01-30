@@ -4,6 +4,7 @@
 	<title>GAsp_v3</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	<link rel="stylesheet" type="text/css" href="./css/error.css">
 	<script type="text/javascript" src="./js/lib/ganja.js/ganja.js"></script>
 	<script type="text/javascript" src="./js/classes.js"></script>	
 	<script type="text/javascript" src="./js/codeInstance.js"></script>
@@ -601,12 +602,16 @@
 
 	    //Manage the save if user is logged in or not
 	    els.saveButton.onclick = () =>{
-	    	els.pop_up_black.classList.add("active");
 	    	if(account.state){
-	    		project.link != "" ? project.updateProject(editor.getValue()) : 
+	    		if(project.link != "")
+	    			project.updateProject(editor.getValue());
+	    		else{
+	    			els.pop_up_black.classList.add("active");
 	    			els.name_project.classList.add("active");
+	    		}
 	    	}
 	    	else{
+	    		els.pop_up_black.classList.add("active");
 	    		els.save.classList.add("active");
 	    	}
 	    }
