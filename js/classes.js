@@ -86,7 +86,7 @@ class Project{
 	async updateProject(src){
 		var payload = {
 			src: src,
-			link: this._link;
+			link: this._link
 		}
 		var data = JSON.stringify(payload);
 		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/changeCode',{
