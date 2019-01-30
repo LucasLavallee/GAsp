@@ -186,8 +186,6 @@
 		}
 
 
-
-
 		// build an array (exampleCategories) with the names of the categories, and their occurrences
 		// example : ["Complex", 2, "Differentiation", 2,... ]
 		var exampleCategories=[];
@@ -605,7 +603,8 @@
 	    els.saveButton.onclick = () =>{
 	    	els.pop_up_black.classList.add("active");
 	    	if(account.state){
-	    		els.name_project.classList.add("active");
+	    		project.link != "" ? project.updateProject(editor.getValue()) : 
+	    			els.name_project.classList.add("active");
 	    	}
 	    	else{
 	    		els.save.classList.add("active");
