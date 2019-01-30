@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
-    <script type="text/javascript" src="./js/lib/ganja.js"></script>
+    <script type="text/javascript" src="./js/classes.js"></script>  
 </head>
 
 <body>
@@ -20,32 +20,45 @@
     <div id ="projectList">
         <h4> Hello Username, here are your projects </h4>
         <div id = "projectContainer">
-    <div id = "projects1">
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-    </div>
-    <div id = "projects2">
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-        <div id = "project"> <i class="far fa-trash-alt"></i> <div id ="rename">rename</div> <p> project 1</p> </div>
-    </div>
-</div>
+            <div id = "projects1">
+                
+            </div>
+            <div id = "projects2">
+                
+            </div>
+        </div>
     </div>
 
     <div id="iconOpen" class="circleBase type1">
-            <img  src="media/img/open_file_icon.png" alt="new file">
-            <h4>Open a project</h4>
-        </div>
+        <img  src="media/img/open_file_icon.png" alt="new file">
+        <h4>Open a project</h4>
+    </div>
         
 
     <script>
+        var els={};
+        ["#projects1","#projects2"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 
-         </script>
+        var account = new Account();
+        account.isLoggedIn();
+        if(!account.state){
+            window.location.replace("https://lucaslavallee.github.io/GAsp/main.html");
+        }
+        account.getAllProject();
+
+        var allProj = account.projects;
+        allProj.forEach(function(element) {
+            var div = document.createElement('div');
+            div.classList.add('project');
+            div.innerHTML = '<i class="far fa-trash-alt"></i><div class ="rename">rename</div> <a href="https://lucaslavallee.github.io/GAsp/'+element.link+'"><p> '+element.name+'</p></a> ';
+            if(element.role == 1){
+                els.projects1.appendChild(div);
+            }
+            else if(element.role == 2 || element.role == 3){
+                els.projects2.appendChild(div);
+            }
+        });
+    </script>
 </body>
 
 </html>

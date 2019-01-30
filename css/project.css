@@ -88,7 +88,7 @@ body{
     white-space: nowrap;
 }
 
-#project{
+.project{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -98,10 +98,10 @@ body{
     display: flex;
     flex-direction: row;
 }
-#project>*{
+.project>*{
     margin: 10px;
 }
-#rename{
+.rename{
     border: 2px solid #011c27;
     background: #011c27;
     border-radius: 5px;

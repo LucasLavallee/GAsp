@@ -1,9 +1,10 @@
 class Project{
-	constructor(id,link,name){
+	constructor(id,link,name,role){
 		this._id = id;
 		this._link = link
 		this._srcCode = "";
 		this._name = name;
+		this._role = role;
 	}
 
 	set setSrcCode(src){
@@ -13,16 +14,10 @@ class Project{
 		this._name = name;
 	}
 
-	get src(){
-		return this._srcCode;
-	}
-
-	get name(){
-		return this._name;
-	}
-	get link(){
-		return this._link;
-	}
+	get src(){return this._srcCode;}
+	get name(){return this._name;}
+	get link(){return this._link;}
+	get role(){return this._role;}
 
 
 	async saveProject(name, src){
@@ -117,6 +112,7 @@ class Account{
  	get state(){ return this._state;}
  	get mail(){ return this._mail;}
  	get username(){ return this._username;}
+ 	get projects(){return this._listProject;}
 
  	async isLoggedIn(){
  		var menuAccount = document.getElementById("menuAccount");
@@ -289,7 +285,7 @@ class Account{
 		});
 		let data = await response.json();
  		for(var i = 0; i< data.projects.length; i++){
- 			this._listProject[i] = new Project(data.projects[i].id_project,data.projects[i].link,data.projects[i].name);
+ 			this._listProject[i] = new Project(data.projects[i].id_project,data.projects[i].link,data.projects[i].name,data.projects[i].role);
  		}
       }
 }
