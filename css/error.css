@@ -3,12 +3,12 @@
   	top: -50px;
 	opacity: 0;
   }
-  10% {
+  5% {
 	top: 10px;
 	opacity: 1;
   }
 
-  90% {
+  95% {
 	top: 10px;
 	opacity: 1;
   }
