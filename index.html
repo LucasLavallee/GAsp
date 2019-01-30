@@ -170,7 +170,7 @@
 	<script type="text/javascript" id="ganjaCode"></script>
 	<script>
 
-		var currentMode = 1; // 0 = project Mode | 1 = Example Mode 
+		var currentMode = 0; // 0 = project Mode | 1 = Example Mode 
 		var account = new Account();
 		account.isLoggedIn();
 
@@ -665,12 +665,26 @@
 			updateViewer();
 			updateGAInfo();
 		}
-		
 
 	    refreshOption();
 	    loadProj();
 	    displayInterface();
 	    preloadIframe();
+		
+		
+		//manage the creation of a new algebra, if there is one in the local storage
+		var userGA = localStorage.getItem("createGA");
+		if(userGA!=null){
+			editor.setValue(userGA);
+			loadProjInfos("author",project.name)
+			//remove the string form localStorage
+			localStorage.removeItem("createGA");
+			updateViewer();
+			updateGAInfo();
+		}
+		
+		
+
 		
 	</script>
 </body>

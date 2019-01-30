@@ -84,6 +84,7 @@
             <p>
                 <label> Basis </label> : <input type="text" name="basisGA" />
 				<span class="GADefError">Enter <em></em>values</span>
+				<span class="GADefExamples">ex : 'e1', 'e2', 'e3', 'e+', 'e-'</span>
             </p>
             <p>
                 <label> Metric </label> : <input type="text" name="metricGA" />
@@ -223,8 +224,8 @@
 			var dimensions = els.formCreateGA.dimensionGA.value;
 			var basis = els.formCreateGA.basisGA.value;
 			var metric = els.formCreateGA.metricGA.value;
-			var vectorsDef = els.formCreateGA.vectorsGA;
-			var pointDef = els.formCreateGA.pointGA;
+			var vectorsDef = els.formCreateGA.vectorsGA.value;
+			var pointDef = els.formCreateGA.pointGA.value;
 			// create the GA object
 			var userGA = new GA(name, dimensions, basis, metric, vectorsDef, pointDef);
 			
