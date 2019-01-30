@@ -1,3 +1,24 @@
+@keyframes error {
+  0%{
+  	top: -50px;
+	opacity: 0;
+  }
+  10% {
+	top: 10px;
+	opacity: 1;
+  }
+
+  90% {
+	top: 10px;
+	opacity: 1;
+  }
+
+  100%{
+	top: -50px;
+	opacity: 0;
+  }
+}
+
 #error{
 	position: fixed;
 	top: -50px;
@@ -10,6 +31,6 @@
 	padding: 15px;
 }
 #error.error{
-	top: 10px;
-	opacity: 1;
+	animation-name: error;
+	animation-duration: 10s;
 }
