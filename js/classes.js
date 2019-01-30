@@ -123,7 +123,7 @@ class Project{
 		var list = document.getElementById('allCoworkers');
 		if(coworks.success){
 			list.innerHTML = "";
-			coworks.project.forEach(function(element) {
+			coworks.projects.forEach(function(element) {
 	            var div = document.createElement('div');
 	            div.classList.add('coworkers');
 	            div.innerHTML = '<p>'+element.username+'</p>';
