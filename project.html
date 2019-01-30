@@ -36,14 +36,15 @@
         
 
     <script>
+        var account = new Account();
+        account.isLoggedIn();
+        /*if(!account.state){
+            window.location.replace("https://lucaslavallee.github.io/GAsp/main.html");
+        }
         var els={};
         ["#projects1","#projects2"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 
-        var account = new Account();
-        account.isLoggedIn();
-        if(!account.state){
-            window.location.replace("https://lucaslavallee.github.io/GAsp/main.html");
-        }
+        
         account.getAllProject();
 
         var allProj = account.projects;
@@ -57,7 +58,7 @@
             else if(element.role == 2 || element.role == 3){
                 els.projects2.appendChild(div);
             }
-        });
+        });*/
     </script>
 </body>
 
