@@ -206,6 +206,8 @@
 				var res = await project.loadProject(linkProj);
 				editor.setValue(project.src);
 				loadProjInfos("author",project.name);
+				if(account.state)
+ 					els.sharePanel.style.display = "block";
 			}
 		}
 		

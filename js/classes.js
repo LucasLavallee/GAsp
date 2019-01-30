@@ -193,12 +193,10 @@ class Account{
  		if(data.success){
  			this._state = true;
  			menuAccount.style.display = "block";
- 			share.style.display = "block";
  		}
  		else{
  			this._state = false;
  			menuAccount.style.display = "none";
- 			share.style.display = "none";
  		}	 
  	}
 
