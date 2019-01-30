@@ -107,7 +107,7 @@ class Project{
 		}
 		var data = JSON.stringify(payload);
 		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/coworkers',{
-			method: 'GET',
+			method: 'POST',
 			body: data,
 			mode: 'cors',
 			headers: {
@@ -127,7 +127,6 @@ class Project{
             div.innerHTML = '<p>'+element.username+'</p>';
             list.appendChild(div);
         });
-
 	}
 }
 
