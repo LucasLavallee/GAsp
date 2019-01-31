@@ -165,6 +165,31 @@ class Project{
  		var mess = new Message(result.msg,true,null);
  		mess.display();	 
 	}
+
+	async removeCoworkers(username, idProj){
+		var payload = {
+			username: username,
+			id_project: idProj
+		};
+		var data = JSON.stringify(payload);
+		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/rmCoworkers',{
+			method: 'POST',
+			body: data,
+			mode: 'cors',
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
+			},
+			credentials: 'include'
+		});
+		let result = await response.json();
+ 		if(result.success){
+ 			this.updateShareInfos();
+ 		}
+ 		var mess = new Message(result.msg,true,null);
+ 		mess.display();
+	}
 }
 
 class Account{
