@@ -94,7 +94,6 @@ body{
 }
 .choose{
     width: 400px;
-    height: 300px;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
@@ -116,7 +115,6 @@ body{
 }
 .infoGA{
     width: 250px;
-    height: 300px;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
@@ -128,12 +126,12 @@ body{
     font-family: 'PT Sans Narrow', sans-serif;
 }
 
-.choose > p{
-	cursor : pointer;
-}
-
-.choose>p:hover, .infoGA>p{
+.choose>p>a:hover, .infoGA>p{
 	color : #47827a;
+}
+.choose>p>a{
+	color : inherit;
+	text-decoration : inherit;
 }
 
 #signIn>h4{
