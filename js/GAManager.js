@@ -35,8 +35,8 @@ class GA{
 		}
 		
 		res+= "\n	//Write your code here !\n\n\n\n";
-		res+= "  document.body.appendChild(this.graph([\n\n],{grid:true}));";
-		res+= "});";
+		res+= "  document.body.appendChild(this.graph([\n\n	],{grid:true}));";
+		res+= "\n	});";
 		return res;
 	}
 }
