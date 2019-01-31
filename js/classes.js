@@ -369,11 +369,13 @@ class Account{
             var div = document.createElement('div');
 
             div.classList.add('project');
-            div.innerHTML = '<i class="far fa-trash-alt"></i><div class ="rename">rename</div> <a href="https://lucaslavallee.github.io/GAsp/#'+element.link+'"><p> '+element.name+'</p></a> ';
+            
             if(element.role == 1){
+            	div.innerHTML = '<i class="far fa-trash-alt"></i><div class ="rename">rename</div> <a href="https://lucaslavallee.github.io/GAsp/#'+element.link+'"><p> '+element.name+'</p></a> ';
                 els.projects1.appendChild(div);
             }
             else if(element.role == 2 || element.role == 3){
+            	div.innerHTML = '<a href="https://lucaslavallee.github.io/GAsp/#'+element.link+'"><p> '+element.name+'</p></a> ';
                 els.projects2.appendChild(div);
             }
         });
