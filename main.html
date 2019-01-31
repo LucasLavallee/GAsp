@@ -22,6 +22,7 @@
 
     <div id="signIn" class="sign ">
         <h4> Sign in </h4>
+            <div id="errorForm"></div>
         <form id="form" method="post" action="traitemebt.php">
             <p>
                 <label> Mail </label> : <input type="text" name="username" id="mailIn"/>
@@ -31,10 +32,8 @@
             </p>
         </form>
 
-            <div id="errorForm"></div>
         <div class="validate">
-                
-                <a href ="project.html" > <i id = "check " class="fas fa-check-square"> </i> </a>
+                <a href ="project.html" > <i id="check" class="fas fa-check-square"> </i> </a>
         </div>
     </div>
     
@@ -162,7 +161,7 @@
         }
 		
 		var els={};
-		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA","#check","#usenameSignIn","#pwdSignIn"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA","#check"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 		changeActive = (element) => {
             element.classList.toggle("active");
         }
