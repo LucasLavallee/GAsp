@@ -217,7 +217,7 @@ class Account{
 		let data = await response.json();
  		if(data.success) {
  			this.changeData("","",false);
- 			document.location.replace('https://lucaslavallee.github.io/GAsp/');
+ 			document.location.replace('https://lucaslavallee.github.io/GAsp/main.html');
  		} 
  	}
 
@@ -332,7 +332,8 @@ class Account{
  						menuAccount.style.display = "block";
  				}
  				else{
-                		window.location.replace("../project.html");
+ 						console.log(dataUser);
+                		//window.location.replace("../project.html");
  				}
 
               	//
