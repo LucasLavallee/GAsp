@@ -332,8 +332,7 @@ class Account{
  						menuAccount.style.display = "block";
  				}
  				else{
- 						console.log(dataUser);
-                		//window.location.replace("../project.html");
+                		window.location.replace("../project.html");
  				}
 
               	//
