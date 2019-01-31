@@ -12,7 +12,7 @@ class GA{
 		var res =
 			"// " + this.name +"\n"
 			+ "Algebra({";
-		if(typeof(this.dimensions)!="number")
+		if(this.dimensions.length!=1)
 			res+= this.dimensions + ",";
 		else if (typeof(this.metric)!="undefined")
 			res+= "metric:[" + this.metric + "],";
@@ -30,11 +30,12 @@ class GA{
 		if(typeof(this.pointDef)!="undefined"){
 			res+=
 				"	// Function : return the point from a 3D Euclidean point\n"
-				+"	var point = (x,y,z)=> return " + this.pointDef + ";\n"
+				+"	var point = (x,y,z)=> " + this.pointDef + ";\n"
 				+ "	// To create a point, do point(x,y,z)\n"
 		}
 		
 		res+= "\n	//Write your code here !\n\n\n\n";
+		res+= "  document.body.appendChild(this.graph([\n\n],{grid:true}));";
 		res+= "});";
 		return res;
 	}
