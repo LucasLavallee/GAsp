@@ -62,12 +62,19 @@ nav{
 	right: -200px;
 	top: 70px;
 	background-color: #fff;
-	padding: 15px;
+	padding: 15px 25px;
 	color: #011c27;
 	transition: all ease 0.5s;
 }
 #connectedButton.active{
 	right: 0px;
+}
+.buttons_con{
+	cursor: pointer;
+}
+.buttons_con a{
+	color: #000;
+	text-decoration: none;
 }
 #menuAccount{
 	margin-left: 20px;
@@ -537,6 +544,7 @@ form > p{
 	right: -50%;
 	background-color: #fff;
 	text-align: center;
+	display: none;
 }
 #shareIcon{
 	position: absolute;
@@ -556,7 +564,19 @@ form > p{
 	border-bottom: 1px solid #dcdcdc;
 	padding: 5px 0;
 }
-
+.shareTitle{
+	text-decoration: underline;
+	padding-bottom: 15px;
+}
+#submitCoword{
+	display: inline-block;
+	background: #011c27;
+	width: auto;
+	padding: 5px 15px;
+	margin-top: 15px;
+	color: #fff;
+	cursor: pointer;
+}
 @media(max-width: 565px){
 	#nav > h1 > span{
 		display : none;

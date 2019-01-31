@@ -24,7 +24,6 @@
 	top: -50px;
 	left: 50%;
 	transform: translate3d(-50%,0,0);
-	transition: all ease .5s;
 	opacity: 0;
 	z-index: 3;
 	background: #fff;

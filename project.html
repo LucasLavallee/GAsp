@@ -12,7 +12,10 @@
 </head>
 
 <body>
+
+    <p id="logoutButton">Logout</p>
     <i class="fas fa-user fa-lg" id="menuAccount"></i>
+    </div>
 	<div id="goBackStart"></div>
     <div id="header">
         <h4 id="title"> GAsp</h4>
@@ -43,11 +46,13 @@
             window.location.replace("https://lucaslavallee.github.io/GAsp/main.html");
         }*/
         var els={};
-        ["#projects1","#projects2"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+        ["#projects1","#projects2","#logoutButton"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 
         account.getAllProject();
 
-        
+        els.logoutButton.onclick = () => {
+            account.logout();
+        }
     </script>
 </body>
 
