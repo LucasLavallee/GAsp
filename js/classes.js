@@ -325,6 +325,7 @@ class Account{
            if(dataUser.success){
               	var msg = new Message(dataUser.msg,true,null);
               	msg.display();
+              	this.changeData(dataUser.user.email,dataUser.user.username,true);
               	if(!bool){
               			popUp.classList.toggle("active");
               			save.classList.toggle("active");
@@ -333,7 +334,6 @@ class Account{
  				else{
                 		window.location.replace("../project.html");
  				}
-              	this.changeData(dataUser.user.email,dataUser.user.username,true);
 
               	//
            	}else{
