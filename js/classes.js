@@ -292,13 +292,15 @@ class Account{
 	      	this._username = username;
 	      	this._state = state;
 	  }
-    async signIn(){
- 		var menuAccount = document.getElementById("menuAccount");
-         var mail = document.getElementById('mailIn');
-         var pwd = document.getElementById('passwordIn');
-			var popUp = document.getElementById("pop_up_black");
-			var errorForm = document.getElementById("errorForm");
-		var save = document.getElementById("save");
+    async signIn(bool){
+        var mail = document.getElementById('mailIn');
+        var pwd = document.getElementById('passwordIn');
+		var errorForm = document.getElementById("errorForm");
+		if(!bool){
+				var save = document.getElementById("save");
+				var popUp = document.getElementById("pop_up_black");
+ 				var menuAccount = document.getElementById("menuAccount");
+		}
             
          if(mail.value!="" && pwd.value!=""){
             var payload = {
@@ -323,9 +325,14 @@ class Account{
            if(dataUser.success){
               	var msg = new Message(dataUser.msg,true,null);
               	msg.display();
-              	popUp.classList.toggle("active");
-              	save.classList.toggle("active");
- 				menuAccount.style.display = "block";
+              	if(!bool){
+              			popUp.classList.toggle("active");
+              			save.classList.toggle("active");
+ 						menuAccount.style.display = "block";
+ 				}
+ 				else{
+                		window.location.replace("../project.html");
+ 				}
               	this.changeData(dataUser.user.email,dataUser.user.username,true);
 
               	//

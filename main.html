@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    <div id="error"></div>
 	<div id="goBackStart"></div>
     <div id="header">
         <h4 id="title"> GAsp</h4>
@@ -23,12 +24,14 @@
         <h4> Sign in </h4>
         <form id="form" method="post" action="traitemebt.php">
             <p>
-                <label> Username </label> : <input type="text" name="username" />
+                <label> Mail </label> : <input type="text" name="username" id="mailIn"/>
             </p>
             <p>
-                <label> Password </label> : <input type="text" name="password" />
+                <label> Password </label> : <input type="text" name="password" id="passwordIn"/>
             </p>
         </form>
+
+            <div id="errorForm"></div>
         <div class="validate">
                 
                 <a href ="project.html" > <i id = "check " class="fas fa-check-square"> </i> </a>
@@ -127,6 +130,10 @@
 
     </div>
 
+    <div id="save"></div>
+    <div id="menuAccount"></div>
+    <div id="pop_up_black"></div>
+
     <script>
         var account = new Account();
         account.isLoggedIn();
@@ -155,7 +162,7 @@
         }
 		
 		var els={};
-		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA","#check","#usenameSignIn","#pwdSignIn"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 		changeActive = (element) => {
             element.classList.toggle("active");
         }
@@ -245,6 +252,10 @@
 				console.log("Sorry! No Web Storage support.");
 			}
 		}
+
+        els.check.onclick = () =>{
+                account.signIn(true);
+        }
 
         /*document.getElementById("iconExample").addEventListener("click",DisplayExample)
         function DisplayExample(){
