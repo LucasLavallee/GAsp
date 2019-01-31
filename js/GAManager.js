@@ -19,7 +19,7 @@ class GA{
 		if(typeof(this.basis)!="undefined")
 			res+= "basis: [" + this.basis + "],";
 		
-		res+=res.sub(0, res.length-1);
+		res=res.substr(0, res.length-1);
 		res+= "}, ()=>{\n";
 		
 		if(typeof(this.vectorsDef)!="undefined"){
@@ -35,7 +35,7 @@ class GA{
 		}
 		
 		res+= "\n	//Write your code here !\n\n\n\n";
-		
+		res+= "});";
 		return res;
 	}
 }

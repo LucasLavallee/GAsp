@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
-    <script type="text/javascript" src="./js/lib/ganja.js"></script>
 	<script type="text/javascript" src="./js/GAManager.js"></script>	
 </head>
 
@@ -134,15 +133,12 @@
             element.classList.toggle("activeThis");
         }
 		
-		// construct the list of existing GA
+		// construct the list of existing GA in the DOM
 		var GAs = new ExistingGA();
 		var selectGA = document.querySelector(".choose>.validate");
 		for(var i=0; i<GAs.GAArray.length; i++){
 			var newNode = document.createElement("p");
-			var linkProject = document.createElement("a");
-			linkProject.setAttribute("href", "index.html");
-			linkProject.innerHTML = GAs.GAArray[i].name;
-			newNode.appendChild(linkProject);
+			newNode.innerHTML = GAs.GAArray[i].name;
 			document.querySelector(".choose").insertBefore(newNode,selectGA);
 		}
 		
@@ -237,7 +233,6 @@
 			
 			//localStorage
 			if (typeof(Storage) !== "undefined") {
-				console.log(userGA.consoleString());
 				localStorage.setItem("createGA", userGA.consoleString());
 			} else {
 				console.log("Sorry! No Web Storage support.");
@@ -245,8 +240,26 @@
 		}
 		
 		// select existing GA
-		
-		
+		var GAToChoose = document.querySelectorAll(".choose p");
+		console.log(GAToChoose);
+		for(var i=0; i<GAToChoose.length; i++){
+			GAToChoose[i].onclick = (function(i){
+				return function(){
+					console.log("Meh, i :" + i);
+					sendGA(GAs.GAArray[i]);
+				}
+			})(i);
+		}
+		function sendGA(aGA){
+			//localStorage
+			if (typeof(Storage) !== "undefined") {
+				console.log(aGA.consoleString());
+				localStorage.setItem("createGA", aGA.consoleString());
+				window.location.replace("index.html");
+			} else {
+				console.log("Sorry! No Web Storage support.");
+			}
+		}
 
         /*document.getElementById("iconExample").addEventListener("click",DisplayExample)
         function DisplayExample(){

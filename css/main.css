@@ -126,12 +126,13 @@ body{
     font-family: 'PT Sans Narrow', sans-serif;
 }
 
-.choose>p>a:hover, .infoGA>p{
+.choose>p:hover, .infoGA>p{
 	color : #47827a;
 }
-.choose>p>a{
+.choose>p{
 	color : inherit;
 	text-decoration : inherit;
+	cursor : pointer;
 }
 
 #signIn>h4{
