@@ -12,26 +12,25 @@ class GA{
 		var res =
 			"// " + this.name +"\n"
 			+ "Algebra({";
-		if(this.dimensions.length!=1)
+		if(this.dimensions.length>2)
 			res+= this.dimensions + ",";
-		else if (typeof(this.metric)!="undefined")
+		else if (this.metric!="")
 			res+= "metric:[" + this.metric + "],";
-		if(typeof(this.basis)!="undefined")
+		if(this.basis!="")
 			res+= "basis: [" + this.basis + "],";
 		
 		res=res.substr(0, res.length-1);
 		res+= "}, ()=>{\n";
 		
-		if(typeof(this.vectorsDef)!="undefined"){
+		if(this.vectorsDef!=""){
 			res+=
 				"	// Definition of new vectors\n"
 				+ "	" + this.vectorsDef + ";\n";
 		}
-		if(typeof(this.pointDef)!="undefined"){
+		if(this.pointDef!=""){
 			res+=
 				"	// Function : return the point from a 3D Euclidean point\n"
-				+"	var point = (x,y,z)=> " + this.pointDef + ";\n"
-				+ "	// To create a point, do point(x,y,z)\n"
+				+"	var point = (x,y,z)=> " + this.pointDef + ";\n";
 		}
 		
 		res+= "\n	//Write your code here !\n\n\n\n";

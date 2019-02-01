@@ -254,7 +254,6 @@
 		for(var i=0; i<GAToChoose.length; i++){
 			GAToChoose[i].onclick = (function(i){
 				return function(){
-					console.log("Meh, i :" + i);
 					sendGA(GAs.GAArray[i]);
 				}
 			})(i);
