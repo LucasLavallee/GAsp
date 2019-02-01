@@ -36,8 +36,63 @@ class GA{
 		
 		res+= "\n	//Write your code here !\n\n\n\n";
 		res+= "  document.body.appendChild(this.graph([\n\n	],{grid:true}));";
-		res+= "\n	});";
+		res+= "\n});";
 		return res;
+	}
+	
+	// retrieve the GA info from currentCode
+	// return Algebra.describe() (object)
+	static retrieveGAInfo(currentCode){
+		if(currentCode.length!=0){
+			/* delete comments */
+			var args=currentCode.replace(/\/\*[\s\S]*?\*\//g, " ");
+			// delete comments //
+			args=args.replace(/\/\/.*/g, " ");
+			// search Algebra
+			var index = args.indexOf("Algebra");
+			//substring since Algebra
+			args = args.substring(index+8);
+			// slice between ( and (
+			var argsArray = args.split("(", 1);
+			// slice between ( and )
+			argsArray = argsArray[0].split(")", 1);
+			// if ends with , delete it
+			if(argsArray[0].endsWith(","))
+				args=argsArray[0].substring(0, argsArray[0].length-1);
+			else args=argsArray[0];
+			// retrieve the description object
+			var description = new Function('return Algebra(' + args + ').describe();');
+			return description();
+		}
+	}
+	
+	// take an array, and construct a <tr> element with it
+	// return the <tr> element
+	static constructLine(myArray){
+		var myLine = document.createElement("tr");
+		// if myArray contains arrays (not strings or numbers)
+		if(
+			(typeof myArray[0] != "string")
+			&& (typeof myArray[0] != "number")
+		){
+			for(var i=0; i<myArray.length; i++){
+				for(var j=0; j<myArray[i].length; j++){
+					var lineElt = document.createElement("td");
+					lineElt.innerHTML = myArray[i][j];
+					myLine.appendChild(lineElt);
+				}
+			}
+		}
+		// if myArray contains strings or numbers
+		else{
+			for(var i=0; i<myArray.length; i++){
+				var lineElt = document.createElement("td");
+				lineElt.innerHTML = myArray[i];
+				myLine.appendChild(lineElt);
+			}
+		}
+		
+		return myLine;
 	}
 }
 

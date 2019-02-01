@@ -91,17 +91,19 @@ body{
     justify-content: space-around;
     align-items: center;
 }
-.choose{
-    width: 400px;
+.choose {
+    max-width: 400px;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
 	display : flex;
 	flex-direction : column;
+	padding: 30px;
 }
 
+
 .choose>h4{
-    padding: 30px;
+    margin-bottom: 15px;
     color: #011c27;
     font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
@@ -110,25 +112,54 @@ body{
 .chooseInfo{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
+	width : 650px;
 }
-.infoGA{
-    width: 250px;
+#infoGA{
+	padding : 30px;
+	display : none;
+    max-width: 250px;
     border: 2px solid #011c27;
     background: #eeeeee;
     border-radius: 15px;
+	overflow : hidden;
+	max-height : 50vh;
 }
-.infoGA>h4{
-    padding: 30px;
+
+#infoGA.active3{
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+}
+
+#infoGA>h4{
+    margin-bottom : 15px;
     color: #35605a;
     font-size: 25px;
     font-family: 'PT Sans Narrow', sans-serif;
 }
 
-.choose>p:hover, .infoGA>p{
+#infoGA table td{
+	border : 1px solid #35605a;
+	text-align : center;
+	padding : 0 5px;
+}
+
+#infoGA table{
+	display : flex;
+	flex-wrap : wrap;
+}
+
+#infoGA tr{
+	display : flex;
+	flex-direction : column;
+	flex-wrap : wrap;
+}
+
+.choose p:hover, #infoGA>p{
 	color : #47827a;
 }
-.choose>p{
+.choose p{
 	color : inherit;
 	text-decoration : inherit;
 	cursor : pointer;

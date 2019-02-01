@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
+	<script type="text/javascript" src="./js/lib/ganja.js/ganja.js"></script>
 	<script type="text/javascript" src="./js/GAManager.js"></script>	
     <script type="text/javascript" src="./js/classes.js"></script>  
 </head>
@@ -41,19 +42,11 @@
         <div class="chooseInfo">
             <div class="choose">
                 <h4> Choose the geometric algebra </h4>
-                <div class="validate">
-                    <i class="fas fa-check-square"></i>
-                </div>
+				<div id="GAChoiceDiv">
+				</div>
             </div>
 
-            <div class="infoGA">
-                <h4> GA informations </h4>
-                <p> lorem ipsum </p>
-                <p> lorem ipsum </p>
-                <p> lorem ipsum </p>
-                <p> lorem ipsum </p>
-                <p> lorem ipsum </p>
-                <p> lorem ipsum </p>
+            <div id="infoGA">
             </div>
         </div>
         <div class="createGA">
@@ -130,7 +123,7 @@
     <script>
 
 		var els={};
-		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA","#check"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA","#check","#infoGA","#GAChoiceDiv"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 		changeActive = (element) => {
             element.classList.toggle("active");
         }
@@ -143,19 +136,18 @@
 		
 		// construct the list of existing GA in the DOM
 		var GAs = new ExistingGA();
-		var selectGA = document.querySelector(".choose>.validate");
 		for(var i=0; i<GAs.GAArray.length; i++){
 			var newNode = document.createElement("p");
 			newNode.innerHTML = GAs.GAArray[i].name;
-			document.querySelector(".choose").insertBefore(newNode,selectGA);
+			els.GAChoiceDiv.appendChild(newNode);
 		}
-		
-		/*//// EVENT LISTENERS ////*/
 		
 
         var account = new Account();
         account.isLoggedIn();
 
+				
+		/*//// EVENT LISTENERS ////*/
 
 		function myFunction() {
 			var elsClass = {};
@@ -179,9 +171,6 @@
                 })(i);
             }
         }
-		
-		
-		/*//// EVENT LISTENERS ////*/
         
         myFunction();
         els.iconOpen.addEventListener("click", DisplaySignIn);
@@ -262,7 +251,6 @@
 		
 		// select existing GA
 		var GAToChoose = document.querySelectorAll(".choose p");
-		console.log(GAToChoose);
 		for(var i=0; i<GAToChoose.length; i++){
 			GAToChoose[i].onclick = (function(i){
 				return function(){
@@ -290,6 +278,47 @@
         function DisplayExample(){
             window.open("index.html");
         }*/
+		
+		// construct GAinfo
+		for(var i=0; i<GAToChoose.length; i++){
+			GAToChoose[i].onmouseover = (function(i){
+				return function(){
+					constructGAInfos(GAs.GAArray[i]);
+				}
+			})(i);
+		}
+		function constructGAInfos(aGA){
+			console.log(aGA.name);
+			var description = GA.retrieveGAInfo(aGA.consoleString());
+			// if there is a GA description
+			els.infoGA.innerHTML="<h4>GA information</h4><p>Basis and Metric</p>";
+			if (description!=null){
+				var metricTable = document.createElement("table");
+				metricTable.appendChild(GA.constructLine(description.basis));
+				metricTable.appendChild(GA.constructLine(description.metric));
+				
+				els.infoGA.appendChild(metricTable);
+			}
+			// if there isn't a GA description
+			else{
+				metricTitle.innerHTML = "No Geometric Algebra in the console.";
+				els.macrosContent.appendChild(metricTitle);
+			}
+			
+		}
+		
+		// display GAinfo
+		els.GAChoiceDiv.addEventListener("mouseover", displayGAInfo);
+		function displayGAInfo(){
+			els.infoGA.classList.add("active3");
+		}
+		
+		// hide GAinfo
+		els.GAChoiceDiv.addEventListener("mouseleave", hideGAInfo);
+		function hideGAInfo(){
+			els.infoGA.classList.remove("active3");
+		}
+		
 		
     </script>
 </body>
