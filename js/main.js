@@ -25,6 +25,7 @@ const elsClass={};
 AppControllerInstance.init();
 const viewer = AppControllerInstance.interface.viewer;
 const editor = AppControllerInstance.interface.editor;
+const account = AppControllerInstance.account;
 
 
 var transitionTime = 800;
