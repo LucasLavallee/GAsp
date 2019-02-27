@@ -26,6 +26,7 @@ AppControllerInstance.init();
 const viewer = AppControllerInstance.interface.viewer;
 const editor = AppControllerInstance.interface.editor;
 const account = AppControllerInstance.account;
+const project = AppControllerInstance.mainProject;
 
 
 var transitionTime = 800;
@@ -153,7 +154,7 @@ var transitionTime = 800;
 	      	//Taking the script of the example
 	      	viewer.currentScript = [...els.exampleView.contentDocument.querySelectorAll("script")].pop();
 	      	editor.setValue(viewer._currentScript.innerText);
-			AppControllerInstance.mainProject.algebra.updateGAInfo(editor.getValue());
+			project.algebra.updateGAInfo(editor.getValue());
 	    }
 
 	    //Manage the save if user is logged in or not
@@ -213,7 +214,7 @@ var transitionTime = 800;
 		document.getElementById("run").onclick=() =>{
 			const valueEd = editor.getValue();
 			viewer.update(valueEd);
-			AppControllerInstance.mainProject.algebra.updateGAInfo(valueEd);
+			project.algebra.updateGAInfo(valueEd);
 		}
 		
 		//EVENT CLICK CLEAR
@@ -221,5 +222,5 @@ var transitionTime = 800;
 			const valueEd = editor.getValue();
 			editor.setValue("");
 			viewer.update(valueEd);
-			AppControllerInstance.mainProject.algebra.updateGAInfo(valueEd);
+			project.algebra.updateGAInfo(valueEd);
 		}
