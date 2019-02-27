@@ -1,26 +1,20 @@
-class Project{
+class Project extends AllProj{
 	constructor(id,link,name,role){
+		super(name, "____");
 		this._id = id;
 		this._link = link
 		this._srcCode = "";
-		this._name = name;
 		this._role = role;
-		this._author = "";
 	}
 
 	set setSrcCode(src){
 		this._srcCode = src;
 	}
-	set setName(name){
-		this._name = name;
-	}
 
 	get src(){return this._srcCode;}
-	get name(){return this._name;}
 	get link(){return this._link;}
 	get role(){return this._role;}
 	get id(){return this._id;}
-	get author(){return this._author;}
 
 
 	async saveProject(name, src){
@@ -189,28 +183,5 @@ class Project{
  		}
  		var mess = new Message(result.msg,true,null);
  		mess.display();
-	}
-}
-
-
-
-class Message{
-	constructor(msg,typeCont,container){
-		this._msg = msg;
-		this._lvlError = 0;
-		this._typeContainer = typeCont;
-		this._container = container;
-	}
-	display(){
-		if(this._typeContainer){
-			var msgCont = document.getElementById('error');
-			msgCont.classList.add("error");
-			//Reset css animation
-			var newone = msgCont.cloneNode(true);
-			msgCont.parentNode.replaceChild(newone, msgCont);
-         	newone.innerHTML = this._msg;
-		}else{
-         this._container.innerHTML = this._msg; 
-		}
 	}
 }
