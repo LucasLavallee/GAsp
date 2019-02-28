@@ -1,5 +1,17 @@
 class AppController {
 
+    async loadProj(){
+        var linkProj = window.location.hash.substr(1);
+        if(linkProj!=""){
+            this.currentMode = 0;
+            var res = await this.mainProject.loadProject(linkProj);
+            this.interface.editor.setValue(this.mainProject.src);
+            this.mainProject.loadProjInfos(this.mainProject.author,this.mainProject.name);
+            if(this.account.state)
+                els.sharePanel.style.display = "block";
+        }
+    }
+
     preloadIframe(){
             els.exampleView.contentDocument.body.style = "margin:0; padding:0;width:100%; height:100%; margin:0;";
             if(this.currentMode==0){
@@ -24,7 +36,7 @@ class AppController {
 
     init() {
         this.account.isLoggedIn();
-
+        this.loadProj();
         this.interface.init(this.currentMode);
     }
 
