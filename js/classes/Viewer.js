@@ -15,7 +15,7 @@ class Viewer{
 	}
 
 	update(newValue){
-		var parent = this._currentScript.parentNode;
+		this._currentScript!=null ? var parent = this._currentScript.parentNode : var parent = els.exampleView.contentWindow.document.body;
 		parent.innerHTML = '';
 		var script= document.createElement('script');
  		script.innerHTML = newValue;
