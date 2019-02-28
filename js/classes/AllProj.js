@@ -1,7 +1,9 @@
 class AllProj{
-	loadProjInfos(currentCode){
+	loadProjInfos(){
 		els.projName.innerHTML = this._name;
-		els.projAuthor.innerHTML = this._author;
+		els.projAuthor.innerHTML = this._author;		
+	}
+	updateGA(currentCode){
 		this._algebra.updateGAInfo(currentCode);
 	}
 

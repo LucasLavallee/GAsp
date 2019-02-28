@@ -7,7 +7,8 @@ class AppController {
             var res = await this.mainProject.loadProject(linkProj);
             this.interface.updateEditor(this.mainProject.src);
             this.interface.updateViewer();
-            this.mainProject.loadProjInfos(this.mainProject.src);
+            this.mainProject.loadProjInfos();
+            this.mainProject.updateGA(this.mainProject.src);
             if(this.account.state)
                 els.sharePanel.style.display = "block";
         }
@@ -18,7 +19,6 @@ class AppController {
             if(this.currentMode==0){
 
                 //script that contains the ganja.js
-                var currentCode = this.interface.editor.getValue();
                 var scriptGJ= document.createElement('script');
                 scriptGJ.type = "text/javascript";
                 scriptGJ.src = "./js/lib/ganja.js/ganja.js";
