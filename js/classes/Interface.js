@@ -87,14 +87,13 @@ class Interface{
 				els.run.style.top = '-10px';
 				break;
 			case 1: 
+				this.loadExamples();
 				els.clear.style.display = 'none';
 				els.headerExample.style.display = 'flex';
 				els.allEx.style.display = 'block';
 				Interface.loadExample("pga3d_icosahedron");
 				break;
 		}
-
-		this.loadExamples();
 	}
 
 	constructor(){
