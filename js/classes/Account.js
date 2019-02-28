@@ -14,7 +14,7 @@ class Account{
  		var menuAccount = document.getElementById("menuAccount");
  		var share = document.getElementById("sharePanel");
 
-		const req = new Request('https://serene-forest-42732.herokuapp.com/isLog', data, 'GET');
+		const req = new Request('https://serene-forest-42732.herokuapp.com/isLog', null, 'GET');
 
  		let response = await req.send();
 		let data = await response.json();
@@ -154,7 +154,7 @@ class Account{
 
          let response = await req.send();
 		let data = await response.json();
-		
+
  		for(var i = 0; i< data.projects.length; i++){
  			this._listProject[i] = new Project(data.projects[i].id_project,data.projects[i].link,data.projects[i].name,data.projects[i].role);
  		}
