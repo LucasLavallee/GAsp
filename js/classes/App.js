@@ -5,7 +5,8 @@ class AppController {
         if(linkProj!=""){
             this.currentMode = 0;
             var res = await this.mainProject.loadProject(linkProj);
-            this.interface.editor.setValue(this.mainProject.src);
+            this.interface.updateEditor(this.mainProject.src);
+            this.interface.updateViewer();
             this.mainProject.loadProjInfos(this.mainProject.author,this.mainProject.name);
             if(this.account.state)
                 els.sharePanel.style.display = "block";
