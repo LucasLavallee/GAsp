@@ -34,7 +34,6 @@ class AppController {
             
             this.interface.viewer.resize();
         }
-
     init() {
         this.account.isLoggedIn();
         this.loadProj();
