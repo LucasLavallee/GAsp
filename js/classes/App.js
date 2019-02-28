@@ -38,6 +38,7 @@ class AppController {
         this.account.isLoggedIn();
         this.loadProj();
         this.interface.init(this.currentMode);
+        this.preloadIframe();
     }
 
     /**

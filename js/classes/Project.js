@@ -24,18 +24,8 @@ class Project extends AllProj{
 		};
 		var data = JSON.stringify(payload);
 
- 		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/create',{
-			method: 'POST',
-			body: data,
-			mode: 'cors',
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
-			},
-			credentials: 'include'
-		});
-
+		const req = new Request('https://serene-forest-42732.herokuapp.com/project/create', data, 'POST');
+ 		let response = await req.send();
 		let result = await response.json();
  		if(result.success){
  			window.location.replace("https://lucaslavallee.github.io/GAsp#"+result.link);
@@ -50,19 +40,10 @@ class Project extends AllProj{
 			link: link
 		};
 		var data = JSON.stringify( payload );
- 		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/infos',{
-			method: 'POST',
-			body: data,
-			mode: 'cors',
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
-			},
-			credentials: 'include'
-		});
+		const req = new Request('https://serene-forest-42732.herokuapp.com/project/infos', data, 'POST');
+ 		let response = await req.send();
+ 		let result = await response.json();
 
-		let result = await response.json();
  		if(result.success){
  			result.projects[0].id_project
 	 		this._id = result.projects[0].id;
@@ -81,19 +62,11 @@ class Project extends AllProj{
 			link: this._link
 		}
 		var data = JSON.stringify(payload);
-		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/changeCode',{
-			method: 'PUT',
-			body: data,
-			mode: 'cors',
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
-			},
-			credentials: 'include'
-		});
+		const req = new Request('https://serene-forest-42732.herokuapp.com/project/changeCode', data, 'PUT');
 
+		let response = await req.send();
 		let result = await response.json();
+
 	    var msg = new Message(result.msg,true,null);
 	    msg.display();
 	}
@@ -103,19 +76,11 @@ class Project extends AllProj{
 			id: this._id
 		}
 		var data = JSON.stringify(payload);
-		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/coworkers',{
-			method: 'POST',
-			body: data,
-			mode: 'cors',
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
-			},
-			credentials: 'include'
-		});
+		const req = new Request('https://serene-forest-42732.herokuapp.com/project/coworkers', data, 'POST');
 
+		let response = await req.send();
 		let coworks = await response.json();
+
 		document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
 		var list = document.getElementById('allCoworkers');
 		if(coworks.success){
@@ -139,17 +104,8 @@ class Project extends AllProj{
 		};
 		var data = JSON.stringify(payload);
 
- 		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/addCoworkers',{
-			method: 'POST',
-			body: data,
-			mode: 'cors',
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
-			},
-			credentials: 'include'
-		});
+		const req = new Request('https://serene-forest-42732.herokuapp.com/project/addCoworkers', data, 'POST');
+ 		let response = await req.send();
 
 		let result = await response.json();
  		if(result.success){
@@ -159,24 +115,24 @@ class Project extends AllProj{
  		mess.display();	 
 	}
 
+	async displayCoworkers(entry){
+		var payload = {
+			entry: entry
+		};
+		var data = JSON.stringify(payload);
+	}
+
 	async removeCoworkers(username, idProj){
 		var payload = {
 			username: username,
 			id_project: idProj
 		};
 		var data = JSON.stringify(payload);
-		let response = await fetch('https://serene-forest-42732.herokuapp.com/project/rmCoworkers',{
-			method: 'POST',
-			body: data,
-			mode: 'cors',
-			headers: {
-				"Accept": "application/json",
-				"Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://serene-forest-42732.herokuapp.com"
-			},
-			credentials: 'include'
-		});
+		const req = new Request('https://serene-forest-42732.herokuapp.com/project/rmCoworkers', data, 'POST');
+
+		let response = await req.send();
 		let result = await response.json();
+		
  		if(result.success){
  			this.updateShareInfos();
  		}
