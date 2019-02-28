@@ -1,7 +1,8 @@
 class AllProj{
-	loadProjInfos(){
+	loadProjInfos(currentCode){
 		els.projName.innerHTML = this._name;
 		els.projAuthor.innerHTML = this._author;
+		this._algebra.updateGAInfo(currentCode);
 	}
 
 	set setName(name){
