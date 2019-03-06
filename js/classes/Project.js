@@ -5,6 +5,7 @@ class Project extends AllProj{
 		this._link = link
 		this._srcCode = "";
 		this._role = role;
+		this._listCoworkers = [];
 	}
 
 	set setSrcCode(src){
@@ -72,29 +73,32 @@ class Project extends AllProj{
 	}
 
 	async updateShareInfos(){
-		var payload = {
-			id: this._id
-		}
-		var data = JSON.stringify(payload);
-		const req = new Request('https://serene-forest-42732.herokuapp.com/project/coworkers', data, 'POST');
-
-		let response = await req.send();
-		let coworks = await response.json();
-
-		document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
 		var list = document.getElementById('allCoworkers');
-		if(coworks.success){
-			list.innerHTML = "";
-			coworks.projects.forEach(function(element) {
-	            var div = document.createElement('div');
-	            div.classList.add('coworkers');
-	            div.innerHTML = '<p>'+element.username+'</p>';
-	            list.appendChild(div);
-	        });
-	    }
-	    else{
-	    	list.innerHTML = "(empty)";
-	    }
+		if(list.innerHTML!= ""){
+			var payload = {
+				id: this._id
+			}
+			var data = JSON.stringify(payload);
+			const req = new Request('https://serene-forest-42732.herokuapp.com/project/coworkers', data, 'POST');
+
+			let response = await req.send();
+			let coworks = await response.json();
+
+			document.getElementById('linkShare').value = "https://lucaslavallee.github.io/GAsp/#"+this._link;
+			if(coworks.success){
+				list.innerHTML = "";
+				this._listCoworkers = coworks.projects.map(cow=>cow.username);
+				this._listCoworkers.forEach(function(element) {
+		            var div = document.createElement('div');
+		            div.classList.add('coworkers');
+		            div.innerHTML = '<p>'+element+'</p>';
+		            list.appendChild(div);
+		        });
+		    }
+		    else{
+		    	list.innerHTML = "(empty)";
+		    }
+		}
 	}
 
 	async addCoworkers(username, idProj){
@@ -115,11 +119,23 @@ class Project extends AllProj{
  		mess.display();	 
 	}
 
-	async displayCoworkers(entry){
+	async lookingForCoworkers(entry){
 		var payload = {
-			entry: entry
+			entry: entry,
+			id_project: this._id
 		};
 		var data = JSON.stringify(payload);
+		const req = new Request('https://serene-forest-42732.herokuapp.com/project/lookingForCoworkers', data, 'GET');
+		const response = req.send();
+
+		const result = await response.json();
+		if(result.success){
+			//Div to display the results
+			var divList = document.getElementById('lookingCoworkers');
+			for(cow of result.users){
+				divList.innerHTML += "<p>"+cow.username+"</p>";
+			}
+		}
 	}
 
 	async removeCoworkers(username, idProj){
@@ -132,7 +148,7 @@ class Project extends AllProj{
 
 		let response = await req.send();
 		let result = await response.json();
-		
+
  		if(result.success){
  			this.updateShareInfos();
  		}

@@ -16,7 +16,8 @@ changeActive = (element) =>{
 
 // Elements.
 const els={};
-["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black","#saveButton","#name_project","#save","#menuAccount","#connectedButton","#logout","#shareIcon","#sharePanel","#newProject_send","#submitCoword","#inpNewCowork"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black","#saveButton","#name_project",
+"#save","#menuAccount","#connectedButton","#logout","#shareIcon","#sharePanel","#newProject_send","#submitCoword","#inpNewCowork"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 
 const elsClass={};
 [".selectMode",".optionSetting",".cross"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
@@ -188,9 +189,19 @@ var transitionTime = 800;
 	    els.newProject_send.onclick = () =>{
 	    	project.saveProject(document.getElementById("nameProjectUp").value, editor.getValue());
 	    }
+
+	    /* 
+			COWORKERS
+	    */
+
 	    els.submitCoword.onclick = () =>{
 	    	project.addCoworkers(els.inpNewCowork.value, project.id);
 	    }
+
+	    els.inpNewCowork.onkeydown = () =>{
+	    	project.lookingForCoworkers(els.inpNewCowork.value);
+	    }
+
 	    elsClass.cross[0].onclick = () =>{
 	    	changeActive(els.pop_up_black);
 	    	changeActive(els.save);
