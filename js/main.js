@@ -143,8 +143,11 @@ var transitionTime = 800;
 		}
 
 		for(var i = 0; i<elsClass.coworkers.length; i++){
+			console.log("ONCLICK DETECTED ON ID ");
 			elsClass.coworkers[i].onclick = (function (i){
 				return function (){
+
+			console.log(i);
 					AppControllerInstance.modal.setAll("Are you sure ?","Do you really want to remove this coworker ? This process can't be undone.",0,Project.removeCoworkers,[elsClass.coworkers[i].dataset.user,elsClass.coworkers[i].dataset.idProj]);
 					AppControllerInstance.modal.display();
 				}

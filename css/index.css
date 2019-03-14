@@ -568,7 +568,7 @@ form > p{
 	text-decoration: underline;
 	padding-bottom: 15px;
 }
-.coworkers{
+.coworkersCont{
 	display: flex;
 	align-items: center;
 	justify-content: center;

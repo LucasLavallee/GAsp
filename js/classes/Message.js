@@ -71,6 +71,7 @@ class Modal{
 	}
 
 	static remove(){
+		AppControllerInstance.modal.reset();
 		var modal = document.getElementById("modal");
 		modal.parentNode.removeChild(modal);
 	}
