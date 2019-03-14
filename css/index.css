@@ -568,6 +568,11 @@ form > p{
 	text-decoration: underline;
 	padding-bottom: 15px;
 }
+.coworkers{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 #submitCoword{
 	display: inline-block;
 	background: #011c27;
