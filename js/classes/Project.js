@@ -52,8 +52,6 @@ class Project extends AllProj{
 			this._srcCode = result.projects[0].srcCode;
 			this._name = result.projects[0].name;
 			this._author = result.projects[0].username;
- 		}
- 		else{
  		}	
 	}
 
@@ -90,13 +88,13 @@ class Project extends AllProj{
 			if(coworks.success){
 				list.innerHTML = "";
 				this._listCoworkers = coworks.projects.map(cow=>cow.username);
-				this._listCoworkers.forEach(function(element) {
-		            var div = document.createElement('div');
+				for(let c of this._listCoworkers){
+					var div = document.createElement('div');
 		            div.classList.add('coworkers');
 		            div.innerHTML = '<p>'+element+'</p>';
 		            div.innerHTML += '<i class="icon-remove" onclick="removeCoworkers('+element+','+this._id+')"></i>';
 		            list.appendChild(div);
-		        });
+				}
 		    }
 		    else{
 		    	list.innerHTML = "(empty)";
