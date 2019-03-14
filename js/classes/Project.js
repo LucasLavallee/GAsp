@@ -12,12 +12,17 @@ class Project extends AllProj{
 		this._srcCode = src;
 	}
 
+	/*
+		GETTERS
+	*/
+
 	get src(){return this._srcCode;}
 	get link(){return this._link;}
 	get role(){return this._role;}
 	get id(){return this._id;}
 
 
+	/* Create and save a new project in the db */
 	async saveProject(name, src){
 		var payload = {
 			src: src,
@@ -36,6 +41,7 @@ class Project extends AllProj{
  		}	 
 	}
 
+	/* Load a project from a link */
 	async loadProject(link){
 		var payload = {
 			link: link
@@ -55,6 +61,7 @@ class Project extends AllProj{
  		}	
 	}
 
+	/* Update a project that as already been created */
 	async updateProject(src){
 		var payload = {
 			src: src,
@@ -70,11 +77,10 @@ class Project extends AllProj{
 	    msg.display();
 	}
 
+	/* Update the content of share panel with the current project's sharing infos */
 	async updateShareInfos(){
 		var list = document.getElementById('allCoworkers');
-		console.log("Yes");
 		if(list.innerHTML==""){
-			console.log("Yes2");
 			var payload = {
 				id: this._id
 			}
@@ -102,6 +108,7 @@ class Project extends AllProj{
 		}
 	}
 
+	/* Add a new coworkers to the project (idProj) if you have the right to do so */ 
 	async addCoworkers(username, idProj){
 		var payload = {
 			username: username,
@@ -120,6 +127,7 @@ class Project extends AllProj{
  		mess.display();	 
 	}
 
+	/* Help the users to find a coworkers thanks to recommandation */
 	async lookingForCoworkers(entry){
 		var payload = {
 			entry: entry,
@@ -139,6 +147,7 @@ class Project extends AllProj{
 		}
 	}
 
+	/* Remove a coworker from a project if you have the rights */
 	static async removeCoworkers(username, idProj){
 		var payload = {
 			username: username,
