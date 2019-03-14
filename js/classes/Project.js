@@ -95,7 +95,7 @@ class Project extends AllProj{
 				list.innerHTML = "";
 				this._listCoworkers = coworks.projects.map(cow=>cow.username);
 				for(let c of this._listCoworkers){
-					var div = "<div class='coworkers' data-user='"+c+"' data-idProj='"+this._id+"'><p>"+c+"</p><i class='fas fa-trash-alt'></i></div>";
+					var div = "<div><p>"+c+"</p><i class='fas fa-trash-alt coworkers' data-user='"+c+"' data-idProj='"+this._id+"'></i></div>";
 		            list.innerHTML += div;
 				}
 		    }
