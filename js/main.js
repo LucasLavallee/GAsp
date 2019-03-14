@@ -17,10 +17,10 @@ changeActive = (element) =>{
 // Elements.
 const els={};
 ["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black","#saveButton","#name_project",
-"#save","#menuAccount","#connectedButton","#logout","#shareIcon","#sharePanel","#newProject_send","#submitCoword","#inpNewCowork"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+"#save","#menuAccount","#connectedButton","#logout","#shareIcon","#sharePanel","#newProject_send","#submitCoword","#inpNewCowork","#modalYes"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 
 const elsClass={};
-[".selectMode",".optionSetting",".cross"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
+[".selectMode",".optionSetting",".cross",".coworkers"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
 
 /* Main Singleton initialisation */
 AppControllerInstance.init();
@@ -138,6 +138,15 @@ var transitionTime = 800;
 					inst.setOption(data, currentInfos["options"][data]);
 					refreshConsole();
 					updateViewer();
+				}
+			})(i);
+		}
+
+		for(var i = 0; i<elsClass.coworkers.length; i++){
+			elsClass.coworkers[i].onclick = (function (i){
+				return function (){
+					AppControllerInstance.modal.setAll("Are you sure ?","Do you really want to remove this coworker ? This process can't be undone.",0,Project.removeCoworkers,[elsClass.coworkers[i].dataset.user,elsClass.coworkers[i].dataset.idProj]);
+					AppControllerInstance.modal.display();
 				}
 			})(i);
 		}

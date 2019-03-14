@@ -54,6 +54,7 @@ class AppController {
         this.account = new Account();
         this.mainProject = new Project(0,"","---",0);
         this.interface = new Interface();
+        this.modal = new Modal("", "", -1, null, []);
         return AppController.instance;
     }
 }

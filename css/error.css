@@ -33,3 +33,47 @@
 	animation-name: error;
 	animation-duration: 10s;
 }
+
+#modal{
+	position: fixed;
+	top: 0px;
+	background-color: rgba(0,0,0,0.7);
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+}
+#realModal{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40%;
+	transform: translate3d(-50%,-50%,0);
+	background-color: #fff;
+	text-align: center;
+	padding: 25px;
+}
+#modalLeave{
+	position: fixed;
+	right: 10px;
+	top: 10px;
+}
+#modalButtons{
+	display: flex;
+	justify-content: flex-end; 
+	margin-top: 15px;
+}
+#modalYes{
+	background-color: #2dcc70;
+}
+#modalNo{
+	background-color: #e74b3c;
+}
+#modalCancel{
+	background-color: #dcdcdc;
+}
+.modalButton{
+	padding: 10px 15px;
+	margin: 0 5px;
+	color:#fff;
+	cursor: pointer;
+}

@@ -95,11 +95,8 @@ class Project extends AllProj{
 				list.innerHTML = "";
 				this._listCoworkers = coworks.projects.map(cow=>cow.username);
 				for(let c of this._listCoworkers){
-					var div = document.createElement('div');
-		            div.classList.add('coworkers');
-		            div.innerHTML = '<p>'+c+'</p>';
-		            div.innerHTML += '<i class="icon-remove" onclick="Project.removeCoworkers("'+c+'",'+this._id+')"></i>';
-		            list.appendChild(div);
+					var div = "<div class='coworkers' data-user='"+c+"' data-idProj='"+this._id+"'><p>"+c+"</p><i class='fas fa-trash-alt'></i></div>";
+		            list.innerHTML += div;
 				}
 		    }
 		    else{
