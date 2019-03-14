@@ -97,8 +97,8 @@ class Project extends AllProj{
 				for(let c of this._listCoworkers){
 					var div = document.createElement('div');
 		            div.classList.add('coworkers');
-		            div.innerHTML = '<p>'+element+'</p>';
-		            div.innerHTML += '<i class="icon-remove" onclick="removeCoworkers('+element+','+this._id+')"></i>';
+		            div.innerHTML = '<p>'+c+'</p>';
+		            div.innerHTML += '<i class="icon-remove" onclick="removeCoworkers('+c+','+this._id+')"></i>';
 		            list.appendChild(div);
 				}
 		    }
