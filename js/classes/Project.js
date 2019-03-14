@@ -141,7 +141,7 @@ class Project extends AllProj{
 		}
 	}
 
-	public static async removeCoworkers(username, idProj){
+	static async removeCoworkers(username, idProj){
 		var payload = {
 			username: username,
 			id_project: idProj
