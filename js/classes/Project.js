@@ -74,7 +74,9 @@ class Project extends AllProj{
 
 	async updateShareInfos(){
 		var list = document.getElementById('allCoworkers');
-		if(list.innerHTML!= ""){
+		console.log("Yes");
+		if(list.innerHTML==""){
+			console.log("Yes2");
 			var payload = {
 				id: this._id
 			}
@@ -92,6 +94,7 @@ class Project extends AllProj{
 		            var div = document.createElement('div');
 		            div.classList.add('coworkers');
 		            div.innerHTML = '<p>'+element+'</p>';
+		            div.innerHTML += '<i class="icon-remove" onclick="removeCoworkers('+element+','+this._id+')"></i>';
 		            list.appendChild(div);
 		        });
 		    }
@@ -138,7 +141,7 @@ class Project extends AllProj{
 		}
 	}
 
-	async removeCoworkers(username, idProj){
+	async static removeCoworkers(username, idProj){
 		var payload = {
 			username: username,
 			id_project: idProj
