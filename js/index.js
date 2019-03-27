@@ -1,4 +1,4 @@
-var els={};
+const els={};
 		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA","#check","#infoGA","#GAChoiceDiv"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 		changeActive = (element) => {
             element.classList.toggle("active");
@@ -11,12 +11,12 @@ var els={};
         }
 		
 		// construct the list of existing GA in the DOM
-		var GAs = new ExistingGA();
-		for(var i=0; i<GAs.GAArray.length; i++){
-			var newNode = document.createElement("p");
-			newNode.innerHTML = GAs.GAArray[i].name;
+		const GAs = new ExistingGA();
+		GAs.GAArray.map( GA => {
+			const newNode = document.createElement("p");
+			newNode.innerHTML = GA.name;
 			els.GAChoiceDiv.appendChild(newNode);
-		}
+		})
 		
 
         var account = new Account();
@@ -25,17 +25,16 @@ var els={};
 				
 		/*//// EVENT LISTENERS ////*/
 
-		function myFunction() {
-			var elsClass = {};
+		const circlesOnClick = () => {
+			const elsClass = {};
 			[".circleBase", ".type1"].forEach(x => elsClass[x.replace(/[.]/g, '')] = document.querySelectorAll(x));
-            for (var i = 0; i < elsClass.circleBase.length; i++) {
+            for (let i = 0; i < elsClass.circleBase.length; i++) {
                 elsClass.circleBase[i].onclick = (function (i) {
-                    return function () {
+                    return () => {
                         // indice i pour la div cliquée et (i+1)%3 et (i+2)%3 pour les deux classes restantes 
                         if (elsClass.circleBase[i].classList.contains("indexPage"))
                         {
                             changeActiveThis(elsClass.circleBase[i]);
-                            console.log("wesh ça va ?");
                         }
                         else if (elsClass.circleBase[i].classList.contains("active")==false){
 							changeActive(elsClass.circleBase[i]);
@@ -48,9 +47,10 @@ var els={};
             }
         }
         
-        myFunction();
-        els.iconOpen.addEventListener("click", DisplaySignIn);
-        function DisplaySignIn() {
+		circlesOnClick();
+		
+		// manage the display of the signIn item
+        els.iconOpen.addEventListener("click", () => {
             if(account.state){
                 window.location.replace("./project.html");
             }
@@ -60,21 +60,21 @@ var els={};
 				    els.iconOpen.classList.add("unclickable");
 			    }
             }
-        }
+        })
 
-        els.iconCreate.addEventListener("click", DisplayChooseGA)
-        function DisplayChooseGA() {
+		// manage the display of the create-project item
+        els.iconCreate.addEventListener("click", () => {
 			if ( els.iconCreate.classList.contains("unclickable")==false){
 				els.chooseGA.classList.toggle("activeClass2");
 				els.iconCreate.classList.add("unclickable");
 			}
-		}
+		})
 
-        document.getElementById("createGA").addEventListener("click", DisplayCreateGA)
-        function DisplayCreateGA() {
+		//manage the display of the create-GA item
+        document.getElementById("createGA").addEventListener("click", () => {
             document.getElementById("chooseGA").classList.toggle("activeClass2");
             document.getElementById("createAlgebra").classList.toggle("activeClass");
-        }
+        })
 		
 		els.goBackStart.addEventListener("click", goBackStart);
 		function goBackStart(){
