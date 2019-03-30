@@ -164,12 +164,27 @@ nav h1 span{
 	letter-spacing: 0px;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 .selectLeftPan p{
 	margin-left: 35px;
 	font-family: 'Lato_Bold';
 	font-size: 20px;
 	color: #eeeeee;
+}
+#triggerConsole{
+	height: 100%;
+	padding: 0 15px;
+	color: #fff;
+	line-height: 50px;
+	vertical-align: middle;
+	background-color: #FF4C00;
+}
+#logs{
+	padding: 10px;
+}
+.resLogs strong{
+	padding-left: 25px;
 }
 #leftContent{
 	height: 100%;
@@ -239,9 +254,22 @@ nav h1 span{
 	height: calc(100% - 50px);
 	z-index: 1;
 }
-#console{
+.console{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	left: 100%;
+	transition: all ease .5s;
+	overflow: hidden;
+}
+.console.active{
+	left: 0%;
+}
+#consoles{
 	height: calc(100% - 50px);
 	width: 100%;
+	position: relative;
 }
 #macros{
 	height: 50px;

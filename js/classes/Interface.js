@@ -1,6 +1,28 @@
 class Interface{
 
+	/*
+		resolve the last instuction in logs console
+	*/
+	resolveLogs(){
+		var ctnt = document.getElementById('logs');
+		const value = ctnt.textContent;
+		const instr = value.slice(value.lastIndexOf('>>')+2, value.length);
+		try {
+	      const res =  AppControllerInstance.algebra.algebra.inline(new Function("return "+instr))().toString().replace(/_(\d+)/g,"<sub>$1</sub>"); 
+	      this.addContentLogs('<div class="resLogs"><p><strong><em>'+res+'</em></strong></p></div>');
+	    } catch (e) {
+	      const res =  e.message;
+	      this.addContentLogs('<div class="resLogs"><p><strong><em>'+res+'</em></strong></p></div>');
+	    }
+		this.addContentLogs('<span>>></span>');
 
+		document.getSelection().collapse(ctnt.lastChild,1);
+	}
+
+	addContentLogs(content){
+		var ctnt = document.getElementById('logs');
+		ctnt.innerHTML += content;
+	}
 	/*
 		Load an example in the interface
 	*/

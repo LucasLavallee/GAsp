@@ -40,15 +40,18 @@ class AlgebraController{
 			if(argsArray[0].endsWith(","))
 				args=argsArray[0].substring(0, argsArray[0].length-1);
 			else args=argsArray[0];
-			this.algebra = args;
+			args = JSON.parse("[" + args + "]");
+			if(args.length < 3) args[2] = 0;
+			this.algebra = new Algebra(args[0],args[1],args[2]);
 			// retrieve the description object
-			var description = new Function('return Algebra(' + args + ').describe();');
-			return description();
+			var description = this.algebra.describe();
+			AppControllerInstance.interface.addContentLogs('<p>--- You are no in algebra '+args[0]+','+args[1]+','+args[2]+' ---</p><span>>></span>')
+
+			return description;
 		}
 	}
 
 	constructor(name){
 		this.name = name;
-		this.algebra = "";
 	}
 }

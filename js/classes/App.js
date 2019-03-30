@@ -1,4 +1,9 @@
 class AppController {
+
+    get algebra(){
+        return this.mainProject.algebra;
+    }
+
     //TEST FOR GITHUB PAGE TO RELOAD :(
     async loadProj(){
         var linkProj = window.location.hash.substr(1);
