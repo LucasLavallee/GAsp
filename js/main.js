@@ -17,7 +17,7 @@ changeActive = (element) =>{
 // Elements.
 const els={};
 ["#viewer","#viewerPanel","#run","#ganjaCode","#consoleMode","#objectMode","#console","#movableLeft","#movableUp","#leftPanel","#macros","#nav","#headerMacro","#presentationMode","#exampleView","#macrosContent","#headerExample","#allEx","#examples","#projName","#projAuthor","#clear","#sign_up_send","#errorForm","#sign_in_send","#pop_up_black","#saveButton","#name_project",
-"#save","#menuAccount","#connectedButton","#logout","#shareIcon","#sharePanel","#newProject_send","#submitCoword","#inpNewCowork","#modalYes","#triggerConsole","#logs"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+"#save","#menuAccount","#connectedButton","#logout","#shareIcon","#sharePanel","#newProject_send","#submitCoword","#inpNewCowork","#modalYes","#triggerConsole","#logs","#logsContainer","#infosLogs"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 
 const elsClass={};
 [".selectMode",".optionSetting",".cross",".coworkers"].forEach(x=>elsClass[x.replace(/[.]/g,'')]=document.querySelectorAll(x));
@@ -251,7 +251,7 @@ var transitionTime = 800;
 		//Consoles
 
 		els.triggerConsole.onclick = () =>{
-			changeActive(els.logs);
+			changeActive(els.logsContainer);
 			changeActive(els.console);
 		}
 
@@ -260,4 +260,8 @@ var transitionTime = 800;
 				AppControllerInstance.interface.resolveLogs();
 				e.preventDefault();
 			}
+		}
+		els.infosLogs.onclick = () => {
+			AppControllerInstance.modal.setAll("Console information","In this console, you can enter any type of expression (eg. 1e1*1e12). You can also enter a series of instructions (pt1 = 2e1; pt2 = pt1 + 1e2;). To display a result of any instruction you need to end your instruction with a comma (',').",0,Modal.remove(),null);
+			AppControllerInstance.modal.display();
 		}

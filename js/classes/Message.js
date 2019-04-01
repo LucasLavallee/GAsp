@@ -47,7 +47,7 @@ class Modal{
 		realModal.id = "realModal";
 		var textModal = document.createElement('div');
 		textModal.innerHTML = "<h2>"+this._title+"</h2>";
-		textModal.innerHTML += "<p>"+this._msg+"</p>";
+		textModal.innerHTML += "<p id='contentModal'>"+this._msg+"</p>";
 		var contButton = document.createElement('div');
 		contButton.id="modalButtons";
 		allChild = [...allChild,textModal];
@@ -67,13 +67,15 @@ class Modal{
 		allChild = [...allChild,contButton,leave];
 		allChild.map(x=>realModal.appendChild(x));
 		container.appendChild(realModal);
+		console.log(container)
 		document.body.appendChild(container);
 	}
 
 	static remove(){
 		AppControllerInstance.modal.reset();
 		var modal = document.getElementById("modal");
-		modal.parentNode.removeChild(modal);
+		if(modal!=null)
+			modal.parentNode.removeChild(modal);
 	}
 
 	reset(){

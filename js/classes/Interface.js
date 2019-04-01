@@ -1,19 +1,79 @@
 class Interface{
 
+
+/*
+	pt1 = 2e1;
+
+pt2 = -2e1;
+
+pt3 = 1.5*e1 + 1e2;
+
+plan1 = !(!(pt1-pt2));
+
+plan2 = !(pt1-pt3);
+
+line  = !(plan1 ^ !(plan2));
+
+*/
 	/*
 		resolve the last instuction in logs console
 	*/
 	resolveLogs(){
 		var ctnt = document.getElementById('logs');
 		const value = ctnt.textContent;
-		const instr = value.slice(value.lastIndexOf('>>')+2, value.length);
-		try {
-	      const res =  AppControllerInstance.algebra.algebra.inline(new Function("return "+instr))().toString().replace(/_(\d+)/g,"<sub>$1</sub>"); 
-	      this.addContentLogs('<div class="resLogs"><p><strong><em>'+res+'</em></strong></p></div>');
-	    } catch (e) {
-	      const res =  e.message;
-	      this.addContentLogs('<div class="resLogs"><p><strong><em>'+res+'</em></strong></p></div>');
-	    }
+		let instr = value.slice(value.lastIndexOf('>>')+2, value.length);
+		instr = instr.replace(/\s/g, ""); //remove spaces
+		const allInToShow = instr.match(/[A-Za-z0-9_]*=.*?[,;]/g); //Get all the affectation/instruction put in the log console
+
+		if(allInToShow!=null){
+			let parseInstr = allInToShow.reduce((acc, instr)=> {
+				if(instr != ""){
+					const lastChar = instr.substring(instr.length-1,instr.length);
+					const newVal  = instr.replace(lastChar,'');
+					const infos = newVal.split('=');
+					if(infos.length===2)
+						return [...acc,{name:infos[0], value: infos[1].replace(/e(\d+)/g,"1e$1").replace(/([-]?\d+([.]\d+)?)1e(\d+)/g,"($1$2)*1e$3"), type: lastChar}];
+				}
+				return acc;
+			}, []);
+			const keys = parseInstr.reduce((acc,n) => [...acc, n.name],[]);
+			parseInstr.map(n => {
+				let test = false;
+				keys.map(k => {
+					let res = parseInstr.find(x => x.name === n.name);
+					if(res.value.includes(k)){
+						res.value = res.value.replace(k,'('+parseInstr.find(x => x.name === k).value+')');
+					}
+				});
+			});
+
+			const dispValue = parseInstr.filter(v => v.type === ',');
+			if(dispValue.length==0){
+				this.addContentLogs('<div class="resLogs"><p><strong><em>No \' , \' found to display values</em></strong></p></div>');
+			}
+			dispValue.map(instr => {
+				try {
+					let total = "";
+					if(keys.length!=0)
+			    		total = instr.name + " = "+ AppControllerInstance.algebra.algebra.inline(new Function("return "+instr.value))().toString().replace(/_(\d+)/g,"<sub>$1</sub>");
+			      	else
+			      		total = AppControllerInstance.algebra.algebra.inline(new Function("return "+instr))().toString().replace(/_(\d+)/g,"<sub>$1</sub>");
+			      	this.addContentLogs('<div class="resLogs"><p><strong><em>'+total+'</em></strong></p></div>');
+			    } catch (e) {
+			     	this.addContentLogs('<div class="resLogs"><p><strong><em>'+e.message+'</em></strong></p></div>');
+			    }
+			})
+		}
+		else{
+			try {
+				let total = "";
+		      	total = AppControllerInstance.algebra.algebra.inline(new Function("return "+instr))().toString().replace(/_(\d+)/g,"<sub>$1</sub>");
+		      	this.addContentLogs('<div class="resLogs"><p><strong><em>'+total+'</em></strong></p></div>');
+		    } catch (e) {
+		     	this.addContentLogs('<div class="resLogs"><p><strong><em>'+e.message+'</em></strong></p></div>');
+		    }
+		}
+
 		this.addContentLogs('<span>>></span>');
 
 		document.getSelection().collapse(ctnt.lastChild,1);

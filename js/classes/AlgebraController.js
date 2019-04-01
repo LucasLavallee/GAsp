@@ -45,7 +45,7 @@ class AlgebraController{
 			this.algebra = new Algebra(args[0],args[1],args[2]);
 			// retrieve the description object
 			var description = this.algebra.describe();
-			AppControllerInstance.interface.addContentLogs('<p>--- You are no in algebra '+args[0]+','+args[1]+','+args[2]+' ---</p><span>>></span>')
+			AppControllerInstance.interface.addContentLogs('<div class="logsInfo"><p>--- You are now in algebra '+args[0]+','+args[1]+','+args[2]+' ---</p></div><br><span>>></span>')
 
 			return description;
 		}
