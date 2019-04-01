@@ -262,6 +262,6 @@ var transitionTime = 800;
 			}
 		}
 		els.infosLogs.onclick = () => {
-			AppControllerInstance.modal.setAll("Console information","In this console, you can enter any type of expression (eg. 1e1*1e12). You can also enter a series of instructions (pt1 = 2e1; pt2 = pt1 + 1e2;). To display a result of any instruction you need to end your instruction with a comma (',').",0,Modal.remove(),null);
+			AppControllerInstance.modal.setAll("Console information","<p>In this console, you can enter any type of expression (eg. 1e1*1e12).</p> <p>You can also enter a series of instructions (pt1 = 2e1; pt2 = pt1 + 1e2;).</p><p>To display a result of any instruction you need to end your instruction with a comma (',').</p><p><strong>Mathematical expression: </strong>'!' = dual, '^' = wedge</p>",0,Modal.remove(),null);
 			AppControllerInstance.modal.display();
 		}
