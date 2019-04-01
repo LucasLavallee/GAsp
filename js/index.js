@@ -1,5 +1,6 @@
 const els={};
-		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart","#formCreateGA","#check","#infoGA","#GAChoiceDiv"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
+		["#iconOpen", "#iconCreate", "#signIn", "#chooseGA","#validate","#projectList","#goBackStart",
+		"#formCreateGA","#check","#infoGA","#GAChoiceDiv", "#createGA"].forEach(x=>els[x.replace(/[.#]/g,'')]=document.querySelector(x));
 		changeActive = (element) => {
             element.classList.toggle("active");
         }
@@ -71,13 +72,13 @@ const els={};
 		})
 
 		//manage the display of the create-GA item
-        document.getElementById("createGA").addEventListener("click", () => {
+        els.createGA.addEventListener("click", () => {
             document.getElementById("chooseGA").classList.toggle("activeClass2");
             document.getElementById("createAlgebra").classList.toggle("activeClass");
         })
 		
-		els.goBackStart.addEventListener("click", goBackStart);
-		function goBackStart(){
+		// manage the return to the home menu when clicking on the left-top icon
+		els.goBackStart.addEventListener("click", () => {
 			var elsClass = {};
 			[".activeClass", ".activeClass2", ".unclickable", ".activeDiv", ".active", ".unactive"].forEach(x => elsClass[x.replace(/[.]/g, '')] = document.querySelectorAll(x));
 			for(var i=0; i<elsClass.activeClass.length; i++)
@@ -97,7 +98,7 @@ const els={};
 				
 			for(var i=0; i<elsClass.unactive.length; i++)
 				elsClass.unactive[i].classList.remove("unactive");
-		}
+		})
 
         /*els.validate.addEventListener("click",DisplayProjectList)
         function DisplayProjectList(){
@@ -105,8 +106,9 @@ const els={};
             els.signIn.classList.toggle("activeClass");
         }*/
 		
-		document.querySelector("#createAlgebra>.validate>a>i").addEventListener("click", createGA);
-		function createGA(){
+		// put the information from the GA form and store it in the local storage,
+		// and then sends us to a new project
+		document.querySelector("#createAlgebra>.validate>a>i").addEventListener("click", () =>{
 			// retrieve info form form
 			var name = els.formCreateGA.nameGA.value;
 			var dimensions = els.formCreateGA.dimensionGA.value;
@@ -123,75 +125,26 @@ const els={};
 			} else {
 				console.log("Sorry! No Web Storage support.");
 			}
-		}
+		})
 		
 		// select existing GA
 		var GAToChoose = document.querySelectorAll(".choose p");
 		for(var i=0; i<GAToChoose.length; i++){
 			GAToChoose[i].onclick = (function(i){
 				return function(){
-					sendGA(GAs.GAArray[i]);
+					//localStorage
+					if (typeof(Storage) !== "undefined") {
+						console.log(GAs.GAArray[i].consoleString());
+						localStorage.setItem("createGA", GAs.GAArray[i].consoleString());
+						window.location.replace("index.html");
+					} else {
+						console.log("Sorry! No Web Storage support.");
+					}
 				}
 			})(i);
-		}
-		function sendGA(aGA){
-			//localStorage
-			if (typeof(Storage) !== "undefined") {
-				console.log(aGA.consoleString());
-				localStorage.setItem("createGA", aGA.consoleString());
-				window.location.replace("index.html");
-			} else {
-				console.log("Sorry! No Web Storage support.");
-			}
 		}
 
         els.check.onclick = () =>{
             account.signIn(true);
         }
-
-        /*document.getElementById("iconExample").addEventListener("click",DisplayExample)
-        function DisplayExample(){
-            window.open("index.html");
-        }*/
-		
-		// construct GAinfo
-		for(var i=0; i<GAToChoose.length; i++){
-			GAToChoose[i].onmouseover = (function(i){
-				return function(){
-					constructGAInfos(GAs.GAArray[i]);
-				}
-			})(i);
-		}
-		function constructGAInfos(aGA){
-			console.log(aGA.name);
-			var description = GA.retrieveGAInfo(aGA.consoleString());
-			// if there is a GA description
-			els.infoGA.innerHTML="<h4>GA information</h4><p>Basis and Metric</p>";
-			if (description!=null){
-				var metricTable = document.createElement("table");
-				metricTable.appendChild(GA.constructLine(description.basis));
-				metricTable.appendChild(GA.constructLine(description.metric));
-				
-				els.infoGA.appendChild(metricTable);
-			}
-			// if there isn't a GA description
-			else{
-				metricTitle.innerHTML = "No Geometric Algebra in the console.";
-				els.macrosContent.appendChild(metricTitle);
-			}
-			
-		}
-		
-		// display GAinfo
-		els.GAChoiceDiv.addEventListener("mouseover", displayGAInfo);
-		function displayGAInfo(){
-			els.infoGA.classList.add("active3");
-		}
-		
-		// hide GAinfo
-		els.GAChoiceDiv.addEventListener("mouseleave", hideGAInfo);
-		function hideGAInfo(){
-			els.infoGA.classList.remove("active3");
-		}
-		
 		
