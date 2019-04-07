@@ -10,7 +10,7 @@
         crossorigin="anonymous">
 	<script type="text/javascript" src="./js/lib/ganja.js/ganja.js"></script>
     <script type="text/javascript" src="./js/classes/RequestManager.js"></script>	
-    <script type="text/javascript" src="./js/classes/Account.js"></script> 
+    <script type="text/javascript" src="./js/classes/Account.js"></script>
 </head>
 
 <body>
@@ -67,30 +67,25 @@
                 <label> Name </label> : <input type="text" name="nameGA" />
             </p>
             <p>
-                <label> Dimension </label> : <input type="text" name="dimensionGA" />
-				<span class="GADefExamples">ex : p:3,q:0,r:1</span>
+                <label> Dimension </label> : <input type="text" name="dimensionGA" value="p:3,q:0,r:1" />
 			</p>
             <p>
-                <label> Basis </label> : <input type="text" name="basisGA" />
+                <label> Basis </label> : <input type="text" name="basisGA" value="'1', 'e12', 'e13', 'e23'" />
 				<span class="GADefError">Enter <em></em>values</span>
-				<span class="GADefExamples">(ex : '1', 'e12', 'e13', 'e23')</span>
             </p>
             <p>
-                <label> Metric </label> : <input type="text" name="metricGA" />
+                <label> Metric </label> : <input type="text" name="metricGA" value="1, 1, 1, 1, -1" />
 				<span class="GADefError">Enter <em></em>values</span>
-				<span class="GADefExamples">(ex : 1, 1, 1, 1, -1)</span>
             </p>
             <p>
-                <label>(optional) Definition of new vectors from basis</label> : <textarea name="vectorsGA"></textarea>
-				<span class="GADefExamples">ex : var e0 = 0.5*(1e12 + 1e23); var ei = 1e12 - 1e23</span>
+                <label>(optional) Definition of new vectors from basis</label> : <textarea name="vectorsGA">var e0 = 0.5*(1e12 + 1e23); var ei = 1e12 - 1e23</textarea>
             </p>
             <p>
-                <label>(optional) Definition from a 3D Euclidean point (x,y,z)</label> : <input type="text" name="pointGA" />
-				<span class="GADefExamples">ex : 1e123-x*1e012+y*1e013+(z||0)*1e023</span>
+                <label>(optional) Definition from a 3D Euclidean point (x,y,z)</label> : <input type="text" name="pointGA" value="1e123-x*1e012+y*1e013+(z||0)*1e023" />
 			</p>
         </form>
 		<div class="validate">
-			<a href="index.html">
+			<a>
 				<i class="fas fa-check-square"></i>
 			</a>
         </div>
@@ -120,7 +115,7 @@
     <div id="menuAccount"></div>
     <div id="pop_up_black"></div>
     
-    <script type="text/javascript" src="./js/GAManager.js"></script>
+    <script type="text/javascript" src="./js/classes/AlgebraController.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
 </body>
 

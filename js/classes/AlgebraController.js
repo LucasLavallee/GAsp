@@ -54,4 +54,66 @@ class AlgebraController{
 	constructor(name){
 		this.name = name;
 	}
+
+	static consoleString(name, dimensions, basis, metric, vectorsDef, pointDef) {
+		let res =
+			"// " + name +"\n"
+			+ "Algebra({";
+		if(dimensions.length>2)
+			res+= dimensions + ",";
+		else if (metric!="")
+			res+= "metric:[" + metric + "],";
+		if(basis!="")
+			res+= "basis: [" + basis + "],";
+		
+		res=res.substr(0, res.length-1);
+		res+= "}, ()=>{\n";
+		
+		if(vectorsDef!=""){
+			res+=
+				"	// Definition of new vectors\n"
+				+ "	" + vectorsDef + ";\n";
+		}
+		if(pointDef!=""){
+			res+=
+				"	// Function : return the point from a 3D Euclidean point\n"
+				+"	var point = (x,y,z)=> " + pointDef + ";\n";
+		}
+		
+		res+= "\n	//Write your code here !\n\n\n\n";
+		res+= "  document.body.appendChild(this.graph([\n\n	],{grid:true}));";
+		res+= "\n});";
+		return res;
+	}
 }
+
+AlgebraController.existingGAs = [
+	{
+		name : 'pga2d',
+		dimensions : 'p:2, q:0, r:1'
+	},
+	{
+		name : 'pga3d',
+		dimensions : 'p:3, q:0, r:1'
+	},
+	{
+		name : 'cga2d',
+		dimensions : 'p:3, q:1'
+	},
+	{
+		name : 'cga3d',
+		dimensions : 'p:4, q:1'
+	},
+	{
+		name : 'mga3d',
+		dimensions : 'p:4, q:4'
+	},
+	{
+		name : 'ccga3d',
+		dimensions : 'p:6, q:3'
+	},
+	{
+		name : 'qcga3d',
+		dimensions : 'p:9, q:6'
+	}
+]
