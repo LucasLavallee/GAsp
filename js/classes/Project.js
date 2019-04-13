@@ -52,12 +52,14 @@ class Project extends AllProj{
  		let result = await response.json();
 
  		if(result.success){
- 			result.projects[0].id_project
+ 			//result.projects[0].id_project
+ 			super.setLanguage(result.projects[0].language);
 	 		this._id = result.projects[0].id;
 			this._link = result.projects[0].link;
 			this._srcCode = result.projects[0].srcCode;
 			this._name = result.projects[0].name;
 			this._author = result.projects[0].username;
+
  		}	
 	}
 

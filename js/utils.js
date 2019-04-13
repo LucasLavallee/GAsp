@@ -24,3 +24,6 @@ function constructLine(myArray){
 	
 	return myLine;
 }
+
+// Testing - simple 2D PGA to start.
+    var A = Algebra(4,1);

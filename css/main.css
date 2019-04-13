@@ -113,7 +113,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-	width : 650px;
+	/*width : 650px;*/
 }
 #infoGA{
 	padding : 30px;
@@ -156,14 +156,14 @@ body{
 	flex-wrap : wrap;
 }
 
-.choose p:hover, #infoGA>p{
+/*.choose p:hover, #infoGA>p{
 	color : #47827a;
 }
 .choose p{
 	color : inherit;
 	text-decoration : inherit;
 	cursor : pointer;
-}
+}*/
 
 #signIn>h4{
     padding: 30px;
@@ -376,4 +376,23 @@ body{
 .circleBase:nth-child(3){
     left: 75%;
     transform: translate3d(-50%,0,0);
+}
+.listChoosableGA{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.choosableLang{
+    display: flex;
+    justify-content: space-between;
+}
+.choosableLang p{
+    background: #ff4c00;
+    margin: 5px;
+    padding: 3px 5px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.choosableLang p:hover{
+    background: #ff6600;
 }

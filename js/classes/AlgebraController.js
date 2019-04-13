@@ -1,3 +1,6 @@
+
+
+
 class AlgebraController{
 	updateGAInfo(currentCode){
 		els.macrosContent.innerHTML='';
@@ -23,7 +26,7 @@ class AlgebraController{
 	}
 
 	retrieveGAInfo(currentCode){
-		if(currentCode.length!=0){
+		if(currentCode.length!=0 && this.algebra===undefined){
 			/* delete comments */
 			var args=currentCode.replace(/\/\*[\s\S]*?\*\//g, " ");
 			// delete comments //
@@ -42,20 +45,69 @@ class AlgebraController{
 			else args=argsArray[0];
 			args = JSON.parse("[" + args + "]");
 			if(args.length < 3) args[2] = 0;
-			this.algebra = new Algebra(args[0],args[1],args[2]);
+			this.setAlgebra(args[0],args[1],args[2]);
 			// retrieve the description object
-			var description = this.algebra.describe();
-			AppControllerInstance.interface.addContentLogs('<div class="logsInfo"><p>--- You are now in algebra '+args[0]+','+args[1]+','+args[2]+' ---</p></div><br><span>>></span>')
-
-			return description;
+			
 		}
+		var description = this.algebra.describe();
+		AppControllerInstance.interface.addContentLogs('<div class="logsInfo"><p>--- You change of Algebra ---</p></div><br><span>>></span>')
+
+		return description;
+	}
+
+	buildAlgebraCode(name, dimensions, basis, metric, vectorsDef, pointDef){
+		console.log("In buildAlgebraCode")
+		if(dimensions.length < 3) dimensions[2] = 0;
+		this.setAlgebra(dimensions[0],dimensions[1],dimensions[2]);
+		let res =
+			`//${name}\nAlgebra({p:${dimensions[0]},q:${dimensions[1]},r:${dimensions[2]},`;
+		
+		if(metric!=null){
+			res += `metric:[${metric}],`;
+		}
+		if(basis!=null){
+			res += `basis:[${basis}]`;
+		}
+		res+=`}, ()=>{\n`;
+		if(vectorsDef!=null){
+			res+=`\t// Definition of new vectors\n${vectorsDef};\n`;
+		}
+		if(pointDef!=null){
+			res+=`\t// Function : return the point from a 3D Euclidean point\n\tvar point = (x,y,z)=>${pointDef};\n`
+		}
+		res+=`\n\t//Write your code here !\n\n\n\n\tdocument.body.appendChild(this.graph(()=>{\n\t},{grid:true}));\n});`;
+		return res;
 	}
 
 	constructor(name){
 		this.name = name;
 	}
+	setAlgebra(p,q,r){
+		this.algebra = new Algebra(p,q,r);
+	}
 
-	static consoleString(name, dimensions, basis, metric, vectorsDef, pointDef) {
+		//Setting the localStorage for a new algebra
+	static setLocalStorage(name, dimensions, basis, metric, vectorsDef, pointDef){
+			if(!Array.isArray(dimensions)){
+				dimensions = dimensions.split(',');
+			}
+			if(basis != null && !Array.isArray(basis)){
+				basis = basis.split(',');
+			}
+			if(metric != null && !Array.isArray(metric)){
+				metric = metric.split(',');
+			}
+			window.localStorage.setItem("newGA",JSON.stringify({
+				name: name,
+				dim: dimensions,
+				basis: basis,
+				metric: metric,
+				vector: vectorsDef,
+				point: pointDef
+			}))
+	}
+
+	/*static consoleString(name, dimensions, basis, metric, vectorsDef, pointDef) {
 		let res =
 			"// " + name +"\n"
 			+ "Algebra({";
@@ -84,36 +136,50 @@ class AlgebraController{
 		res+= "  document.body.appendChild(this.graph([\n\n	],{grid:true}));";
 		res+= "\n});";
 		return res;
-	}
+	}*/
 }
 
 AlgebraController.existingGAs = [
 	{
 		name : 'pga2d',
-		dimensions : 'p:2, q:0, r:1'
+		//dimensions : 'p:2, q:0, r:1'
+		dimensions :  [2,0,1],
+		language: ['js']
 	},
 	{
 		name : 'pga3d',
-		dimensions : 'p:3, q:0, r:1'
+		//dimensions : 'p:3, q:0, r:1'
+		dimensions :  [3,0,1],
+		language: ['js']
 	},
 	{
 		name : 'cga2d',
-		dimensions : 'p:3, q:1'
+		//dimensions : 'p:3, q:1'
+		dimensions :  [3,1],
+		language: ['js']
 	},
 	{
 		name : 'cga3d',
-		dimensions : 'p:4, q:1'
+		//dimensions : 'p:4, q:1'
+		dimensions :  [4,1],
+		language: ['js','gaViewer']
 	},
 	{
 		name : 'mga3d',
-		dimensions : 'p:4, q:4'
+		//dimensions : 'p:4, q:4'
+		dimensions :  [4,4],
+		language: ['js']
 	},
 	{
 		name : 'ccga3d',
-		dimensions : 'p:6, q:3'
+		//dimensions : 'p:6, q:3'
+		dimensions :  [6,3],
+		language: ['js']
 	},
 	{
 		name : 'qcga3d',
-		dimensions : 'p:9, q:6'
+		//dimensions : 'p:9, q:6'
+		dimensions :  [9,6],
+		language: ['js']
 	}
 ]

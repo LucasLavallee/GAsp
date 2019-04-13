@@ -10,12 +10,42 @@ changeUnactive = (element) => {
 changeActiveThis = (element) => {
     element.classList.toggle("activeThis");
 }
-		
+const selectLanguage = (nameGA, language) => {
+	console.log("ga");
+	const ga = AlgebraController.existingGAs.find(ga => ga.name === nameGA);
+	if (typeof(Storage) !== "undefined") {
+		window.localStorage.clear();
+		window.localStorage.setItem("language",language);
+		AlgebraController.setLocalStorage(ga.name, ga.dimensions, null, null, null, null);
+		//window.localStorage.setItem("GA_name", name);
+		window.location.replace("./index.html");
+
+		/*const name = AlgebraController.existingGAs[i].name;
+		const dimensions = AlgebraController.existingGAs[i].dimensions;
+		const toSend = AlgebraController.consoleString(name, dimensions);
+		localStorage.setItem("createGA", toSend);
+		window.location.replace("index.html");*/
+	} else {
+		console.log("Sorry! No Web Storage support.");
+	}
+}
 // construct the list of existing GA in the DOM
 AlgebraController.existingGAs.map( GA => {
+	const newDiv = document.createElement("div");
+	newDiv.classList.add("listChoosableGA");
 	const newNode = document.createElement("p");
 	newNode.innerHTML = GA.name;
-	els.GAChoiceDiv.appendChild(newNode);
+	const divLang = document.createElement("div");
+	divLang.classList.add("choosableLang");
+	GA.language.map(lang => {
+		const val = document.createElement("p");
+		val.innerHTML = lang;
+		val.setAttribute("onclick",`selectLanguage('${GA.name}','${lang}')`);
+		divLang.appendChild(val);
+	})
+	newDiv.appendChild(newNode);
+	newDiv.appendChild(divLang);
+	els.GAChoiceDiv.appendChild(newDiv);
 })
 		
 var account = new Account();
@@ -112,34 +142,13 @@ document.querySelector("#createAlgebra>.validate>a>i").addEventListener("click",
 	
 	//localStorage
 	if (typeof(Storage) !== "undefined") {
-		const toSend = AlgebraController.consoleString(name, dimensions, basis, metric, vectorsDef, pointDef);
-		console.log(toSend);
-		localStorage.setItem("createGA", toSend);
-		window.location.replace("index.html");
+		window.localStorage.clear();
+		AlgebraController.setLocalStorage(name, dimensions, basis, metric, vectorsDef, pointDef);
+		window.location.replace("./index.html");
 	} else {
 		console.log("Sorry! No Web Storage support.");
 	}
 })
-		
-// select existing GA
-var GAToChoose = document.querySelectorAll(".choose p");
-for(let i=0; i<GAToChoose.length; i++){
-	GAToChoose[i].onclick = ((i) => {
-		return () => {
-			//localStorage
-			if (typeof(Storage) !== "undefined") {
-				const name = AlgebraController.existingGAs[i].name;
-				const dimensions = AlgebraController.existingGAs[i].dimensions;
-				const toSend = AlgebraController.consoleString(name, dimensions);
-				console.log(toSend);
-				localStorage.setItem("createGA", toSend);
-				window.location.replace("index.html");
-			} else {
-				console.log("Sorry! No Web Storage support.");
-			}
-		}
-	})(i);
-}
 
         els.check.addEventListener("click", () =>{
             account.signIn(true);

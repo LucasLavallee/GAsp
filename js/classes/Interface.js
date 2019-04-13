@@ -10,9 +10,9 @@ pt3 = 1.5*e1 + 1e2;
 
 plan1 = !(!(pt1-pt2));
 
-plan2 = !(pt1-pt3);
+plan2 = !(pt1-pt3),
 
-line  = !(plan1 ^ !(plan2));
+line  = !(plan1 ^ !(plan2)),
 
 */
 	/*
@@ -178,11 +178,23 @@ line  = !(plan1 ^ !(plan2));
 		}
 	}
 
-	constructor(){
-		this.listExample = [];
-		this.viewer = new Viewer();
-		this.editor = new Editor();
+	initLanguage(lang){
+		/*switch(lang){
+			case 'gaViewer':
+				break;
+			default:
+				this.viewer = new Viewer();
+				this.editor = new Editor(lang);
+		}*/
+				this.viewer = new Viewer(lang);
+				this.editor = new Editor(lang);
+
 		this.editor = this.editor.inst;
 		this.editor.setValue("");
+	}
+
+	constructor(language){
+		this.listExample = [];
+		this.initLanguage(language);
 	}
 }

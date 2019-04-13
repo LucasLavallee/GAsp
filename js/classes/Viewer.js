@@ -33,7 +33,16 @@ class Viewer{
 		this._currentScript = val;
 	}
 	get getCurrentS(){ return this._currentScript;}
-	constructor(){
+	constructor(language){
 		this._currentScript = null;
+		if(language==='js'){
+		}
+		else if(language==='gaViewer'){
+			document.getElementById('viewer').removeChild(document.getElementById('exampleView'));
+			document.getElementById('viewer').innerHTML += '<div id="viewerGAViewer" class="transi"></div>';
+			
+			this.Graph = document.getElementById("viewerGAViewer").appendChild(A.graph([],{gl:true,grid:true,conformal:true,z:8}));
+			Object.assign(this.Graph.style,{width:'100%',height:'100%',position:'absolute'});
+		}
 	}
 }
