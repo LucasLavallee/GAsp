@@ -1,0 +1,46 @@
+@font-face{
+	font-family: 'Lato_Regular'; 
+	src: url("font/Lato-Regular.ttf");
+}
+
+body{
+	background: #F5F5DC;
+	text-align: center;
+	font-family: 'Lato_Regular'; 	
+}
+#logo{
+	width: 30%;
+	height: auto;
+}
+section{
+	margin: 100px 0;
+	width: 70%;
+	margin-left: 15%;
+}
+#backToMain {
+	position: fixed;
+	right: 50px;
+	top: 50px;
+	text-decoration: underline;
+	font-weight: bold;	
+	color: #363636;
+}
+div{
+	margin: 50px 0;
+}
+hr{
+	width: 250px;
+}
+#logoIMAC{
+	width: 150px;
+	height: auto;
+}
+a{
+	text-decoration: none;
+	font-weight: bold;
+	color: #363636;
+}
+#imacStud{
+	width: 400px;
+	height: auto;
+}

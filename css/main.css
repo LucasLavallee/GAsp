@@ -396,3 +396,15 @@ body{
 .choosableLang p:hover{
     background: #ff6600;
 }
+#infosAboutGAsp{
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translate3d(-50%,0,0);
+}
+#infosAboutGAsp a{
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
